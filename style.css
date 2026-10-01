@@ -1,0 +1,115 @@
+/* Page styling */
+
+body {
+font-family: Arial, sans-serif;
+background-color: #f2f4f7;
+margin: 0;
+padding: 40px;
+}
+
+/* Main form box */
+
+.form-container {
+width: 450px;
+margin: auto;
+background-color: white;
+padding: 30px;
+border-radius: 10px;
+box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading */
+
+h1 {
+text-align: center;
+margin-bottom: 5px;
+color: #333;
+}
+
+.subtitle {
+text-align: center;
+color: #777;
+margin-bottom: 25px;
+}
+
+/* Labels */
+
+label {
+display: block;
+margin-bottom: 7px;
+color: #333;
+font-weight: bold;
+}
+
+/* Text inputs and dropdown */
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="tel"],
+input[type="password"],
+select {
+width: 100%;
+padding: 12px;
+margin-bottom: 18px;
+border: 1px solid #ccc;
+border-radius: 6px;
+box-sizing: border-box;
+font-size: 14px;
+}
+
+/* Input when user clicks on it */
+
+input:focus,
+select:focus {
+border-color: #4a90e2;
+outline: none;
+}
+
+/* Gender section */
+
+.gender-options {
+display: flex;
+gap: 30px;
+margin-bottom: 18px;
+}
+
+.gender-options label {
+font-weight: normal;
+display: flex;
+align-items: center;
+gap: 5px;
+}
+
+/* Terms and Conditions */
+
+.terms {
+display: flex;
+align-items: center;
+gap: 8px;
+margin-bottom: 20px;
+}
+
+.terms label {
+margin: 0;
+font-weight: normal;
+}
+
+/* Register button */
+
+button {
+width: 100%;
+padding: 12px;
+background-color: #4a90e2;
+color: white;
+border: none;
+border-radius: 6px;
+font-size: 16px;
+cursor: pointer;
+}
+
+/* Button hover effect */
+
+button:hover {
+background-color: #357abd;
+}
