@@ -39,7 +39,7 @@
 
     /* Sidebar Navigation */
     .sidebar {
-      width: 290px;
+      width: 295px;
       background: var(--bg-secondary);
       border-right: 1px solid var(--border);
       position: fixed;
@@ -99,7 +99,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 9px 12px;
+      padding: 8px 12px;
       color: var(--text-muted);
       text-decoration: none;
       border-radius: 8px;
@@ -118,9 +118,9 @@
     /* Main Content Area */
     .main-content {
       flex: 1;
-      margin-left: 290px;
+      margin-left: 295px;
       padding: 32px 40px 80px;
-      max-width: 1220px;
+      max-width: 1240px;
     }
 
     /* Mobile Header */
@@ -274,7 +274,7 @@
       border-radius: 10px;
       padding: 20px;
       margin-bottom: 16px;
-      transition: border-color 0.2s, transform 0.15s;
+      transition: border-color 0.2s;
     }
 
     .cmd-card:hover {
@@ -411,7 +411,7 @@
       }
       .sidebar {
         transform: translateX(-100%);
-        width: 270px;
+        width: 275px;
       }
       .sidebar.open {
         transform: translateX(0);
@@ -459,7 +459,7 @@
       </div>
     </div>
 
-    <div class="nav-label">Feature Modules (14)</div>
+    <div class="nav-label">Feature Modules (16)</div>
     <a href="#sec-make" class="nav-link" onclick="closeMobileMenu()">🛡️ 0. Role Setup (/make)</a>
     <a href="#sec-language" class="nav-link" onclick="closeMobileMenu()">🌐 1. Language (/language)</a>
     <a href="#sec-spam" class="nav-link" onclick="closeMobileMenu()">🚨 2. Spam Protection (/spam)</a>
@@ -468,34 +468,36 @@
     <a href="#sec-shop" class="nav-link" onclick="closeMobileMenu()">🛒 5. Shop & Sellers (/shop)</a>
     <a href="#sec-ticket" class="nav-link" onclick="closeMobileMenu()">🎫 6. Ticket System (/ticket)</a>
     <a href="#sec-embed" class="nav-link" onclick="closeMobileMenu()">🛠️ 7. Web & App Embeds (/embed)</a>
-    <a href="#sec-birthday" class="nav-link" onclick="closeMobileMenu()">🎂 8. Birthdays (/birthday & /sync)</a>
-    <a href="#sec-nick" class="nav-link" onclick="closeMobileMenu()">🏷️ 9. Auto Nickname (/nick)</a>
-    <a href="#sec-answer" class="nav-link" onclick="closeMobileMenu()">🧩 10. Riddle Q&A (/answer)</a>
-    <a href="#sec-link" class="nav-link" onclick="closeMobileMenu()">🔗 11. Link Box Wrapper (/link)</a>
-    <a href="#sec-close" class="nav-link" onclick="closeMobileMenu()">🧵 12. Auto-Close Threads (/close)</a>
-    <a href="#sec-donation" class="nav-link" onclick="closeMobileMenu()">💸 13. Donations (/donation)</a>
-    <a href="#sec-study" class="nav-link" onclick="closeMobileMenu()">📚 14. Study & VC Tracker (/study)</a>
+    <a href="#sec-reminder" class="nav-link" onclick="closeMobileMenu()">⏰ 8. Embed Reminders (/reminder)</a>
+    <a href="#sec-birthday" class="nav-link" onclick="closeMobileMenu()">🎂 9. Birthdays (/birthday & /sync)</a>
+    <a href="#sec-nick" class="nav-link" onclick="closeMobileMenu()">🏷️ 10. Auto Nickname (/nick)</a>
+    <a href="#sec-answer" class="nav-link" onclick="closeMobileMenu()">🧩 11. Riddle Q&A (/answer)</a>
+    <a href="#sec-link" class="nav-link" onclick="closeMobileMenu()">🔗 12. Link Box Wrapper (/link)</a>
+    <a href="#sec-close" class="nav-link" onclick="closeMobileMenu()">🧵 13. Auto-Close Threads (/close)</a>
+    <a href="#sec-donation" class="nav-link" onclick="closeMobileMenu()">💸 14. Donations (/donation)</a>
+    <a href="#sec-routine" class="nav-link" onclick="closeMobileMenu()">📅 15. Routine Sync (/routine)</a>
+    <a href="#sec-study" class="nav-link" onclick="closeMobileMenu()">📚 16. Study & Ranks (/study & /ranks)</a>
   </aside>
 
   <!-- Main Content -->
   <main class="main-content">
     <div class="hero">
       <h2>📚 কবিরাজ • ভূত বট — Complete Command & Feature Reference</h2>
-      <p>Every slash command, button workflow, background timer, and auto-moderation rule is 100% backed by <strong>Supabase PostgreSQL</strong>. If the server restarts at any moment, all active cooldowns, timers, tickets, Truth/Dare sessions, and voice study streaks resume automatically.</p>
+      <p>Every slash command, button workflow, background timer, routine schedule, and auto-moderation rule is 100% backed by <strong>Supabase PostgreSQL</strong>. If the server restarts at any moment, all active cooldowns, timers, tickets, Truth/Dare sessions, scheduled reminders, and voice study streaks resume automatically.</p>
       <div class="badge-row">
-        <span class="pill pill-red">⚡ 30 Slash Commands</span>
-        <span class="pill pill-white">💾 21 Supabase Tables</span>
+        <span class="pill pill-red">⚡ 40+ Slash Commands</span>
+        <span class="pill pill-white">💾 23 Supabase Tables</span>
         <span class="pill pill-gold">🇧🇩/🇬🇧 Bilingual (Bangla & English)</span>
-        <span class="pill pill-cyan">🌐 Built-in Web Embed Editor</span>
+        <span class="pill pill-cyan">🌐 Built-in Web Embed & Reminder Editor</span>
       </div>
     </div>
 
     <!-- Search & Filter Bar -->
     <div class="controls">
-      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search any command, feature, or parameter (e.g. /make, /link, /answer, /nick, /close, vc)..." oninput="filterCommands()" />
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search any command, feature, or parameter (e.g. /routine, /ranks, /reminder, /donation add, /embed)..." oninput="filterCommands()" />
       <button class="filter-btn active" onclick="setRoleFilter('all', this)">All</button>
       <button class="filter-btn" onclick="setRoleFilter('admin', this)">Admin / Mod / Staff</button>
-      <button class="filter-btn" onclick="setRoleFilter('seller', this)">Seller Commands</button>
+      <button class="filter-btn" onclick="setRoleFilter('seller', this)">Seller & Donator Roles</button>
       <button class="filter-btn" onclick="setRoleFilter('member', this)">Member / Interactive</button>
     </div>
 
@@ -515,13 +517,6 @@
           </div>
         </div>
         <p class="cmd-desc">Teaches the bot which Discord roles correspond to <strong>Admin</strong>, <strong>Mod</strong>, <strong>Staff</strong>, or <strong>Seller</strong> permissions in your server. Running the command again with the same role removes it (toggle).</p>
-        <table class="param-table">
-          <thead><tr><th>Parameter</th><th>Type / Choices</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td class="param-name">role_type</td><td><code>Admin</code>, <code>Mod</code>, <code>Staff</code>, <code>Seller</code></td><td>Permission tier to assign. Admins can run all config commands; Mods can manage `/spam`, `/nick`, `/link`, `/close`; Staff can use `/embed`, `/answer`, and view/close tickets; Sellers can use `/shop` tools.</td></tr>
-            <tr><td class="param-name">role</td><td><code>@Role</code></td><td>The Discord role to register or remove in Supabase.</td></tr>
-          </tbody>
-        </table>
       </div>
     </section>
 
@@ -570,7 +565,7 @@
             <button class="copy-btn" onclick="copyText('/spam channel')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Adds or removes a specific channel from spam mention monitoring. <em>(If no channels are added, the bot automatically protects <strong>all</strong> channels when `/spam mention on` is active).</em></p>
+        <p class="cmd-desc">Adds or removes a specific channel from spam mention monitoring.</p>
       </div>
 
       <div class="cmd-card" data-role="admin">
@@ -581,10 +576,7 @@
             <button class="copy-btn" onclick="copyText('/spam log')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Sets the log channel where red warning embeds are posted whenever someone triggers a spam mention cooldown.</p>
-        <div class="logic-box">
-          <strong>⚙️ How It Works & Persistence:</strong> If User A mentions User B <strong>3 or more times</strong> in a single message (or across rapid messages within 15 seconds), the bot deletes the message, locks User A on a <strong>1-hour cooldown</strong> specifically from mentioning User B (saved in <code>spam_cooldowns</code>), warns User A in chat, and sends a full report to the log channel.
-        </div>
+        <p class="cmd-desc">Sets the log channel where red warning embeds are posted whenever someone triggers a 1-hour spam mention cooldown.</p>
       </div>
     </section>
 
@@ -604,16 +596,6 @@
           </div>
         </div>
         <p class="cmd-desc">Creates a custom leveling rule for a specific Text or Forum channel with anti-cheat cooldown protection.</p>
-        <table class="param-table">
-          <thead><tr><th>Parameter</th><th>Type / Choices</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td class="param-name">level_gain</td><td>Integer (e.g. <code>1</code>)</td><td>How many levels the user gains each time they complete <code>posts_required</code>.</td></tr>
-            <tr><td class="param-name">channel</td><td>Text / Forum Channel</td><td>The specific channel where posts are counted.</td></tr>
-            <tr><td class="param-name">posts_required</td><td>Integer (e.g. <code>1</code>)</td><td>How many qualifying posts are needed to trigger the level increase.</td></tr>
-            <tr><td class="param-name">post_type</td><td><code>Any Post</code>, <code>Media</code>, <code>Text</code>, <code>Forum Post</code>, <code>Links</code></td><td>Filters what kind of post counts toward leveling in this channel.</td></tr>
-            <tr><td class="param-name">cooldown_seconds</td><td>Integer (Default: <code>60</code>)</td><td>Anti-cheat timer: minimum seconds required between two counted posts by the same user.</td></tr>
-          </tbody>
-        </table>
       </div>
 
       <div class="cmd-card" data-role="admin">
@@ -643,15 +625,7 @@
             <button class="copy-btn" onclick="copyText('/tord')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Starts or stops the interactive Bangla Truth or Dare panel in the target channel.</p>
-        <div class="logic-box">
-          <strong>🔄 Complete Button Workflow &amp; 3-Day Auto-Delete:</strong><br/>
-          1. <strong>Choose:</strong> A player clicks <code>Truth</code>, <code>Dare</code>, or <code>Random</code>.<br/>
-          2. <strong>Ask Question (প্রশ্ন করুন):</strong> Other members see who chose what along with two buttons: <code>📝 প্রশ্ন করুন</code> and <code>🕵️ নাম/পরিচয় গোপন রাখুন</code> (Anonymous toggle). <em>(The player cannot ask themselves a question!)</em><br/>
-          3. <strong>Question Modal &amp; Media Placeholder:</strong> The asker types their question, optionally pastes a Photo/GIF link in the special media placeholder field, and chooses whether to hide their identity.<br/>
-          4. <strong>BINGO Button:</strong> The bot posts the question, tags the player, and displays the green <code>BINGO</code> button. Only that specific player can click <code>BINGO</code> to submit their answer and proof media/GIF.<br/>
-          5. <strong>⏰ 3-Day Auto-Expiry:</strong> Any Truth or Dare message older than <strong>3 days</strong> is automatically deleted from both Discord and the Supabase database. If a user clicks a button on an expired message before cleanup, the bot sends an ephemeral expiration alert (<code>⏰ এই Truth or Dare মেসেজটির মেয়াদ শেষ হয়ে গেছে!</code>) and deletes the message immediately.
-        </div>
+        <p class="cmd-desc">Starts or stops the interactive Bangla Truth or Dare panel (`Truth`, `Dare`, `Random`, `প্রশ্ন করুন`, Anonymous toggle, Media URL placeholder, and `BINGO` answer button). Automatically deletes sessions older than <strong>3 days</strong> from Discord and Supabase.</p>
       </div>
     </section>
 
@@ -681,7 +655,7 @@
             <button class="copy-btn" onclick="copyText('/shop seller')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Registers a Seller Role or specific Seller User who is permitted to use <code>/shop react</code>, <code>/shop box</code>, <code>/shop seller_cooldown</code>, and manage Shop Tickets.</p>
+        <p class="cmd-desc">Registers a Seller Role or specific Seller User who is permitted to use <code>/shop react</code>, <code>/shop box</code>, and <code>/shop seller_cooldown</code>.</p>
       </div>
 
       <div class="cmd-card" data-role="seller">
@@ -692,7 +666,7 @@
             <button class="copy-btn" onclick="copyText('/shop react')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Reacts to an existing seller message with the specified emoji. Any customer who reacts to that emoji on that message will automatically open a private serial Shop Ticket (<code>#shop-1</code>, <code>#shop-2</code>...).</p>
+        <p class="cmd-desc">Reacts to an existing seller message with the specified emoji so customers who click it open a Shop Ticket.</p>
       </div>
 
       <div class="cmd-card" data-role="seller">
@@ -703,7 +677,7 @@
             <button class="copy-btn" onclick="copyText('/shop box')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Deletes the seller's raw text message and wraps it into a clean gold Box Embed featuring the seller's avatar, display name, product details, attached image, and a custom green button (e.g., <code>🛒 Create Ticket</code>) that opens a Shop Ticket when clicked.</p>
+        <p class="cmd-desc">Deletes the seller's raw text message and wraps it into a clean gold Box Embed with a custom Ticket button.</p>
       </div>
 
       <div class="cmd-card" data-role="seller">
@@ -714,7 +688,7 @@
             <button class="copy-btn" onclick="copyText('/shop seller_mention')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Toggles whether sellers are automatically mentioned/pinged inside newly created Shop Tickets.</p>
+        <p class="cmd-desc">Toggles whether sellers are automatically mentioned inside newly created Shop Tickets.</p>
       </div>
 
       <div class="cmd-card" data-role="seller">
@@ -725,7 +699,7 @@
             <button class="copy-btn" onclick="copyText('/shop seller_cooldown')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Allows Sellers to adjust the customer ticket creation cooldown (in seconds) and how long a ticket channel stays open before auto-closing (in minutes; <code>0</code> = stays open until closed manually).</p>
+        <p class="cmd-desc">Allows Sellers to adjust the customer ticket creation cooldown and auto-close duration.</p>
       </div>
     </section>
 
@@ -744,20 +718,7 @@
             <button class="copy-btn" onclick="copyText('/ticket')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Master configuration command for customizing every aspect of Shop Ticket channels. Protected by both a <strong>Millisecond Double-Click / Auto-Clicker Lock</strong> and a persistent Supabase cooldown timer.</p>
-        <table class="param-table">
-          <thead><tr><th>Parameter</th><th>Default / Options</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td class="param-name">name_format</td><td><code>shop-{id}</code></td><td>Supports <code>{id}</code> (serial number 1, 2, 3...) and <code>{name}</code> (customer username).</td></tr>
-            <tr><td class="param-name">position_mode</td><td><code>top</code>, <code>after_channel</code>, <code>category</code></td><td>Open at the very top of the server, directly beneath a reference channel, or inside a category.</td></tr>
-            <tr><td class="param-name">category</td><td>CategoryChannel</td><td>Which category the ticket channel should be placed under.</td></tr>
-            <tr><td class="param-name">under_channel</td><td>TextChannel</td><td>Reference channel when using <code>after_channel</code> placement.</td></tr>
-            <tr><td class="param-name">cooldown_seconds</td><td><code>300</code></td><td>Seconds a user must wait before opening another ticket.</td></tr>
-            <tr><td class="param-name">duration_minutes</td><td><code>0</code> (Infinite)</td><td>If &gt; 0, automatically closes and deletes the ticket channel after X minutes.</td></tr>
-            <tr><td class="param-name">allow_user_close</td><td><code>yes</code> / <code>no</code></td><td>Admin-only setting: controls whether the customer can click the Close Ticket button or only Sellers/Staff/Admins.</td></tr>
-            <tr><td class="param-name">welcome_message_bangla</td><td>Bangla Text</td><td>Custom Bangla welcome message inside the ticket. Supports <code>{user}</code> placeholder.</td></tr>
-          </tbody>
-        </table>
+        <p class="cmd-desc">Master configuration command for customizing every aspect of Shop Ticket channels, protected by a Millisecond Auto-Clicker Lock and Supabase cooldowns.</p>
       </div>
     </section>
 
@@ -770,31 +731,89 @@
 
       <div class="cmd-card" data-role="admin">
         <div class="cmd-top">
-          <code class="cmd-syntax">/embed builder</code>
+          <code class="cmd-syntax">/embed builder channel:[Optional #channel]</code>
           <div>
             <span class="pill pill-red">Staff / Mod / Admin</span>
             <button class="copy-btn" onclick="copyText('/embed builder')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Opens an interactive ephemeral Embed Builder directly inside Discord with buttons to edit Title/Body/Color, Webhook Username &amp; Avatar URL, Author, Images, Footer, Inline/Regular Fields, and Custom Link or Action Buttons.</p>
+        <p class="cmd-desc">Opens the rich interactive In-Discord Embed &amp; Button Builder.</p>
+        <div class="logic-box">
+          <strong>✨ Rich Features Included:</strong><br/>
+          • <strong>Title / Body / Color:</strong> Title, Title URL, Markdown Description, Hex Color, and Outside Message Content.<br/>
+          • <strong>Author / Side &amp; Top Media / Footer:</strong> Author Name, Author URL, Author Icon, Webhook Username &amp; Avatar, Top/Main Large Media (Image/GIF), Side Media (Thumbnail), Footer Text &amp; Icon.<br/>
+          • <strong>Multiple Fields &amp; Colored Buttons:</strong> Add up to 25 Inline or Regular fields and up to 25 Buttons with colors (<code>blue</code>, <code>grey</code>, <code>green</code>, <code>red</code>, or <code>link</code>), custom Emojis, Link URLs, Custom Click Replies, and optional Role IDs granted on click!
+        </div>
       </div>
 
       <div class="cmd-card" data-role="admin">
         <div class="cmd-top">
-          <code class="cmd-syntax">/embed web</code>
+          <code class="cmd-syntax">/embed web channel:[Optional #channel]</code>
           <div>
-            <span class="pill pill-cyan">Web Editor (Heroku Ready)</span>
+            <span class="pill pill-cyan">Web Editor</span>
             <button class="copy-btn" onclick="copyText('/embed web')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Generates a secure link button to open the live Dark-Mode Web Embed Editor in your browser with full Discord Markdown formatting, Color Picker, Fields, and Custom Action/Link Buttons.</p>
+        <p class="cmd-desc">Generates a secure link button to open the live Web Embed Editor in your browser.</p>
       </div>
     </section>
 
-    <!-- 8. BIRTHDAY & SYNC -->
+    <!-- 8. SCHEDULED & RECURRING EMBED REMINDERS (/reminder) -->
+    <section class="feature-section" id="sec-reminder">
+      <div class="section-header">
+        <h3>⏰ 8. Scheduled & Recurring Rich Embed Reminders (/reminder)</h3>
+        <span class="pill pill-white">Table: scheduled_reminders</span>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/reminder embed channel:[#channel] delay_minutes:[int] repeat_interval_minutes:[int] cooldown_seconds:[int]</code>
+          <div>
+            <span class="pill pill-red">Staff / Mod / Admin</span>
+            <button class="copy-btn" onclick="copyText('/reminder embed')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Opens the full interactive Embed &amp; Button Builder (including Author Name/URL/Icon, Side Media Thumbnail, Top Media Image, Multiple Fields, Colored/Link Buttons, and Timer Settings) and schedules it to post in <code>#channel</code> after <code>delay_minutes</code> (and optionally repeat every <code>repeat_interval_minutes</code>).</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/reminder channel channel:[#channel] delay_minutes:[int] message:[Text] title:[Text] repeat_interval_minutes:[int] cooldown_seconds:[int] color_hex:[Hex] top_media_url:[URL] side_media_url:[URL]</code>
+          <div>
+            <span class="pill pill-red">Staff / Mod / Admin</span>
+            <button class="copy-btn" onclick="copyText('/reminder channel')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Quickly schedules a one-time or recurring Embed Reminder directly from slash command parameters.</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/reminder web channel:[#channel]</code>
+          <div>
+            <span class="pill pill-cyan">Web Reminder Builder</span>
+            <button class="copy-btn" onclick="copyText('/reminder web')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Opens the Web Editor in Scheduled Reminder Mode with timer, repeat interval, and cooldown controls.</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/reminder list   &amp;   /reminder stop reminder_id:[ID]</code>
+          <div>
+            <span class="pill pill-red">Staff / Mod / Admin</span>
+            <button class="copy-btn" onclick="copyText('/reminder list')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Views all active scheduled reminders in the server or stops/deletes a specific reminder by ID.</p>
+      </div>
+    </section>
+
+    <!-- 9. BIRTHDAY & SYNC -->
     <section class="feature-section" id="sec-birthday">
       <div class="section-header">
-        <h3>🎂 8. Birthday Wishing & Smart Channel History Sync</h3>
+        <h3>🎂 9. Birthday Wishing & Smart Channel History Sync</h3>
         <span class="pill pill-white">Tables: guild_settings, user_birthdays</span>
       </div>
 
@@ -806,7 +825,7 @@
             <button class="copy-btn" onclick="copyText('/birthday')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Enables automatic daily birthday wishing in <code>#channel</code> (checked at midnight Bangladesh Time). If you only pass <code>channel</code>, it uses the default Bangla birthday title, description, and celebration GIF.</p>
+        <p class="cmd-desc">Enables automatic daily birthday wishing in <code>#channel</code> at midnight Bangladesh Time.</p>
       </div>
 
       <div class="cmd-card" data-role="admin">
@@ -817,14 +836,14 @@
             <button class="copy-btn" onclick="copyText('/sync')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Scans the entire message history of <code>#birthday_channel</code>, parses every user's birthday (keeping only each user's <strong>latest</strong> birthday entry if they posted twice), adds a <code>✅</code> reaction, and saves them to Supabase. Supports <code>Dec26</code>, <code>August 19</code>, <code>29th march</code>, and numeric pairs <code>08/24</code>, <code>3 - 5</code>, <code>3 5</code> (1st = Month, 2nd = Day).</p>
+        <p class="cmd-desc">Scans the entire history of <code>#birthday_channel</code>, keeps only each user's latest birthday entry, reacts with <code>✅</code>, and saves to Supabase.</p>
       </div>
     </section>
 
-    <!-- 9. AUTO NICKNAME -->
+    <!-- 10. AUTO NICKNAME -->
     <section class="feature-section" id="sec-nick">
       <div class="section-header">
-        <h3>🏷️ 9. Auto Nickname Channel (On / Off)</h3>
+        <h3>🏷️ 10. Auto Nickname Channel (On / Off)</h3>
         <span class="pill pill-white">Table: guild_settings</span>
       </div>
 
@@ -836,20 +855,14 @@
             <button class="copy-btn" onclick="copyText('/nick state:on')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Turns automatic nickname changing <strong>ON</strong> or <strong>OFF</strong> in <code>#channel</code>.</p>
-        <div class="logic-box">
-          <strong>🤖 StickyBot-Safe &amp; Multi-Line Smart Handling:</strong><br/>
-          • Strictly ignores all bots and webhooks (such as <code>StickyBot</code>).<br/>
-          • Takes the first non-empty line of a user's message as their new nickname (supports Bangla, English, and any UTF-8 language) and reacts with <code>✅</code>.<br/>
-          • Blocks names starting with numbers (<code>0-9</code> or <code>০-৯</code>) and notifies the user with <code>⚠️</code> if Discord's role hierarchy blocks changing the Server Owner's nickname.
-        </div>
+        <p class="cmd-desc">Turns automatic nickname changing ON or OFF in <code>#channel</code> (ignores all bots like StickyBot and blocks leading numbers).</p>
       </div>
     </section>
 
-    <!-- 10. SMART RIDDLE / Q&A -->
+    <!-- 11. SMART RIDDLE / Q&A -->
     <section class="feature-section" id="sec-answer">
       <div class="section-header">
-        <h3>🧩 10. Auto-Detecting Q&A / Riddle Answer System (Set & Unset)</h3>
+        <h3>🧩 11. Auto-Detecting Q&A / Riddle Answer System (Set & Unset)</h3>
         <span class="pill pill-white">Table: channel_answers</span>
       </div>
 
@@ -861,18 +874,7 @@
             <button class="copy-btn" onclick="copyText('/answer set')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Sets the auto-detected target answer for a channel or a specific Forum Post / Thread.</p>
-        <table class="param-table">
-          <thead><tr><th>Parameter</th><th>Type</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td class="param-name">channel</td><td>Channel</td><td>The parent text or forum channel.</td></tr>
-            <tr><td class="param-name">answer</td><td>Text</td><td>The target word or sentence answer.</td></tr>
-            <tr><td class="param-name">thread</td><td>Optional String</td><td>Pass a Thread ID (e.g. <code>123456789012345678</code>), thread mention (<code>&lt;#ID&gt;</code>), thread link, or thread title to bind the answer to a specific thread!</td></tr>
-          </tbody>
-        </table>
-        <div class="logic-box">
-          <strong>🔍 Phonetic, Bangla &amp; Misspelled Sentence Matcher:</strong> Reacts with <code>❌</code> on wrong guesses and <code>✅</code> + replies <code>🎉 @User সঠিক উত্তর দিয়েছেন!</code> when correct. Uses whole-sentence similarity, sliding-window phrase matching, and Bangla phonetic transliteration so misspelled words or full misspelled sentences matching the answer are recognized automatically!
-        </div>
+        <p class="cmd-desc">Sets the auto-detected target answer for a channel or specific thread. Recognizes phonetic typos, Bangla transliteration, and misspelled sentences matching the answer.</p>
       </div>
 
       <div class="cmd-card" data-role="admin">
@@ -883,40 +885,26 @@
             <button class="copy-btn" onclick="copyText('/answer unset')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Removes / disables the active riddle answer for the specified channel or thread.</p>
+        <p class="cmd-desc">Removes the active riddle answer for the specified channel or thread.</p>
       </div>
     </section>
 
-    <!-- 11. LINK BOX WRAPPER (/link) -->
+    <!-- 12. LINK BOX WRAPPER (/link) -->
     <section class="feature-section" id="sec-link">
       <div class="section-header">
-        <h3>🔗 11. Automatic Link Box Wrapper (/link)</h3>
+        <h3>🔗 12. Automatic Link Box Wrapper (/link)</h3>
         <span class="pill pill-white">Table: guild_settings</span>
       </div>
 
       <div class="cmd-card" data-role="admin">
         <div class="cmd-top">
-          <code class="cmd-syntax">/link on channel:[#channel]</code>
+          <code class="cmd-syntax">/link on channel:[#channel]   &amp;   /link off channel:[#channel]</code>
           <div>
             <span class="pill pill-red">Mod / Admin</span>
             <button class="copy-btn" onclick="copyText('/link on')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Turns ON automatic Link Box wrapping in <code>#channel</code> (can be enabled in as many channels as you want).</p>
-        <div class="logic-box">
-          <strong>📦 How Link Wrapping Works:</strong> Whenever a member posts a link in an enabled channel, the bot deletes the raw message and wraps it inside a sleek Embed Box featuring the member's avatar &amp; display name, their message text turned into a clickable hyperlink (e.g., <code>check his shop</code>), and a <code>Go to Link ↗</code> button below it. By default, links containing <code>discord</code>, <code>tenor</code>, <code>kliphy</code>, <code>klipy</code>, or <code>.gif</code> are ignored so GIFs and Discord links post normally.
-        </div>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/link off channel:[#channel]</code>
-          <div>
-            <span class="pill pill-red">Mod / Admin</span>
-            <button class="copy-btn" onclick="copyText('/link off')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Turns OFF automatic Link Box wrapping in <code>#channel</code>.</p>
+        <p class="cmd-desc">Wraps non-whitelisted links posted in enabled channels inside an Embed Box with the author's name/avatar, clickable caption, and a <code>Go to Link ↗</code> button (ignores <code>discord</code>, <code>tenor</code>, <code>kliphy</code>, <code>klipy</code>, <code>.gif</code> by default).</p>
       </div>
 
       <div class="cmd-card" data-role="admin">
@@ -927,7 +915,7 @@
             <button class="copy-btn" onclick="copyText('/link whitelist')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Adds, removes, or lists whitelisted keywords/domains that should <strong>not</strong> be wrapped into a box.</p>
+        <p class="cmd-desc">Manages custom whitelisted keywords/URLs that should not be wrapped.</p>
       </div>
 
       <div class="cmd-card" data-role="admin">
@@ -938,14 +926,14 @@
             <button class="copy-btn" onclick="copyText('/link blacklist')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Adds, removes, or lists blacklisted keywords/URLs that must <strong>always</strong> be wrapped into a box (overrides whitelist).</p>
+        <p class="cmd-desc">Manages blacklisted keywords/URLs that must always be wrapped into a box.</p>
       </div>
     </section>
 
-    <!-- 12. AUTO-CLOSE THREADS -->
+    <!-- 13. AUTO-CLOSE THREADS -->
     <section class="feature-section" id="sec-close">
       <div class="section-header">
-        <h3>🧵 12. Silent Nested Thread Auto-Closer (Up to 15 Channels) & Timer</h3>
+        <h3>🧵 13. Silent Nested Thread Auto-Closer (Up to 15 Channels) & Timer</h3>
         <span class="pill pill-white">Tables: auto_close_channels, scheduled_thread_closes</span>
       </div>
 
@@ -957,13 +945,7 @@
             <button class="copy-btn" onclick="copyText('/close channels')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Configures up to <strong>15 channels at once</strong> so that any thread opened or active inside them is <strong>silently closed (archived)</strong> without deleting the thread.</p>
-        <div class="logic-box">
-          <strong>🔇 100% Silent Close (No "removed from thread" messages!):</strong><br/>
-          • Immediately closes all currently open threads in the selected channels.<br/>
-          • Automatically re-closes threads whenever someone sends a message, edits a message, deletes a message, or reopens the thread.<br/>
-          • Archives threads directly without calling member-kick APIs, so Discord <strong>never</strong> displays ugly <code>← Bot removed User from the thread</code> system messages inside your comment sections!
-        </div>
+        <p class="cmd-desc">Silently archives threads across up to 15 channels without posting any "removed from thread" system messages.</p>
       </div>
 
       <div class="cmd-card" data-role="admin">
@@ -974,128 +956,126 @@
             <button class="copy-btn" onclick="copyText('/close timer')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Sets a delay timer (in minutes) before newly created threads in <code>#channel</code> are silently closed.</p>
+        <p class="cmd-desc">Sets a delay timer in minutes before threads in <code>#channel</code> are silently closed.</p>
       </div>
     </section>
 
-    <!-- 13. DONATION SYSTEM -->
+    <!-- 14. DONATION SYSTEM -->
     <section class="feature-section" id="sec-donation">
       <div class="section-header">
-        <h3>💸 13. Community Donation Goals, Progress Bars, Top Ranks & Tickets</h3>
+        <h3>💸 14. Rich Multi-Option Donation System (0% Default & Live Ranks)</h3>
         <span class="pill pill-white">Tables: donation_goals, donation_records, active_tickets</span>
       </div>
 
       <div class="cmd-card" data-role="admin">
         <div class="cmd-top">
-          <code class="cmd-syntax">/donation status channel:[#channel] state:[on | off]</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/donation status')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Enables or disables the Donation system in the specified channel.</p>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/donation default channel:[#channel]</code>
+          <code class="cmd-syntax">/donation default channel:[#channel]   &amp;   /donation status channel:[#channel] state:[on | off]</code>
           <div>
             <span class="pill pill-red">Admin</span>
             <button class="copy-btn" onclick="copyText('/donation default')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Posts the complete default Minecraft Community Donation Embed featuring Option 1 (💻 Server RAM Performance Boost) &amp; Option 2 (💸 Monthly Server Billing Goal), emoji progress bars (<code>🟩</code>/<code>⬛</code>), Top Donators leaderboard (<code>👑</code>, <code>🥈</code>, <code>🥉</code>), and the interactive Goal Dropdown menu.</p>
+        <p class="cmd-desc">Posts the default Donation Embed where <strong>all options start at <code>0% (0 BDT)</code></strong> alongside the interactive Goal Dropdown menu.</p>
       </div>
 
-      <div class="cmd-card" data-role="admin">
+      <div class="cmd-card" data-role="seller">
         <div class="cmd-top">
-          <code class="cmd-syntax">/donation embed channel:[#channel]</code>
+          <code class="cmd-syntax">/donation add money_amount:[float] member:[@Member] option_number:[int] top_ranks_to_show:[Optional int]</code>
           <div>
-            <span class="pill pill-cyan">Web Editor</span>
-            <button class="copy-btn" onclick="copyText('/donation embed')">Copy</button>
+            <span class="pill pill-gold">Permitted Role / Admin</span>
+            <button class="copy-btn" onclick="copyText('/donation add')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Opens the Web Embed Editor in Donation Mode—lets you customize the title, description, colors, and images on the web while automatically injecting the live emoji progress bars, Top Donators list, and Dropdown menu when submitted.</p>
+        <p class="cmd-desc">Usable by Admins and anyone with a role added via <code>/donation permission @role</code>. Adds the donated money amount to the member's total and the selected <code>option_number</code>, and <strong>automatically updates the live Donation Embed's emoji progress bar &amp; Top Donator Ranks</strong> in the donation channel!</p>
       </div>
 
-      <div class="cmd-card" data-role="admin">
+      <div class="cmd-card" data-role="seller">
         <div class="cmd-top">
-          <code class="cmd-syntax">/donation record donator:[@Member] amount_bdt:[number] option_number:[1|2] top_ranks_to_show:[int]</code>
+          <code class="cmd-syntax">/donation option_add option_number:[int] title:[Text] target_amount:[float] description:[Text] emoji:[Emoji] dropdown_label:[Text] dropdown_desc:[Text] current_amount:[0] welcome_text_bangla:[Text]</code>
           <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/donation record')">Copy</button>
+            <span class="pill pill-gold">Permitted Role / Admin</span>
+            <button class="copy-btn" onclick="copyText('/donation option_add')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Records a donation from a member, updates the goal's BDT progress bar, sets how many Top <code>{n}</code> donators to display, and immediately updates the live Donation Embed message in your channel.</p>
+        <p class="cmd-desc">Adds a new goal option (Option 3, Option 4, etc.) or edits an existing option on the Donation Embed and Dropdown menu, refreshing the live message immediately.</p>
+      </div>
+
+      <div class="cmd-card" data-role="seller">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/donation option_remove option_number:[int]   &amp;   /donation reset reset_donator_leaderboard:[True|False]</code>
+          <div>
+            <span class="pill pill-red">Admin / Permitted Role</span>
+            <button class="copy-btn" onclick="copyText('/donation option_remove')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Removes a specific option or resets all progress bars back to <code>0% (0 BDT)</code>.</p>
       </div>
 
       <div class="cmd-card" data-role="admin">
         <div class="cmd-top">
-          <code class="cmd-syntax">/donation permission role:[@Role]</code>
+          <code class="cmd-syntax">/donation permission role:[@Role]   &amp;   /donation embed   &amp;   /donation ticket ...</code>
           <div>
             <span class="pill pill-red">Admin</span>
             <button class="copy-btn" onclick="copyText('/donation permission')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Adds a role that is permitted to view and click the <code>🔒 Close Ticket</code> button inside Donation Tickets. <em>(Regular users are blocked from closing Donation Tickets).</em></p>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/donation ticket name_format position_mode category under_channel cooldown_seconds duration_minutes welcome_message_bangla</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/donation ticket')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Customizes where Donation Tickets open, their naming format (e.g. <code>donation-{id}</code>), cooldowns, auto-close timer, and default Bangla instructions.</p>
+        <p class="cmd-desc">Grants <code>@Role</code> permission to use <code>/donation add</code> and close Donation Tickets, or customizes the Donation Embed &amp; Ticket settings.</p>
       </div>
     </section>
 
-    <!-- 14. STUDY & VOICE TRACKER -->
+    <!-- 15. ROUTINE REMINDER & ACTIVITY SYNC (/routine) -->
+    <section class="feature-section" id="sec-routine">
+      <div class="section-header">
+        <h3>📅 15. Smart Todo Routine Parser, Auto-Reminder & Activity Checker (/routine)</h3>
+        <span class="pill pill-white">Tables: routine_schedules, study_users, guild_settings</span>
+      </div>
+
+      <div class="cmd-card" data-role="member">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/routine reminder state:[on | off] mode:[member | admin] channel:[Optional #channel (Admin)]</code>
+          <div>
+            <span class="pill pill-green">Member &amp; Admin</span>
+            <button class="copy-btn" onclick="copyText('/routine reminder')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Controls the automatic Todo Routine Reminder &amp; Activity Checker system.</p>
+        <div class="logic-box">
+          <strong>🧠 How Routine Parsing, Reminders &amp; Activity Penalties Work:</strong><br/>
+          • <strong>Member vs Admin Lock:</strong> By default, reminders are <strong>ON</strong> for everyone. Members can run <code>/routine reminder state:on/off</code> to toggle their own reminders. If an Admin runs <code>/routine reminder state:off mode:admin</code>, the feature is locked globally and members cannot turn it on until an Admin re-enables it.<br/>
+          • <strong>Custom Channel:</strong> By default, reminders post in the Todo channel and auto-delete after 25 seconds. Admins can change the reminder channel via <code>/routine reminder channel:#channel</code>.<br/>
+          • <strong>Smart Time Sync:</strong> When a user posts (or edits) a schedule in the Todo channel—such as <code>Repair 9-10</code>, <code>Hardware 10-12</code>, <code>C++ 12-2</code>, <code>Design *-*</code>, or <code>8:00 – 10:00 Web Dev</code>—the bot parses every time slot into Supabase and confirms the sync.<br/>
+          • <strong>Auto-Mention &amp; Activity Check:</strong> When the clock hits a scheduled slot in Bangladesh Time, the bot mentions the user to start that subject (and deletes the ping seconds later). During that slot's time window, if their Discord status shows an unrelated activity, they lose <strong><code>-1 coin</code></strong>; if they are playing a game during a non-game study slot, they lose a high rate of <strong><code>-3 coins</code></strong>!
+        </div>
+      </div>
+    </section>
+
+    <!-- 16. STUDY & RANKS LEADERBOARD -->
     <section class="feature-section" id="sec-study">
       <div class="section-header">
-        <h3>📚 14. Study Voice Tracker, Activity Gaming Penalty, Todo & Bangla Rank Card</h3>
+        <h3>📚 16. Study Voice Tracker, Todo, Calendar Card & PFP Leaderboard (/study & /ranks)</h3>
         <span class="pill pill-white">Tables: study_users, study_vc_sessions, study_daily_logs, study_todo_messages</span>
+      </div>
+
+      <div class="cmd-card" data-role="member">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/ranks scope:[top3 (Default) | all (Top 10)]</code>
+          <div>
+            <span class="pill pill-green">Member Command</span>
+            <button class="copy-btn" onclick="copyText('/ranks')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Generates a visual Leaderboard PNG Card displaying the <strong>Top 3 users (with their circular Discord PFP avatars, Bangla/Unicode names, Study VC hours, and Coins)</strong> by default, or the <strong>Top 10 users</strong> when <code>scope:all</code> is selected!</p>
       </div>
 
       <div class="cmd-card" data-role="admin">
         <div class="cmd-top">
-          <code class="cmd-syntax">/study vc vc_channel:[Voice Channel]</code>
+          <code class="cmd-syntax">/study vc vc_channel:[Voice Channel]   &amp;   /study log channel:[#log-channel]   &amp;   /study todo channel:[#todo-channel]</code>
           <div>
             <span class="pill pill-red">Admin</span>
             <button class="copy-btn" onclick="copyText('/study vc')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Adds or removes a Voice Channel from Study Tracking (and immediately enrolls any members already sitting inside the VC).</p>
-        <div class="logic-box">
-          <strong>🪙 Study Coin Rates &amp; 🎮 Discord VC Activity / Game Penalty:</strong><br/>
-          • <strong>Base Listening:</strong> <code>+1.0 coin/min</code> | <strong>Unmuted (Talking):</strong> <code>+0.5 bonus/min</code> | <strong>Streaming / Camera On:</strong> <code>+1.0 bonus/min</code>.<br/>
-          • <strong>Full Game &amp; Discord Activity Detection:</strong> Detects both standard PC/Mobile games (Roblox, GTA, Steam) <strong>AND Discord Embedded Voice Channel Activities</strong> (Smash Karts, Sketch Heads / Scratch, Poker, Chess, Bobble League, etc.).<br/>
-          • Penalizes <strong><code>-2 coins</code> immediately</strong> when launched (`on_presence_update`) and every minute while active, sending warnings to both the VC text chat and Study Log channel!
-        </div>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/study log channel:[#log-channel]</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/study log')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Sets the event log channel where orange embeds are posted whenever a member joins or finishes a Study Voice session or receives a gaming penalty.</p>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/study todo channel:[#todo-channel]</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/study todo')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Sets the Daily Study Todo channel (+5 Coins &amp; +1 Todo Point per daily post; 1 message per day in Bangladesh Time; auto-clears at 00:00 Midnight BD Time).</p>
+        <p class="cmd-desc">Configures Study Voice Channels (+1 coin/min listening, +0.5 talking, +1.0 streaming; -2 coins/min for playing games or Discord VC activities), Study Event Logs, and the Daily Todo/Routine channel.</p>
       </div>
 
       <div class="cmd-card" data-role="member">
@@ -1106,7 +1086,7 @@
             <button class="copy-btn" onclick="copyText('/study progress')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Generates and sends a visual <strong>Profile, Achievements, Leaderboard Rank, Voice Time, and Monthly Voice Streak Calendar PNG card</strong> with full <strong>Bangla &amp; UTF-8 Unicode font rendering</strong> for display names.</p>
+        <p class="cmd-desc">Generates and sends the visual <strong>Profile, Achievements, Leaderboard Rank, Voice Time, and Monthly Voice Streak Calendar PNG card</strong> with full Bangla &amp; UTF-8 font support.</p>
       </div>
     </section>
   </main>
