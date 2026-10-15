@@ -1,73 +1,1022 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Form</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>কবিরাজ • ভূত বট — Complete Command & Feature Documentation</title>
+  <style>
+    :root {
+      --bg-primary: #111214;
+      --bg-secondary: #1e1f22;
+      --bg-card: #2b2d31;
+      --bg-card-hover: #313338;
+      --border: #3f4147;
+      --text-main: #f2f3f5;
+      --text-muted: #b5bac1;
+      --blurple: #5865f2;
+      --green: #23a55a;
+      --gold: #f0b232;
+      --red: #f23f43;
+      --cyan: #00a8fc;
+    }
 
-</head><body><div class="form-container">
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    <h1>Registration Form</h1>
-    <p class="subtitle">Please fill in the information below</p>
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      display: flex;
+      min-height: 100vh;
+    }
 
-    <form>
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      background: var(--bg-secondary);
+      border-right: 1px solid var(--border);
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      overflow-y: auto;
+      padding: 20px 14px;
+      z-index: 100;
+      transition: transform 0.25s ease;
+    }
 
-        <label for="first-name">First Name</label>
-        <input type="text" id="first-name" name="first-name" placeholder="Enter your first name">
-        
-        <label for="last-name">Last Name</label>
-        <input type="text" id="last-name" name="last-name" placeholder="Enter your last name">
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 10px 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email">
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--blurple);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
 
-        <label for="dob">Date of Birth</label>
-        <input type="date" id="dob" name="dob">
+    .brand-text h1 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
 
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+    .brand-text span {
+      font-size: 12px;
+      color: var(--green);
+      font-weight: 600;
+    }
 
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password">
+    .nav-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin: 12px 10px 6px;
+      font-weight: 700;
+    }
 
-        <label>Gender</label>
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.15s;
+      margin-bottom: 2px;
+    }
 
-        <div class="gender-options">
-            <label>
-                <input type="radio" name="gender" value="male">
-                Male
-            </label>
+    .nav-link:hover, .nav-link.active {
+      background: var(--bg-card);
+      color: var(--text-main);
+    }
 
-            <label>
-                <input type="radio" name="gender" value="female">
-                Female
-            </label>
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      margin-left: 280px;
+      padding: 32px 40px 80px;
+      max-width: 1200px;
+    }
+
+    /* Mobile Header */
+    .mobile-bar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .menu-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, #2b2d31 0%, #1e1f22 100%);
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--blurple);
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 28px;
+    }
+
+    .hero h2 {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 15px;
+      margin-bottom: 18px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .pill-blurple { background: rgba(88, 101, 242, 0.2); color: #99a2ff; border: 1px solid rgba(88, 101, 242, 0.4); }
+    .pill-green { background: rgba(35, 165, 90, 0.2); color: #57f287; border: 1px solid rgba(35, 165, 90, 0.4); }
+    .pill-gold { background: rgba(240, 178, 50, 0.2); color: #fadb7f; border: 1px solid rgba(240, 178, 50, 0.4); }
+    .pill-red { background: rgba(242, 63, 67, 0.2); color: #ff8587; border: 1px solid rgba(242, 63, 67, 0.4); }
+    .pill-cyan { background: rgba(0, 168, 252, 0.2); color: #72d2ff; border: 1px solid rgba(0, 168, 252, 0.4); }
+
+    /* Search & Filter Controls */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+      position: sticky;
+      top: 12px;
+      z-index: 50;
+      background: rgba(17, 18, 20, 0.9);
+      backdrop-filter: blur(8px);
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .search-input {
+      flex: 1;
+      min-width: 240px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--blurple);
+    }
+
+    .filter-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.15s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--blurple);
+      color: white;
+      border-color: var(--blurple);
+    }
+
+    /* Feature Sections */
+    .feature-section {
+      margin-bottom: 40px;
+      scroll-margin-top: 85px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .section-header h3 {
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Command Cards */
+    .cmd-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .cmd-card:hover {
+      border-color: var(--blurple);
+    }
+
+    .cmd-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .cmd-syntax {
+      font-family: 'Consolas', 'Courier New', monospace;
+      background: var(--bg-primary);
+      color: #00f59b;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid #2e3035;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .copy-btn:hover {
+      background: var(--blurple);
+      color: white;
+      border-color: var(--blurple);
+    }
+
+    .cmd-desc {
+      color: var(--text-main);
+      font-size: 14.5px;
+      margin-bottom: 12px;
+    }
+
+    .param-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 13.5px;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .param-table th, .param-table td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .param-table th {
+      background: rgba(0, 0, 0, 0.25);
+      color: var(--text-muted);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .param-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .param-name {
+      font-family: monospace;
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    .logic-box {
+      margin-top: 14px;
+      background: rgba(88, 101, 242, 0.08);
+      border-left: 3px solid var(--blurple);
+      padding: 12px 14px;
+      border-radius: 4px;
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    .logic-box strong {
+      color: var(--text-main);
+    }
+
+    /* Responsive Media Queries */
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+      .mobile-bar {
+        display: flex;
+      }
+      .sidebar {
+        transform: translateX(-100%);
+        width: 260px;
+      }
+      .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 20px 16px 60px;
+      }
+      .param-table, .param-table thead, .param-table tbody, .param-table th, .param-table td, .param-table tr {
+        display: block;
+      }
+      .param-table thead {
+        display: none;
+      }
+      .param-table tr {
+        border-bottom: 2px solid var(--border);
+        padding: 8px 0;
+      }
+      .param-table td {
+        border: none;
+        padding: 6px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Mobile Top Header -->
+  <div class="mobile-bar">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span style="font-size:20px;">👻</span>
+      <strong>কবিরাজ • ভূত বট Docs</strong>
+    </div>
+    <button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-icon">👻</div>
+      <div class="brand-text">
+        <h1>কবিরাজ • ভূত বট</h1>
+        <span>● 100% Supabase Persistent</span>
+      </div>
+    </div>
+
+    <div class="nav-label"> Feature Modules (12)</div>
+    <a href="#sec-language" class="nav-link" onclick="closeMobileMenu()">🌐 1. Language (/language)</a>
+    <a href="#sec-spam" class="nav-link" onclick="closeMobileMenu()">🚨 2. Spam Protection (/spam)</a>
+    <a href="#sec-level" class="nav-link" onclick="closeMobileMenu()">🏆 3. Level & Rewards (/level)</a>
+    <a href="#sec-tord" class="nav-link" onclick="closeMobileMenu()">🎲 4. Truth or Dare (/tord)</a>
+    <a href="#sec-shop" class="nav-link" onclick="closeMobileMenu()">🛒 5. Shop & Sellers (/shop)</a>
+    <a href="#sec-ticket" class="nav-link" onclick="closeMobileMenu()">🎫 6. Ticket System (/ticket)</a>
+    <a href="#sec-embed" class="nav-link" onclick="closeMobileMenu()">🛠️ 7. Web & App Embeds (/embed)</a>
+    <a href="#sec-birthday" class="nav-link" onclick="closeMobileMenu()">🎂 8. Birthdays (/birthday & /sync)</a>
+    <a href="#sec-nick" class="nav-link" onclick="closeMobileMenu()">🏷️ 9. Auto Nickname (/nick)</a>
+    <a href="#sec-answer" class="nav-link" onclick="closeMobileMenu()">🧩 10. Riddle Q&A (/answer)</a>
+    <a href="#sec-close" class="nav-link" onclick="closeMobileMenu()">🧵 11. Auto-Close Threads (/close)</a>
+    <a href="#sec-donation" class="nav-link" onclick="closeMobileMenu()">💸 12. Donations (/donation)</a>
+    <a href="#sec-study" class="nav-link" onclick="closeMobileMenu()">📚 13. Study & VC Tracker (/study)</a>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="hero">
+      <h2>📚 Complete Bot Command & Feature Reference</h2>
+      <p>Every slash command, button workflow, background timer, and auto-moderation rule is 100% backed by <strong>Supabase PostgreSQL</strong>. If the server restarts at any moment, all active cooldowns, timers, tickets, Truth/Dare sessions, and voice study streaks resume automatically.</p>
+      <div class="badge-row">
+        <span class="pill pill-blurple">⚡ 24 Slash Commands</span>
+        <span class="pill pill-green">💾 21 Supabase Tables</span>
+        <span class="pill pill-gold">🇧🇩/🇬🇧 Bilingual (Bangla & English)</span>
+        <span class="pill pill-cyan">🌐 Built-in Web Embed Editor</span>
+      </div>
+    </div>
+
+    <!-- Search & Filter Bar -->
+    <div class="controls">
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search any command, feature, or parameter (e.g. /shop, bingo, cooldown, birthday, vc)..." oninput="filterCommands()" />
+      <button class="filter-btn active" onclick="setRoleFilter('all', this)">All</button>
+      <button class="filter-btn" onclick="setRoleFilter('admin', this)">Admin Commands</button>
+      <button class="filter-btn" onclick="setRoleFilter('seller', this)">Seller Commands</button>
+      <button class="filter-btn" onclick="setRoleFilter('member', this)">Member / Interactive</button>
+    </div>
+
+    <!-- 1. LANGUAGE -->
+    <section class="feature-section" id="sec-language">
+      <div class="section-header">
+        <h3>🌐 1. Global Bot Language System</h3>
+        <span class="pill pill-blurple">Table: guild_settings</span>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/language lang:[বাংলা (Bangla) | English]</code>
+          <div>
+            <span class="pill pill-red">Admin (Manage Server)</span>
+            <button class="copy-btn" onclick="copyText('/language')">Copy</button>
+          </div>
         </div>
+        <p class="cmd-desc">Changes the entire bot's response language across the server between <strong>Bangla (`bn`)</strong> and <strong>English (`en`)</strong>.</p>
+        <table class="param-table">
+          <thead><tr><th>Parameter</th><th>Type / Choices</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td class="param-name">lang</td><td>Choice: <code>বাংলা (Bangla)</code>, <code>English</code></td><td>Selects the active language for all warnings, embeds, buttons, modals, and logs.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-        <label for="district">District</label>
+    <!-- 2. SPAM MENTION PROTECTION -->
+    <section class="feature-section" id="sec-spam">
+      <div class="section-header">
+        <h3>🚨 2. Spam Mention Protection & 1-Hour Cooldown</h3>
+        <span class="pill pill-blurple">Tables: guild_settings, spam_cooldowns</span>
+      </div>
 
-        <select id="district" name="district">
-            <option value="">Select your district</option>
-            <option value="dhaka">Dhaka</option>
-            <option value="rajshahi">Rajshahi</option>
-            <option value="chattogram">Chattogram</option>
-            <option value="sylhet">Sylhet</option>
-            <option value="khulna">Khulna</option>
-            <option value="barishal">Barishal</option>
-        </select>
-
-        <div class="terms">
-            <input type="checkbox" id="terms" name="terms">
-            <label for="terms">
-                I agree to the Terms and Conditions
-            </label>
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/spam mention state:[on | off]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/spam mention state:on')">Copy</button>
+          </div>
         </div>
+        <p class="cmd-desc">Turns the 3x Spam Mention detector ON or OFF for the server.</p>
+      </div>
 
-        <button type="submit">Register</button>
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/spam channel channel:[#channel]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/spam channel')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Adds or removes a specific channel from spam mention monitoring. <em>(Note: If no channels are added, the bot automatically protects <strong>all</strong> channels when `/spam mention on` is active).</em></p>
+      </div>
 
-    </form>
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/spam log channel:[#log-channel]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/spam log')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Sets the log channel where red warning embeds are posted whenever someone triggers a spam mention cooldown.</p>
+        <div class="logic-box">
+          <strong>⚙️ How It Works & Persistence:</strong> If User A mentions User B <strong>3 or more times</strong> in a single message (or across rapid messages within 15 seconds), the bot deletes the message, locks User A on a <strong>1-hour cooldown</strong> specifically from mentioning User B (saved in <code>spam_cooldowns</code> with an exact UTC expiration timestamp), warns User A in chat, and sends a full report to the log channel. Any attempt by User A to mention User B during that 1 hour is immediately deleted.
+        </div>
+      </div>
+    </section>
 
-</div>
+    <!-- 3. LEVEL & REWARD SYSTEM -->
+    <section class="feature-section" id="sec-level">
+      <div class="section-header">
+        <h3>🏆 3. Channel-Specific Leveling & Role Rewards</h3>
+        <span class="pill pill-blurple">Tables: level_rules, user_channel_levels, level_rewards</span>
+      </div>
 
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/level level_gain:[int] channel:[#channel] posts_required:[int] post_type:[Choice] cooldown_seconds:[int]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/level')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Creates a custom leveling rule for a specific Text or Forum channel with anti-cheat cooldown protection.</p>
+        <table class="param-table">
+          <thead><tr><th>Parameter</th><th>Type / Choices</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td class="param-name">level_gain</td><td>Integer (e.g. <code>1</code>)</td><td>How many levels the user gains each time they complete <code>posts_required</code>.</td></tr>
+            <tr><td class="param-name">channel</td><td>Text / Forum Channel</td><td>The specific channel where posts are counted.</td></tr>
+            <tr><td class="param-name">posts_required</td><td>Integer (e.g. <code>1</code>)</td><td>How many qualifying posts are needed to trigger the level increase.</td></tr>
+            <tr><td class="param-name">post_type</td><td><code>Any Post</code>, <code>Media</code>, <code>Text</code>, <code>Forum Post</code>, <code>Links</code></td><td>Filters what kind of post counts toward leveling in this channel.</td></tr>
+            <tr><td class="param-name">cooldown_seconds</td><td>Integer (Default: <code>60</code>)</td><td>Anti-cheat timer: minimum seconds required between two counted posts by the same user.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/reward channel:[#channel] level:[int] role:[@Role]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/reward')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Automatically awards the specified <code>@Role</code> when a member reaches <code>level</code> inside <code>#channel</code>.</p>
+      </div>
+    </section>
+
+    <!-- 4. TRUTH OR DARE -->
+    <section class="feature-section" id="sec-tord">
+      <div class="section-header">
+        <h3>🎲 4. Bangla Truth or Dare System (সত্য নাকি সাহস)</h3>
+        <span class="pill pill-blurple">Tables: tord_channels, tord_sessions</span>
+      </div>
+
+      <div class="cmd-card" data-role="member">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/tord channel:[#channel] action:[start | stop]</code>
+          <div>
+            <span class="pill pill-green">Interactive Game</span>
+            <button class="copy-btn" onclick="copyText('/tord')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Starts or stops the interactive Bangla Truth or Dare panel in the target channel.</p>
+        <div class="logic-box">
+          <strong>🔄 Complete Button & Modal Workflow:</strong><br/>
+          1. <strong>Choose:</strong> A player clicks <code>Truth</code>, <code>Dare</code>, or <code>Random</code>.<br/>
+          2. <strong>Ask Question (প্রশ্ন করুন):</strong> Other members see who chose what along with two buttons: <code>📝 প্রশ্ন করুন</code> and <code>🕵️ নাম/পরিচয় গোপন রাখুন</code> (Anonymous toggle). <em>(The player cannot ask themselves a question!)</em><br/>
+          3. <strong>Question Modal & Media Placeholder:</strong> The asker types their question, optionally pastes a Photo/GIF link in the special media placeholder field, and chooses whether to hide their identity.<br/>
+          4. <strong>BINGO Button:</strong> The bot posts the question, tags the player, and displays the green <code>BINGO</code> button. Only that specific player can click <code>BINGO</code> to submit their answer and proof media/GIF.<br/>
+          5. <strong>Infinite Loop:</strong> Once answered, the embed updates to <code>🎯 খেলা সম্পন্ন!</code> and attaches fresh <code>Truth | Dare | Random</code> buttons at the bottom!
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SHOP SYSTEM -->
+    <section class="feature-section" id="sec-shop">
+      <div class="section-header">
+        <h3>🛒 5. Shop System, Seller Roles, Emoji Triggers & Boxed Posts</h3>
+        <span class="pill pill-blurple">Tables: guild_settings, shop_triggers</span>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/shop status state:[on | off] channel:[#channel]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/shop status')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Turns the Shop system ON or OFF for a specific channel.</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/shop seller role:[@Role] user:[@Member]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/shop seller')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Registers a Seller Role or specific Seller User who is permitted to use <code>/shop react</code>, <code>/shop box</code>, <code>/shop seller_cooldown</code>, and manage Shop Tickets.</p>
+      </div>
+
+      <div class="cmd-card" data-role="seller">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/shop react message_id:[ID] emoji:[Emoji]</code>
+          <div>
+            <span class="pill pill-gold">Seller / Admin</span>
+            <button class="copy-btn" onclick="copyText('/shop react')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Reacts to an existing seller message with the specified emoji. Any customer who reacts to that emoji on that message will automatically open a private serial Shop Ticket (<code>#shop-1</code>, <code>#shop-2</code>...).</p>
+      </div>
+
+      <div class="cmd-card" data-role="seller">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/shop box button_name:[Label] message_id:[ID]</code>
+          <div>
+            <span class="pill pill-gold">Seller / Admin</span>
+            <button class="copy-btn" onclick="copyText('/shop box')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Deletes the seller's raw text message and wraps it into a clean gold Box Embed featuring the seller's avatar, display name, product details, attached image, and a custom green button (e.g., <code>🛒 Create Ticket</code>) that opens a Shop Ticket when clicked.</p>
+      </div>
+
+      <div class="cmd-card" data-role="seller">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/shop seller_mention state:[on | off]</code>
+          <div>
+            <span class="pill pill-gold">Seller / Admin</span>
+            <button class="copy-btn" onclick="copyText('/shop seller_mention')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Toggles whether sellers are automatically mentioned/pinged inside newly created Shop Tickets.</p>
+      </div>
+
+      <div class="cmd-card" data-role="seller">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/shop seller_cooldown cooldown_seconds:[int] duration_minutes:[int]</code>
+          <div>
+            <span class="pill pill-gold">Seller / Admin</span>
+            <button class="copy-btn" onclick="copyText('/shop seller_cooldown')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Allows Sellers to adjust the customer ticket creation cooldown (in seconds) and how long a ticket channel stays open before auto-closing (in minutes; <code>0</code> = stays open until closed manually).</p>
+      </div>
+    </section>
+
+    <!-- 6. TICKET CONFIGURATION -->
+    <section class="feature-section" id="sec-ticket">
+      <div class="section-header">
+        <h3>🎫 6. Rich Ticket Channel Configuration</h3>
+        <span class="pill pill-blurple">Tables: active_tickets, ticket_cooldowns</span>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/ticket name_format position_mode category under_channel cooldown_seconds duration_minutes allow_user_close welcome_message_bangla</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/ticket')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Master configuration command for customizing every aspect of Shop Ticket channels.</p>
+        <table class="param-table">
+          <thead><tr><th>Parameter</th><th>Default / Options</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td class="param-name">name_format</td><td><code>shop-{id}</code></td><td>Supports <code>{id}</code> (serial number 1, 2, 3...) and <code>{name}</code> (customer username).</td></tr>
+            <tr><td class="param-name">position_mode</td><td><code>top</code>, <code>after_channel</code>, <code>category</code></td><td>Open at the very top of the server, directly beneath a reference channel, or inside a category.</td></tr>
+            <tr><td class="param-name">category</td><td>CategoryChannel</td><td>Which category the ticket channel should be placed under.</td></tr>
+            <tr><td class="param-name">under_channel</td><td>TextChannel</td><td>Reference channel when using <code>after_channel</code> placement.</td></tr>
+            <tr><td class="param-name">cooldown_seconds</td><td><code>300</code></td><td>Seconds a user must wait before opening another ticket.</td></tr>
+            <tr><td class="param-name">duration_minutes</td><td><code>0</code> (Infinite)</td><td>If &gt; 0, automatically closes and deletes the ticket channel after X minutes.</td></tr>
+            <tr><td class="param-name">allow_user_close</td><td><code>yes</code> / <code>no</code></td><td>Admin-only setting: controls whether the customer can click the Close Ticket button or only Sellers/Admins.</td></tr>
+            <tr><td class="param-name">welcome_message_bangla</td><td>Bangla Text</td><td>Custom Bangla welcome message inside the ticket. Supports <code>{user}</code> placeholder.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 7. EMBED BUILDER (IN-APP & WEB) -->
+    <section class="feature-section" id="sec-embed">
+      <div class="section-header">
+        <h3>🛠️ 7. Full Embed & Custom Button Builder (In-App + Web)</h3>
+        <span class="pill pill-blurple">Tables: web_editor_sessions, custom_embed_buttons</span>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/embed builder</code>
+          <div>
+            <span class="pill pill-red">Manage Messages</span>
+            <button class="copy-btn" onclick="copyText('/embed builder')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Opens an interactive ephemeral Embed Builder directly inside Discord with buttons to edit Title/Body/Color, Webhook Username &amp; Avatar URL, Author, Images, Footer, Inline/Regular Fields, and Custom Link or Action Buttons.</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/embed web</code>
+          <div>
+            <span class="pill pill-cyan">Web Editor (Heroku Ready)</span>
+            <button class="copy-btn" onclick="copyText('/embed web')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Generates a secure link button to open the live Dark-Mode Web Embed Editor in your browser.</p>
+        <div class="logic-box">
+          <strong>🌐 Web Editor Features:</strong> Includes a Channel selector dropdown + manual Channel ID box, custom Webhook Username &amp; Avatar URL, full Discord Markdown formatting toolbar (<code>**</code>, <code>*</code>, <code>***</code>, <code>__</code>, <code>||</code>, <code>```</code>, <code>#</code>, <code>##</code>, <code>###</code>), Color Picker, Dynamic Fields (with Inline checkbox), multi-color Buttons (Blurple, Grey, Green, Red, Link) with custom click-responses saved in Supabase, and a live side-by-side Discord preview!
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. BIRTHDAY & SYNC -->
+    <section class="feature-section" id="sec-birthday">
+      <div class="section-header">
+        <h3>🎂 8. Birthday Wishing & Smart Channel History Sync</h3>
+        <span class="pill pill-blurple">Tables: guild_settings, user_birthdays</span>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/birthday channel:[#channel] title:[Text] desc:[Text] url:[Media/GIF URL]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/birthday')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Enables automatic daily birthday wishing in <code>#channel</code> (checked at midnight Bangladesh Time). If you only pass <code>channel</code>, it uses the default Bangla birthday title, description, and celebration GIF. Any user who types their birthday in this channel automatically gets a <code>✅</code> reaction and is saved to the database.</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/sync birthday_channel:[#channel]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/sync')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Scans the entire message history of <code>#birthday_channel</code>, parses every user's birthday, adds a <code>✅</code> reaction, and saves them to Supabase.</p>
+        <div class="logic-box">
+          <strong>🧠 Smart Date Parsing & Duplicate Rule:</strong><br/>
+          • If a user typed their birthday twice or multiple times in history, the bot strictly saves <strong>only the LAST (most recent) birthday</strong> they typed.<br/>
+          • Understands formats like <code>Dec26</code>, <code>August 19</code>, <code>29th march</code>, Bangla months, and numeric dates like <code>08/24</code>, <code>3 - 5</code>, <code>3 5</code> (where the <strong>1st number is ALWAYS Month</strong> and the <strong>2nd number is ALWAYS Day</strong>).
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. AUTO NICKNAME -->
+    <section class="feature-section" id="sec-nick">
+      <div class="section-header">
+        <h3>🏷️ 9. Auto Nickname Channel</h3>
+        <span class="pill pill-blurple">Table: guild_settings</span>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/nick channel:[#channel]</code>
+          <div>
+            <span class="pill pill-red">Manage Nicknames</span>
+            <button class="copy-btn" onclick="copyText('/nick')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Designates a channel where any message typed by a member automatically becomes their server nickname (in any language: Bangla, English, etc.) and gets a <code>✅</code> tick reaction. Names starting with a number (<code>0-9</code> or <code>০-৯</code>) or exceeding 32 characters are automatically rejected.</p>
+      </div>
+    </section>
+
+    <!-- 10. SMART RIDDLE / Q&A -->
+    <section class="feature-section" id="sec-answer">
+      <div class="section-header">
+        <h3>🧩 10. Auto-Detecting Q&A / Riddle Answer System</h3>
+        <span class="pill pill-blurple">Table: channel_answers</span>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/answer channel_or_thread:[#channel / Thread] answer:[Correct Answer]</code>
+          <div>
+            <span class="pill pill-red">Manage Messages</span>
+            <button class="copy-btn" onclick="copyText('/answer')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Sets the secret target answer for any Forum Post thread or Text channel.</p>
+        <div class="logic-box">
+          <strong>🔍 Phonetic, Typo-Tolerant & Bangla Matcher:</strong> Automatically reacts with <code>❌</code> on wrong guesses and <code>✅</code> + replies <code>🎉 @User সঠিক উত্তর দিয়েছেন!</code> when correct. Even if the user misspells it (e.g., <code>eifel tower</code>, <code>aifel</code>) or writes it in Bangla script (<code>আইফেল টাওয়ার</code>), the bot recognizes it as right while rejecting incomplete single-word guesses or puns like <code>I Fell (TOWER)</code>.
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. AUTO-CLOSE THREADS -->
+    <section class="feature-section" id="sec-close">
+      <div class="section-header">
+        <h3>🧵 11. Nested Thread Auto-Closer & Timer</h3>
+        <span class="pill pill-blurple">Tables: auto_close_channels, scheduled_thread_closes</span>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/close channels channel1:[#ch1] channel2:[#ch2] channel3:[#ch3] channel4:[#ch4] channel5:[#ch5]</code>
+          <div>
+            <span class="pill pill-red">Manage Threads</span>
+            <button class="copy-btn" onclick="copyText('/close channels')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Configures up to 5 channels at once so that whenever any user or bot opens a thread inside them, the thread is <strong>not deleted</strong>—instead it is automatically closed (archived) so ugly nested threads never clutter your channel sidebar.</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/close timer channel:[#channel] minutes:[int]</code>
+          <div>
+            <span class="pill pill-red">Manage Threads</span>
+            <button class="copy-btn" onclick="copyText('/close timer')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Sets a delay timer (in minutes) before newly created threads in <code>#channel</code> are automatically closed.</p>
+      </div>
+    </section>
+
+    <!-- 12. DONATION SYSTEM -->
+    <section class="feature-section" id="sec-donation">
+      <div class="section-header">
+        <h3>💸 12. Community Donation Goals, Progress Bars, Top Ranks & Tickets</h3>
+        <span class="pill pill-blurple">Tables: donation_goals, donation_records, active_tickets</span>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/donation status channel:[#channel] state:[on | off]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/donation status')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Enables or disables the Donation system in the specified channel.</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/donation default channel:[#channel]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/donation default')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Posts the complete default Minecraft Community Donation Embed featuring Option 1 (💻 Server RAM Performance Boost) &amp; Option 2 (💸 Monthly Server Billing Goal), emoji progress bars (<code>🟩</code>/<code>⬛</code>), Top Donators leaderboard (<code>👑</code>, <code>🥈</code>, <code>🥉</code>), and the interactive Goal Dropdown menu.</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/donation embed channel:[#channel]</code>
+          <div>
+            <span class="pill pill-cyan">Web Editor</span>
+            <button class="copy-btn" onclick="copyText('/donation embed')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Opens the Web Embed Editor in Donation Mode—lets you customize the title, description, colors, and images on the web while automatically injecting the live emoji progress bars, Top Donators list, and Dropdown menu when submitted!</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/donation record donator:[@Member] amount_bdt:[number] option_number:[1|2] top_ranks_to_show:[int]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/donation record')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Records a donation from a member, updates the goal's BDT progress bar, sets how many Top <code>{n}</code> donators to display, and <strong>immediately updates the live Donation Embed message</strong> in your donation channel.</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/donation permission role:[@Role]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/donation permission')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Adds a role that is permitted to view and click the <code>🔒 Close Ticket</code> button inside Donation Tickets. <em>(Regular users/donators are strictly blocked from closing Donation Tickets).</em></p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/donation ticket name_format position_mode category under_channel cooldown_seconds duration_minutes welcome_message_bangla</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/donation ticket')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Customizes where Donation Tickets open (top of server, under a specific channel, or in a category), their naming format (e.g. <code>donation-{id}</code>), cooldowns, auto-close timer, and default Bangla instructions.</p>
+      </div>
+    </section>
+
+    <!-- 13. STUDY & VOICE TRACKER -->
+    <section class="feature-section" id="sec-study">
+      <div class="section-header">
+        <h3>📚 13. Study Voice Tracker, Gaming Penalty, Daily Todo & Calendar Card</h3>
+        <span class="pill pill-blurple">Tables: study_users, study_vc_sessions, study_daily_logs, study_todo_messages</span>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/study vc vc_channel:[Voice Channel]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/study vc')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Adds or removes a Voice Channel from Study Tracking.</p>
+        <div class="logic-box">
+          <strong>🪙 Study Coin Rates &amp; 🎮 Real-Time Gaming Penalty:</strong><br/>
+          • <strong>Base Listening:</strong> <code>+1.0 coin/min</code> | <strong>Unmuted (Talking):</strong> <code>+0.5 bonus/min</code> | <strong>Streaming / Camera On:</strong> <code>+1.0 bonus/min</code>.<br/>
+          • <strong>Gaming Detection:</strong> Every 60 seconds, the bot checks each connected member's Discord Presence activity. If they are playing any game (Roblox, GTA, Steam games, etc.), they <strong>lose <code>-2 coins/min</code></strong> and receive an immediate warning in the VC text chat and Study Log channel!
+        </div>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/study log channel:[#log-channel]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/study log')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Sets the event log channel where orange embeds are posted whenever a member joins or finishes a Study Voice session (showing start time and coins earned) or receives a gaming penalty.</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/study todo channel:[#todo-channel]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/study todo')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Sets the Daily Study Todo channel.</p>
+        <div class="logic-box">
+          <strong>📋 1-Post-Per-Day Rule &amp; Midnight BD Reset:</strong><br/>
+          • Members earn <strong>+5 Coins</strong> and <strong>+1 Todo Point</strong> for posting their daily Todo list.<br/>
+          • A member can only post <strong>once per day</strong> (Bangladesh Time <code>Asia/Dhaka</code>). If they try to send a second message, the bot deletes the duplicate and instructs them to <strong>Edit</strong> or <strong>Delete</strong> their existing Todo.<br/>
+          • Every night at <strong>00:00 Midnight (Bangladesh Time)</strong>, the bot automatically deletes the previous day's Todo messages so everyone starts fresh!
+        </div>
+      </div>
+
+      <div class="cmd-card" data-role="member">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/study progress log_channel:[Optional #channel (Admin Only)]</code>
+          <div>
+            <span class="pill pill-green">Member &amp; Admin</span>
+            <button class="copy-btn" onclick="copyText('/study progress')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Generates and sends a visual <strong>Profile, Achievements, Leaderboard Rank, Voice Time (Daily/Weekly/Monthly/All-Time), and Monthly Voice Streak Calendar PNG card</strong>. Regular members run <code>/study progress</code> to view their card; Admins can optionally specify <code>log_channel</code> to post the card directly to a log channel.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let activeRole = 'all';
+
+    function closeMobileMenu() {
+      document.getElementById('sidebar').classList.remove('open');
+    }
+
+    function setRoleFilter(role, btn) {
+      activeRole = role;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterCommands();
+    }
+
+    function filterCommands() {
+      const q = document.getElementById('searchInput').value.toLowerCase();
+      document.querySelectorAll('.feature-section').forEach(sec => {
+        let anyVisible = false;
+        sec.querySelectorAll('.cmd-card').forEach(card => {
+          const roleMatch = (activeRole === 'all') || (card.getAttribute('data-role') === activeRole);
+          const textMatch = card.innerText.toLowerCase().includes(q);
+          if (roleMatch && textMatch) {
+            card.style.display = 'block';
+            anyVisible = true;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        sec.style.display = anyVisible ? 'block' : 'none';
+      });
+    }
+
+    function copyText(txt) {
+      navigator.clipboard.writeText(txt);
+      alert('Copied to clipboard: ' + txt);
+    }
+  </script>
 </body>
 </html>
