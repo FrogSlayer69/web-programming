@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>কবিরাজ • ভূত বট — Complete Command & Feature Documentation</title>
+  <title>কবিরাজ • ভূত বট — Complete Command &amp; Feature Documentation</title>
   <style>
     :root {
-      /* Server Custom Theme: #211f1f, #f44336, and White */
       --bg-primary: #161515;
       --bg-secondary: #211f1f;
       --bg-card: #282525;
@@ -20,6 +19,7 @@
       --green: #2ecc71;
       --gold: #ffb300;
       --cyan: #29b6f6;
+      --purple: #ba55d3;
       --zoom-scale: 1;
     }
 
@@ -53,9 +53,8 @@
       transition: background 0.2s, color 0.2s;
     }
 
-    /* Sidebar Navigation */
     .sidebar {
-      width: 315px;
+      width: 325px;
       background: var(--bg-secondary);
       border-right: 1px solid var(--border);
       position: fixed;
@@ -132,15 +131,13 @@
       border-left: 3px solid var(--accent);
     }
 
-    /* Main Content Area */
     .main-content {
       flex: 1;
-      margin-left: 315px;
+      margin-left: 325px;
       padding: 32px 40px 80px;
       max-width: 1280px;
     }
 
-    /* Mobile Header */
     .mobile-bar {
       display: none;
       position: sticky;
@@ -164,7 +161,6 @@
       cursor: pointer;
     }
 
-    /* Hero Banner */
     .hero {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
@@ -207,9 +203,9 @@
     .pill-green { background: rgba(46, 204, 113, 0.16); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.4); }
     .pill-gold { background: rgba(255, 179, 0, 0.16); color: #ffb300; border: 1px solid rgba(255, 179, 0, 0.4); }
     .pill-cyan { background: rgba(41, 182, 246, 0.16); color: #29b6f6; border: 1px solid rgba(41, 182, 246, 0.4); }
+    .pill-purple { background: rgba(186, 85, 211, 0.16); color: #ba55d3; border: 1px solid rgba(186, 85, 211, 0.4); }
     .pill-white { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border); }
 
-    /* Search & Filter Controls */
     .controls {
       display: flex;
       flex-wrap: wrap;
@@ -259,7 +255,6 @@
       border-color: var(--accent);
     }
 
-    /* Feature Sections */
     .feature-section {
       margin-bottom: 42px;
       scroll-margin-top: 85px;
@@ -284,7 +279,6 @@
       gap: 10px;
     }
 
-    /* Command Cards */
     .cmd-card {
       background: var(--bg-secondary);
       border: 1px solid var(--border);
@@ -396,7 +390,6 @@
       color: var(--text-main);
     }
 
-    /* Toast Notification */
     #toast {
       position: fixed;
       bottom: 24px;
@@ -418,7 +411,6 @@
       opacity: 1;
     }
 
-    /* Responsive Media Queries */
     @media (max-width: 900px) {
       body {
         flex-direction: column;
@@ -428,7 +420,7 @@
       }
       .sidebar {
         transform: translateX(-100%);
-        width: 285px;
+        width: 295px;
       }
       .sidebar.open {
         transform: translateX(0);
@@ -476,12 +468,16 @@
       </div>
     </div>
 
-    <div class="nav-label">Feature Modules (25)</div>
+    <div class="nav-label">Core Control &amp; Progression</div>
     <a href="#sec-setup" class="nav-link" onclick="closeMobileMenu()">🎛️ 00. Master Web Setup (/setup)</a>
-    <a href="#sec-make" class="nav-link" onclick="closeMobileMenu()">🛡️ 0. Roles, Vampire King &amp; /help</a>
-    <a href="#sec-language" class="nav-link" onclick="closeMobileMenu()">🌐 1. Language &amp; Toggle (/language, /command)</a>
+    <a href="#sec-maps" class="nav-link" onclick="closeMobileMenu()">🗺️ 01. Blood Role Map (/maps)</a>
+    <a href="#sec-make" class="nav-link" onclick="closeMobileMenu()">🛡️ 0. Roles, Factions &amp; /help</a>
+    <a href="#sec-alias" class="nav-link" onclick="closeMobileMenu()">⚡ 0B. Multi-Prefix &amp; Aliases (/alias)</a>
+
+    <div class="nav-label">Server &amp; Auto-Mod</div>
+    <a href="#sec-language" class="nav-link" onclick="closeMobileMenu()">🌐 1. Language &amp; Command Toggle</a>
     <a href="#sec-spam" class="nav-link" onclick="closeMobileMenu()">🚨 2. Spam Protection (/spam)</a>
-    <a href="#sec-level" class="nav-link" onclick="closeMobileMenu()">🏆 3. Levels, Rewards &amp; Gifts (/level, /gifts)</a>
+    <a href="#sec-level" class="nav-link" onclick="closeMobileMenu()">🏆 3. Levels, Rewards &amp; Gifts</a>
     <a href="#sec-tord" class="nav-link" onclick="closeMobileMenu()">🎲 4. Truth or Dare (/tord)</a>
     <a href="#sec-shop" class="nav-link" onclick="closeMobileMenu()">🛒 5. Shop &amp; Sellers (/shop)</a>
     <a href="#sec-ticket" class="nav-link" onclick="closeMobileMenu()">🎫 6. Ticket System (/ticket)</a>
@@ -493,37 +489,41 @@
     <a href="#sec-link" class="nav-link" onclick="closeMobileMenu()">🔗 12. Link Box Wrapper (/link)</a>
     <a href="#sec-close" class="nav-link" onclick="closeMobileMenu()">🧵 13. Auto-Close Threads (/close)</a>
     <a href="#sec-donation" class="nav-link" onclick="closeMobileMenu()">💸 14. Donations (/donation)</a>
+
+    <div class="nav-label">Study, Blood &amp; Supernatural RPG</div>
     <a href="#sec-routine" class="nav-link" onclick="closeMobileMenu()">📅 15. DM Routine Sync (/routine)</a>
-    <a href="#sec-study" class="nav-link" onclick="closeMobileMenu()">📚 16. Study VC, Music Penalty &amp; Top-8</a>
-    <a href="#sec-afk" class="nav-link" onclick="closeMobileMenu()">👻 17. Minimal Boxed AFK &amp; Spy (/afk)</a>
-    <a href="#sec-blood" class="nav-link" onclick="closeMobileMenu()">🩸 18. Blood Vials, Passive Channels &amp; Perms</a>
+    <a href="#sec-study" class="nav-link" onclick="closeMobileMenu()">📚 16. Study VC &amp; Anti-Distraction</a>
+    <a href="#sec-afk" class="nav-link" onclick="closeMobileMenu()">👻 17. Minimal Boxed AFK &amp; Spy</a>
+    <a href="#sec-blood" class="nav-link" onclick="closeMobileMenu()">🩸 18. Blood Vials &amp; Passive Channels</a>
     <a href="#sec-currency" class="nav-link" onclick="closeMobileMenu()">🔐 19. Permission Currency (/currency)</a>
-    <a href="#sec-supernatural" class="nav-link" onclick="closeMobileMenu()">🧛 20. Vampire King, Mummy Curse &amp; #death</a>
+    <a href="#sec-supernatural" class="nav-link" onclick="closeMobileMenu()">🧛 20. Vampire King, Mummy &amp; #death</a>
     <a href="#sec-shhh" class="nav-link" onclick="closeMobileMenu()">🤫 21. Channel Shhh Mute (/shhh)</a>
     <a href="#sec-games" class="nav-link" onclick="closeMobileMenu()">🔫 22. Party Games (/roulette, /pass, /fish)</a>
     <a href="#sec-download" class="nav-link" onclick="closeMobileMenu()">📥 23. Media Downloader (/download)</a>
-    <a href="#sec-owo" class="nav-link" onclick="closeMobileMenu()">🎭 24. OwO Roleplay, Cooldown &amp; Shutdown</a>
+    <a href="#sec-owo" class="nav-link" onclick="closeMobileMenu()">🎭 24. OwO Roleplay &amp; Shutdown</a>
   </aside>
 
   <!-- Main Content -->
   <main class="main-content">
     <div class="hero">
       <h2>📚 কবিরাজ • ভূত বট — Complete Command &amp; Feature Reference</h2>
-      <p>Every slash command, Master Web Control Center toggle (<code>/setup</code>), prefix action &amp; cooldown, routine DM reminder, Blood Vial economy (with 10 mL initial pre-blood, passive Blood VC/Text/Forum channels, and strict <code>1210652404169707520</code> / Owner / Dealer permissions), Supernatural RPG faction (Vampires, Vampire Kings, Witches, Wizards, Mummies with <code>[CURSED]</code> locks, Werewolves), and Study VC Spotify/Music Bot/Meme penalty is 100% backed by <strong>Supabase PostgreSQL</strong>.</p>
+      <p>Every slash command, Multi-Prefix configuration (<code>!</code>, <code>w</code>, <code>&amp;</code>, <code>!b</code>), Command Alias Studio (e.g. <code>!rokto</code> ➔ <code>!blood</code>), Master Web Control Center (<code>/setup</code>), Blood &amp; Role Progression Map (<code>/maps</code> &amp; <code>!maps</code>), routine DM reminder, Blood Vial economy (10 mL initial pre-blood, default member visibility, passive earning channels, and strict Dealer/Owner permissions), Supernatural RPG faction (Vampire, Vampire King with 0 cooldown, Witch, Wizard, Mummy with <code>[CURSED]</code> power/gamble locks, Werewolf), and Study VC anti-distraction penalties are 100% backed by <strong>Supabase PostgreSQL</strong>[cite: 25, 27, 29].</p>
       <div class="badge-row">
-        <span class="pill pill-red">⚡ 80+ Slash &amp; Prefix Commands</span>
-        <span class="pill pill-cyan">🎛️ /setup Master Web Control Center</span>
-        <span class="pill pill-gold">👑🩸 Vampire King &amp; Mummy [CURSED] Lock</span>
+        <span class="pill pill-red">⚡ Multi-Prefix &amp; Aliases</span>
+        <span class="pill pill-cyan">🎛️ /setup Master Web Control</span>
+        <span class="pill pill-purple">🗺️ /maps Role Progression Map</span>
+        <span class="pill pill-gold">👑🩸 Vampire King &amp; Mummy Lock</span>
         <span class="pill pill-green">💾 100% Supabase Persistent</span>
       </div>
     </div>
 
     <!-- Search, Role Filter & Theme/Text Size Controls -->
     <div class="controls">
-      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search any command, feature, or parameter (e.g. /setup, vampire_king, /blood vc, /blood perms, /prefix cooldown, /bite, /mummy, /help)..." oninput="filterCommands()" />
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search any command or feature (e.g. /setup, /maps, /alias, /blood, /mummy, /bite, /help)..." oninput="filterCommands()" />
       <button class="filter-btn active" onclick="setRoleFilter('all', this)">All</button>
+      <button class="filter-btn" onclick="setRoleFilter('progression', this)">Progression &amp; Maps</button>
       <button class="filter-btn" onclick="setRoleFilter('admin', this)">Admin / Mod / Staff</button>
-      <button class="filter-btn" onclick="setRoleFilter('seller', this)">Dealer, Seller &amp; Special Roles</button>
+      <button class="filter-btn" onclick="setRoleFilter('seller', this)">Dealer, Seller &amp; Special</button>
       <button class="filter-btn" onclick="setRoleFilter('member', this)">Member, RPG &amp; Games</button>
       <button class="filter-btn" onclick="document.body.classList.toggle('light-mode')">🌓 Dark / White</button>
       <button class="filter-btn" onclick="cycleTextSize()">🔠 Text Size</button>
@@ -544,18 +544,64 @@
             <button class="copy-btn" onclick="copyText('/setup')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Generates a private link button to open the **Master Web Control Center &amp; Bot Profile** in your browser without needing any login password, or locks Web Setup access to a single Admin User ID!</p>
+        <p class="cmd-desc">Generates a private link button to open the <strong>Master Web Control Center &amp; Bot Profile</strong> with live Supabase synchronization (zero ID rounding, zero data resets), or locks Web Setup access strictly to a single Admin User ID!</p>
         <table class="param-table">
           <thead><tr><th>Parameter</th><th>Type / Choices</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td class="param-name">perms</td><td>Optional Discord User ID / <code>off</code></td><td>When run by the first Admin or Server Owner (or User ID <code>1210652404169707520</code>), locks <code>/setup</code> web dashboard access exclusively to that Admin User ID! Any other Admin who tries to run <code>/setup</code> or change <code>/setup perms</code> is blocked. Pass <code>off</code> to unlock for all Admins.</td></tr>
+            <tr><td class="param-name">perms</td><td>Optional Discord User ID / <code>off</code></td><td>When run by the authorized Admin or Server Owner (or User ID <code>1210652404169707520</code>), locks <code>/setup</code> web dashboard access exclusively to that Admin User ID[cite: 25]! Pass <code>off</code> to unlock for all Admins[cite: 25].</td></tr>
           </tbody>
         </table>
         <div class="logic-box">
-          <strong>🌐 What You Can Do Inside the `/setup` Web Dashboard:</strong><br/>
-          • <strong>Theme &amp; Text Scaling:</strong> Toggle between <strong>Dark Crimson</strong>, <strong>White Mode</strong>, and <strong>Neon Cyber</strong> themes, and scale text size (<code>100%</code> / <code>115%</code> / <code>130%</code>).<br/>
-          • <strong>All 8 Modules in One Place:</strong> Configure Language, Prefix &amp; Cooldowns, Supernatural &amp; Staff Roles (clickable chips), Passive Blood VC/Text/Forum Channels, Vampire King &amp; Mummy Curse rates, Study VC &amp; Todo channels, Spam/Nick/Link auto-moderation, Shop/Donation settings, and Command ON/OFF Restrictions—while keeping <code>/embed web</code> on its own separate route (<code>/editor/{token}</code>)!
+          <strong>🌐 Live Database Display &amp; Precision Architecture:</strong><br/>
+          • <strong>Zero Value Resets:</strong> All Discord Snowflake IDs are serialized as exact strings so browser JavaScript never rounds 18-digit numbers[cite: 22].<br/>
+          • <strong>Live DB Sync:</strong> Reopening or reloading `/setup` instantly fetches current database values and displays active channels[cite: 22].<br/>
+          • <strong>Theme &amp; Text Scaling:</strong> Switch between Dark Crimson, Clean White Mode, and Neon Cyber Blood, with 100%, 115%, or 130% text scaling[cite: 22]!
         </div>
+      </div>
+    </section>
+
+    <!-- 01. BLOOD & ACHIEVEMENT ROLE PROGRESSION MAP (/maps & /milestone) -->
+    <section class="feature-section" id="sec-maps">
+      <div class="section-header">
+        <h3>🗺️ 01. Blood &amp; Achievement Role Progression Map (/maps &amp; /milestone)</h3>
+        <span class="pill pill-purple">Interactive Role Map + Auto Unlock &amp; Claim</span>
+      </div>
+
+      <div class="cmd-card" data-role="progression">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/maps category:[all | supernatural | achievement | custom]   &amp;   !maps [category]</code>
+          <div>
+            <span class="pill pill-green">Available to All Members</span>
+            <button class="copy-btn" onclick="copyText('/maps')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Opens the interactive <strong>Blood &amp; Role Progression Map</strong>. Members can view exact Blood (`mL`/`L`), Study VC Time, and Todo Task requirements to unlock Supernatural or Server Achievement roles, track personal progress, and click <strong>`🩸 Claim / Sync Unlocked Roles`</strong>!</p>
+        <div class="logic-box">
+          <strong>💡 Multi-Prefix Ready:</strong><br/>
+          Members can invoke this command via any active prefix: <code>!maps</code>, <code>wmaps</code>, <code>&amp;maps</code>, <code>!b maps</code>, or <code>/maps</code>!
+        </div>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/milestone add role:[@Role] milestone_name:[Text] required_blood:[float] required_vc_minutes:[int] required_todo_points:[int] category:[Choice] task_description:[Text] auto_assign:[True/False] consume_blood:[True/False]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/milestone add')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Adds or updates a Role Milestone in Supabase. You can also configure all milestones via the web studio in <strong>`/setup` ➔ Tab 9 (Blood Role Map)</strong>!</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/milestone remove role:[@Role]</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/milestone remove')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Deletes a role milestone threshold from Supabase and updates the live map embed.</p>
       </div>
     </section>
 
@@ -574,43 +620,66 @@
             <button class="copy-btn" onclick="copyText('/make')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Assigns or removes a Discord role for server management or Supernatural RPG factions. Immediately syncs the server command tree so members who receive the role immediately unlock its commands!</p>
-        <table class="param-table">
-          <thead><tr><th>Parameter</th><th>Type / Choices</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td class="param-name">role_type</td><td><code>Admin</code>, <code>Mod</code>, <code>Staff</code>, <code>Seller</code>, <code>Dealer</code>, <code>Vampire</code>, <code>👑 Vampire King</code>, <code>Witch</code>, <code>Wizard</code>, <code>Mummy</code>, <code>Werewolf</code>, <code>Shhh</code></td><td>Assigns the role to the chosen staff tier or supernatural faction in Supabase.</td></tr>
-            <tr><td class="param-name">role</td><td><code>@Role</code></td><td>The Discord role to register or remove.</td></tr>
-          </tbody>
-        </table>
+        <p class="cmd-desc">Assigns or removes a Discord role for server management or Supernatural RPG factions[cite: 25]. Unlocks commands immediately without creating duplicate slash command listings[cite: 25]!</p>
       </div>
 
       <div class="cmd-card" data-role="admin">
         <div class="cmd-top">
-          <code class="cmd-syntax">/gender gender_type:[Female (Required for Witch) | Male (Required for Wizard)] role:[@Role]</code>
+          <code class="cmd-syntax">/gender gender_type:[Female | Male] role:[@Role]</code>
           <div>
             <span class="pill pill-red">Admin</span>
             <button class="copy-btn" onclick="copyText('/gender')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Registers which server roles represent <strong>Female</strong> (required for <strong>Witch</strong> powers) and <strong>Male</strong> (required for <strong>Wizard</strong> powers).</p>
+        <p class="cmd-desc">Registers which server roles represent <strong>Female</strong> (for Witches) and <strong>Male</strong> (for Wizards)[cite: 25]. Gender enforcement can be toggled on or off in `/setup`!</p>
       </div>
 
       <div class="cmd-card" data-role="member">
         <div class="cmd-top">
-          <code class="cmd-syntax">/help lang:[Optional bn|en]</code>
+          <code class="cmd-syntax">/help lang:[Optional bn|en]   &amp;   !help</code>
           <div>
             <span class="pill pill-green">Role-Aware Command Guide</span>
             <button class="copy-btn" onclick="copyText('/help')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Displays an organized embed tailored to the caller's exact roles: <strong>Member commands</strong>, <strong>Supernatural powers</strong> (Vampire, Vampire King, Witch, Wizard, Mummy, Werewolf, Shhh), <strong>Seller commands</strong>, <strong>Dealer commands</strong>, and <strong>Admin &amp; `/setup` commands</strong>!</p>
+        <p class="cmd-desc">Displays an organized embed tailored to the caller's exact roles: <strong>Member commands</strong> (available to everyone by default), <strong>Supernatural powers</strong> (Vampire, Vampire King, Witch, Wizard, Mummy, Werewolf, Shhh), <strong>Seller commands</strong>, <strong>Dealer commands</strong>, and <strong>Admin commands</strong>[cite: 25]!</p>
+      </div>
+    </section>
+
+    <!-- 0B. MULTI-PREFIX & ALIAS STUDIO (/alias & /prefix) -->
+    <section class="feature-section" id="sec-alias">
+      <div class="section-header">
+        <h3>⚡ 0B. Multi-Prefix Studio &amp; Command Aliases (/alias &amp; /prefix)</h3>
+        <span class="pill pill-cyan">Full Customization in /setup Tab 8</span>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/prefix set new_prefix:[e.g. !b or w or &amp;]   |   /prefix cooldown seconds:[8]   |   /prefix restricted channel:[#ch]</code>
+          <div>
+            <span class="pill pill-red">Admin / Mod</span>
+            <button class="copy-btn" onclick="copyText('/prefix set')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Sets or adds custom prefixes (e.g. <code>!</code>, <code>w</code>, <code>&amp;</code>, <code>!b</code>), adjusts anti-spam cooldown between chat commands, or restricts prefix commands in selected channels[cite: 25].</p>
+      </div>
+
+      <div class="cmd-card" data-role="admin">
+        <div class="cmd-top">
+          <code class="cmd-syntax">/alias set command_name:[blood] alias:[rokto]   |   /alias remove alias:[rokto]   |   /alias list</code>
+          <div>
+            <span class="pill pill-red">Admin</span>
+            <button class="copy-btn" onclick="copyText('/alias set')">Copy</button>
+          </div>
+        </div>
+        <p class="cmd-desc">Maps any custom word as an alias for any command across the bot (e.g., setting <code>rokto</code> ➔ <code>blood</code> allows members to run <code>!rokto</code>, <code>wrokto</code>, or <code>&amp;rokto</code> to check their Blood Vial!).</p>
       </div>
     </section>
 
     <!-- 1. LANGUAGE & COMMAND RESTRICTIONS (/language, /command) -->
     <section class="feature-section" id="sec-language">
       <div class="section-header">
-        <h3>🌐 1. Global Language, Per-Command Language Swap &amp; Channel/Role Command Toggle</h3>
+        <h3>🌐 1. Global Language, Per-Command Language Swap &amp; Granular Permissions</h3>
         <span class="pill pill-white">Tables: guild_settings, command_restrictions</span>
       </div>
 
@@ -622,18 +691,18 @@
             <button class="copy-btn" onclick="copyText('/language')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Changes the entire bot's default response language across the server between <strong>Bangla (`bn`)</strong> and <strong>English (`en`)</strong>.</p>
+        <p class="cmd-desc">Changes the entire bot's default response language across the server between <strong>Bangla (`bn`)</strong> and <strong>English (`en`)</strong>[cite: 25].</p>
       </div>
 
       <div class="cmd-card" data-role="admin">
         <div class="cmd-top">
-          <code class="cmd-syntax">/command state:[on | off] command_name:[Command Name or 'all'] channel:[Optional #channel] role:[Optional @Role]</code>
+          <code class="cmd-syntax">/command state:[on | off] command_name:[Command Name or 'all'] channel:[Optional #channel] role:[Optional @Role] user:[Optional @User]</code>
           <div>
             <span class="pill pill-red">Admin</span>
             <button class="copy-btn" onclick="copyText('/command')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Turns any specific command (e.g., <code>bet</code>, <code>fish</code>, <code>action</code>) or <strong><code>all</code></strong> commands ON or OFF inside a specific <code>#channel</code> or for a specific <code>@role</code>.</p>
+        <p class="cmd-desc">Turns any command (or <strong>`all`</strong>) ON or OFF for a specific channel, role, or user ID[cite: 25]. You can also configure full allowed/restricted lists inside <strong>`/setup` ➔ Tab 8 (Command Alias &amp; Perms)</strong>!</p>
       </div>
     </section>
 
@@ -652,7 +721,7 @@
             <button class="copy-btn" onclick="copyText('/spam mention state:on')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Deletes messages with 3+ rapid mentions of the same user, locks the spammer on a 1-hour target-specific mention cooldown in Supabase, and logs a report in `/spam log`.</p>
+        <p class="cmd-desc">Deletes messages with 3+ rapid mentions of the same user, locks the spammer on a 1-hour target-specific mention cooldown in Supabase, and logs a report in `/spam log`[cite: 25].</p>
       </div>
     </section>
 
@@ -671,7 +740,7 @@
             <button class="copy-btn" onclick="copyText('/level')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Creates a custom leveling rule for a Text or Forum channel with anti-cheat cooldown protection and an optional automatic **Blood/Coin bonus (`blood_reward`)** per level-up!</p>
+        <p class="cmd-desc">Creates a custom leveling rule for a Text or Forum channel with anti-cheat cooldown protection and an optional automatic <strong>Blood bonus (`blood_reward`)</strong> per level-up[cite: 25]!</p>
       </div>
 
       <div class="cmd-card" data-role="admin">
@@ -682,7 +751,7 @@
             <button class="copy-btn" onclick="copyText('/gifts')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Awards a Role and optional Blood bonus on reaching a milestone level, and lets members view all available level gifts via `/gifts`.</p>
+        <p class="cmd-desc">Awards a Role and optional Blood bonus on reaching a milestone level, and lets members view all available level gifts via `/gifts`[cite: 25].</p>
       </div>
     </section>
 
@@ -701,7 +770,7 @@
             <button class="copy-btn" onclick="copyText('/tord')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Starts or stops the interactive Truth or Dare panel with Anonymous toggle, guaranteed GIF/image attachment, real notification pings, and 3-day auto-expiry.</p>
+        <p class="cmd-desc">Starts or stops the interactive Truth or Dare panel with Anonymous toggle, guaranteed GIF/image attachment, real notification pings, and 3-day auto-expiry[cite: 25].</p>
       </div>
     </section>
 
@@ -720,7 +789,7 @@
             <button class="copy-btn" onclick="copyText('/shop box')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Manages shop channels, seller roles, emoji reaction ticket triggers, and boxed product embeds with custom ticket buttons.</p>
+        <p class="cmd-desc">Manages shop channels, seller roles, emoji reaction ticket triggers, and boxed product embeds with custom ticket buttons[cite: 25].</p>
       </div>
     </section>
 
@@ -739,7 +808,7 @@
             <button class="copy-btn" onclick="copyText('/ticket')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Customizes Shop Ticket naming, placement, cooldowns, auto-expiration, and welcome message.</p>
+        <p class="cmd-desc">Customizes Shop Ticket naming, placement, cooldowns, auto-expiration, and welcome message[cite: 25].</p>
       </div>
     </section>
 
@@ -758,7 +827,7 @@
             <button class="copy-btn" onclick="copyText('/embed web')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Build up to 10 embeds with custom left-sidebar colors and interactive/link buttons either inside Discord (`/embed builder`) or in the dedicated Web Editor (`/embed web`) with Dark/White theme and Text Size toggles!</p>
+        <p class="cmd-desc">Build up to 10 embeds with custom left-sidebar colors and interactive/link buttons either inside Discord (`/embed builder`) or in the dedicated Web Editor (`/embed web`) with Dark/White theme and Text Size toggles[cite: 25]!</p>
       </div>
     </section>
 
@@ -777,7 +846,7 @@
             <button class="copy-btn" onclick="copyText('/reminder embed')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Schedules one-time or recurring multi-embed reminders in any channel.</p>
+        <p class="cmd-desc">Schedules one-time or recurring multi-embed reminders in any channel[cite: 25].</p>
       </div>
     </section>
 
@@ -796,7 +865,7 @@
             <button class="copy-btn" onclick="copyText('/birthday')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Enables daily midnight Bangladesh Time birthday wishes and syncs channel history (keeping only each user's latest birthday entry).</p>
+        <p class="cmd-desc">Enables daily midnight Bangladesh Time birthday wishes and syncs channel history (keeping only each user's latest birthday entry)[cite: 25].</p>
       </div>
     </section>
 
@@ -815,7 +884,7 @@
             <button class="copy-btn" onclick="copyText('/nick state:on')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Persistently saves auto-nickname channels in Supabase (`nick_channels` &amp; `nick_channel_id`), ignores all bots, and blocks nicknames starting with numbers.</p>
+        <p class="cmd-desc">Persistently saves auto-nickname channels in Supabase (`nick_channels` &amp; `nick_channel_id`), ignores all bots, and blocks nicknames starting with numbers[cite: 25].</p>
       </div>
     </section>
 
@@ -834,7 +903,7 @@
             <button class="copy-btn" onclick="copyText('/answer set')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Sets or removes the target riddle answer for a channel or thread, matching phonetic typos, Bangla script, and misspelled full sentences.</p>
+        <p class="cmd-desc">Sets or removes the target riddle answer for a channel or thread, matching phonetic typos, Bangla script, and misspelled full sentences[cite: 25].</p>
       </div>
     </section>
 
@@ -853,7 +922,7 @@
             <button class="copy-btn" onclick="copyText('/link on')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Wraps non-whitelisted links inside an Embed Box with the author's name, avatar, clickable caption, and a `Go to Link` button.</p>
+        <p class="cmd-desc">Wraps non-whitelisted links inside an Embed Box with the author's name, avatar, clickable caption, and a `Go to Link` button[cite: 25].</p>
       </div>
     </section>
 
@@ -872,7 +941,7 @@
             <button class="copy-btn" onclick="copyText('/close channels')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Silently archives threads across up to 15 channels without posting any system clutter.</p>
+        <p class="cmd-desc">Silently archives threads across up to 15 channels without posting any system clutter[cite: 25].</p>
       </div>
     </section>
 
@@ -891,7 +960,7 @@
             <button class="copy-btn" onclick="copyText('/donation add')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Manages community donation goals, live emoji progress bars, top donator leaderboards, and dropdown donation tickets.</p>
+        <p class="cmd-desc">Manages community donation goals, live emoji progress bars, top donator leaderboards, and dropdown donation tickets[cite: 25].</p>
       </div>
     </section>
 
@@ -910,14 +979,14 @@
             <button class="copy-btn" onclick="copyText('/routine reminder')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Parses schedules from the Todo channel in Bangladesh Time (`Asia/Dhaka`), sends DM inbox reminders with confirmation buttons, and logs missed tasks to `/study log`.</p>
+        <p class="cmd-desc">Parses schedules from the Todo channel in Bangladesh Time (`Asia/Dhaka`), sends DM inbox reminders with confirmation buttons, and logs missed tasks to `/study log`[cite: 25].</p>
       </div>
     </section>
 
-    <!-- 16. STUDY, SPOTIFY/MUSIC BOT/MEME PENALTY & TOP-8 PODIUM LEADERBOARD -->
+    <!-- 16. STUDY & TOP-8 PODIUM LEADERBOARD -->
     <section class="feature-section" id="sec-study">
       <div class="section-header">
-        <h3>📚 16. Study VC Tracker, Anti-Spotify/Music-Bot/Meme Penalty &amp; Top-8 Leaderboard (/leaderboard, /ranks, /study)</h3>
+        <h3>📚 16. Study VC Tracker, Anti-Distraction Penalty &amp; Top-8 Leaderboard (/leaderboard, /ranks, /study)</h3>
         <span class="pill pill-white">Tables: study_users, study_vc_sessions, study_daily_logs</span>
       </div>
 
@@ -929,25 +998,25 @@
             <button class="copy-btn" onclick="copyText('/leaderboard')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Generates the **Top-8 Podium &amp; Ranked Leaderboard Card** with perfectly centered headers, mixed Bangla + English font rendering (zero `[]` boxes!), each player's **Supernatural Faction or `[CURSED]` status**, and exact rank distance!</p>
+        <p class="cmd-desc">Generates the <strong>Top-8 Podium &amp; Ranked Leaderboard Card</strong> with centered headers, mixed Bangla + English font rendering (zero `[]` boxes!), each player's <strong>Supernatural Faction or `[CURSED]` status</strong>, and exact rank distance[cite: 25]!</p>
       </div>
 
       <div class="cmd-card" data-role="admin">
         <div class="cmd-top">
           <code class="cmd-syntax">/study vc vc_channel:[#vc]   |   /study log channel:[#ch]   |   /study todo channel:[#ch]   |   /study progress</code>
           <div>
-            <span class="pill pill-red">Study VC Anti-Music &amp; Anti-Meme Protection</span>
+            <span class="pill pill-red">Study VC Protection</span>
             <button class="copy-btn" onclick="copyText('/study vc')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Tracks Study Voice Channels and automatically cuts Blood (`-2 mL` per tick/action) if a studying member plays a **Video Game**, listens to **Spotify**, sits in the Study VC with an active **Music Bot** (e.g. `কবিরাজ • Lara`), or posts **memes/GIFs/music commands** in other channels while inside the Study VC!</p>
+        <p class="cmd-desc">Tracks Study Voice Channels and automatically deducts Blood (`-2 mL` per penalty) if a studying member plays a <strong>Video Game</strong>, listens to <strong>Spotify</strong>, or posts <strong>memes/GIFs</strong> in other channels while inside the Study VC[cite: 25]!</p>
       </div>
     </section>
 
-    <!-- 17. MINIMAL SPOOKY BOXED AFK & SPY DETECTOR (/afk) -->
+    <!-- 17. MINIMAL SPOOKY BOXED AFK & AUTO-DELETING NOTICE (/afk) -->
     <section class="feature-section" id="sec-afk">
       <div class="section-header">
-        <h3>👻 17. Minimal Boxed AFK with Larger Text &amp; Secret Spy Detector (/afk &amp; .afk)</h3>
+        <h3>👻 17. Minimal Boxed AFK, Auto-Deleting Reply Notice &amp; Spy Detector (/afk &amp; .afk)</h3>
         <span class="pill pill-white">Table: afk_users</span>
       </div>
 
@@ -955,11 +1024,11 @@
         <div class="cmd-top">
           <code class="cmd-syntax">/afk reason:[Optional AFK Message] lang:[Optional bn|en]   &amp;   .afk [reason]</code>
           <div>
-            <span class="pill pill-green">Member Command</span>
+            <span class="pill pill-green">Bilingual Reply Notice</span>
             <button class="copy-btn" onclick="copyText('/afk')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Displays a clean, minimal dark **Embed Box** with larger Markdown heading text (`### 💤 AFK`) and Thakurmar Jhuli flavor, and catches AFK users if they secretly type or react in chat!</p>
+        <p class="cmd-desc">Sets AFK status inside a clean dark box with Thakurmar Jhuli flavor[cite: 25]. When anyone mentions or <strong>replies</strong> to an AFK member, the bot automatically informs them in chat and <strong>auto-deletes the notice after 8 seconds</strong> (configurable in `/setup`) to prevent chat clutter[cite: 25]!</p>
       </div>
     </section>
 
@@ -974,18 +1043,18 @@
         <div class="cmd-top">
           <code class="cmd-syntax">/blood member:[Optional @Member] give_amount:[Optional float] vc:[Optional #vc] text:[Optional #text] forum:[Optional #forum] perms_user:[Optional @User] perms_role:[Optional @Role]</code>
           <div>
-            <span class="pill pill-gold">Vial Card + Passive Channels + Strict Perms</span>
+            <span class="pill pill-gold">Available to All Members by Default</span>
             <button class="copy-btn" onclick="copyText('/blood')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">All-in-one Blood &amp; Coin command (also available via `/coin`):</p>
+        <p class="cmd-desc">All-in-one Blood &amp; Coin status command (also available via `/coin`, `!blood`, `wblood`, `&amp;rokto`):</p>
         <table class="param-table">
           <thead><tr><th>Mode / Parameter</th><th>Who Can Use</th><th>Description</th></tr></thead>
           <tbody>
-            <tr><td class="param-name">/blood [member]</td><td>Everyone</td><td>Displays the visual Spooky Blood Vial Card (with `[CURSED]` badge if cursed by a Mummy).</td></tr>
-            <tr><td class="param-name">vc / text / forum</td><td>Server Admins</td><td>Toggles passive Blood earning channels! **Blood VC** pays `50%` of Study VC rate; **Blood Text** (`0.15 mL`) and **Blood Forum** (`0.30 mL`) pay a low trickle rate for active texting.</td></tr>
-            <tr><td class="param-name">give_amount</td><td>Owner (`1210652404169707520` / Server Owner), **Dealers**, or `/blood perms`</td><td>Grants or deducts Blood. **Regular Admins and Mods are strictly blocked** from giving themselves or others Blood unless granted permission!</td></tr>
-            <tr><td class="param-name">perms_user / perms_role</td><td>**ONLY** `1210652404169707520` or Server Owner</td><td>Grants or revokes Master Blood &amp; Supernatural permissions for a specific user or role.</td></tr>
+            <tr><td class="param-name">/blood [member]</td><td><strong>All Members by Default</strong></td><td>Displays the visual Spooky Blood Vial Card with initial 10 mL blood, capacity %, and `[CURSED]` badge if cursed by a Mummy[cite: 25].</td></tr>
+            <tr><td class="param-name">vc / text / forum</td><td>Server Admins</td><td>Toggles passive Blood channels[cite: 25]! <strong>Blood VC</strong> pays `50%` of Study VC rate; <strong>Blood Text</strong> (`0.15 mL`) and <strong>Blood Forum</strong> (`0.30 mL`) pay a low trickle rate for active texting[cite: 25].</td></tr>
+            <tr><td class="param-name">give_amount</td><td>Owner (`1210652404169707520` / Server Owner), <strong>Dealers</strong>, or `/blood perms`</td><td>Grants or deducts Blood[cite: 25]. <strong>Regular Admins and Mods are strictly blocked</strong> from giving themselves or others Blood unless granted permission[cite: 25]!</td></tr>
+            <tr><td class="param-name">perms_user / perms_role</td><td><strong>ONLY</strong> `1210652404169707520` or Server Owner</td><td>Grants or revokes Master Blood &amp; Supernatural permissions for a specific user or role[cite: 25].</td></tr>
           </tbody>
         </table>
       </div>
@@ -998,7 +1067,7 @@
             <button class="copy-btn" onclick="copyText('/bet')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Challenges a member to a Blood Dice Duel with multi-frame rolling dice animation (blocked if either player is cursed by a Mummy!).</p>
+        <p class="cmd-desc">Challenges a member to a Blood Dice Duel with multi-frame rolling dice animation (blocked if either player is cursed by a Mummy!)[cite: 25].</p>
       </div>
     </section>
 
@@ -1017,7 +1086,7 @@
             <button class="copy-btn" onclick="copyText('/currency permissions')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Requests moderation/role/channel powers in exchange for Blood with **3-Step Dealer Verification (`1/3` → `2/3` → `3/3`)** and audit-log self-revocation.</p>
+        <p class="cmd-desc">Requests moderation/role/channel powers in exchange for Blood with <strong>3-Step Dealer Verification (`1/3` → `2/3` → `3/3`)</strong> and audit-log self-revocation[cite: 25].</p>
       </div>
     </section>
 
@@ -1030,28 +1099,28 @@
 
       <div class="cmd-card" data-role="seller">
         <div class="cmd-top">
-          <code class="cmd-syntax">/bite target:[@Member]</code>
+          <code class="cmd-syntax">/bite target:[@Member]   &amp;   !bite @target</code>
           <div>
             <span class="pill pill-red">🧛 Vampire &amp; 👑 Vampire King Only</span>
             <button class="copy-btn" onclick="copyText('/bite')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc"><strong>Normal Vampires</strong> steal `5–25 mL` Blood with a cooldown. <strong>👑 Vampire Kings</strong> (`/make role_type:Vampire King`) steal massive random Blood (`60–160 mL`) with **ZERO cooldown**! *(Regular Admins cannot use `/bite` without the role unless they are `1210652404169707520`, Server Owner, or granted `/blood perms`!)*</p>
+        <p class="cmd-desc"><strong>Normal Vampires</strong> steal `5–25 mL` Blood with a cooldown[cite: 25]. <strong>👑 Vampire Kings</strong> (`/make role_type:Vampire King`) steal massive random Blood (`60–160 mL`) with <strong>ZERO cooldown</strong>[cite: 25]! *(Admins without role or master perm are blocked from biting[cite: 25]!)*</p>
       </div>
 
       <div class="cmd-card" data-role="seller">
         <div class="cmd-top">
-          <code class="cmd-syntax">/mummy target:[@Member]</code>
+          <code class="cmd-syntax">/mummy target:[@Member]   &amp;   !mummy @target</code>
           <div>
             <span class="pill pill-gold">🤕 Mummy Curse — Full Power &amp; Gamble Lock</span>
             <button class="copy-btn" onclick="copyText('/mummy')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Curses any target for `60 minutes` (configurable in `/supernatural`). While cursed:
-          <br/>• If the target is a **Vampire / Vampire King**, they **cannot suck blood (`/bite`)**!
-          <br/>• If the target is a **Witch / Wizard**, they **cannot brew or cast spells (`/brew`, `/cast`)**!
-          <br/>• The target **cannot earn positive Blood** and **cannot play `/bet`, `/roulette`, `/pass`, or `/fish`**!
-          <br/>• They are labeled **`[CURSED]`** on `/leaderboard`, `/ranks`, and `/blood`!</p>
+        <p class="cmd-desc">Curses any target for `60 minutes` (configurable in `/supernatural`)[cite: 25]. While cursed:
+          <br/>• If the target is a <strong>Vampire / Vampire King</strong>, they <strong>cannot suck blood (`/bite`)</strong>[cite: 25]!
+          <br/>• If the target is a <strong>Witch / Wizard</strong>, they <strong>cannot brew or cast spells (`/brew`, `/cast`)</strong>[cite: 25]!
+          <br/>• The target <strong>cannot earn positive Blood</strong> and <strong>cannot play `/bet`, `/roulette`, `/pass`, or `/fish`</strong>[cite: 25]!
+          <br/>• They are labeled <strong>`[CURSED]`</strong> on `/leaderboard`, `/ranks`, `/maps`, and `/blood`[cite: 25]!</p>
       </div>
 
       <div class="cmd-card" data-role="seller">
@@ -1062,7 +1131,7 @@
             <button class="copy-btn" onclick="copyText('/brew')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Witches/Wizards brew and cast Drain, Damage, Mummy Curse, or `#death` Banishment potions; Werewolves hunt at Night in Bangladesh Time (`6 PM – 6 AM BD`).</p>
+        <p class="cmd-desc">Witches/Wizards brew and cast Drain, Damage, Mummy Curse, or `#death` Banishment potions; Werewolves hunt at Night in Bangladesh Time (`6 PM – 6 AM BD`)[cite: 25].</p>
       </div>
     </section>
 
@@ -1081,7 +1150,7 @@
             <button class="copy-btn" onclick="copyText('/shhh')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Silences a user from texting in a specific channel for a set duration without applying a server-wide timeout.</p>
+        <p class="cmd-desc">Silences a user from texting in a specific channel for a set duration without applying a server-wide timeout[cite: 25].</p>
       </div>
     </section>
 
@@ -1094,62 +1163,51 @@
 
       <div class="cmd-card" data-role="member">
         <div class="cmd-top">
-          <code class="cmd-syntax">/roulette lobby   |   /pass   |   /fish   |   /lobby close</code>
+          <code class="cmd-syntax">/roulette lobby   |   /pass   |   /fish   |   /lobby close   &amp;   !roulette | !pass | !fish</code>
           <div>
             <span class="pill pill-green">Party Games</span>
             <button class="copy-btn" onclick="copyText('/roulette lobby')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Play Shotgun Roulette, Time-Bomb Pass, or Mystery Fish (automatically moves to the bottom of chat on each turn unless `sticky_in_place:True` is set).</p>
+        <p class="cmd-desc">Play Shotgun Roulette, Time-Bomb Pass, or Mystery Fish (automatically moves to the bottom of chat on each turn unless `sticky_in_place:True` is set)[cite: 25].</p>
       </div>
     </section>
 
     <!-- 23. UNIVERSAL MEDIA DOWNLOADER (/download) -->
     <section class="feature-section" id="sec-download">
       <div class="section-header">
-        <h3>📥 23. NotSoBot-Style Universal Media Downloader (/download)</h3>
-        <span class="pill pill-white">yt-dlp + Direct Stream Extractor</span>
+        <h3>📥 23. Universal Social Media Downloader (/download)</h3>
+        <span class="pill pill-white">yt-dlp + Deno JS Solver</span>
       </div>
 
       <div class="cmd-card" data-role="member">
         <div class="cmd-top">
-          <code class="cmd-syntax">/download link:[Instagram / Facebook / TikTok / Twitter / X / Reddit / Tenor / Giphy / Video / GIF URL]</code>
+          <code class="cmd-syntax">/download link:[YouTube / Instagram / Facebook / TikTok / Twitter / X / Reddit / Tenor / Giphy / Video URL]</code>
           <div>
             <span class="pill pill-green">Member Command</span>
             <button class="copy-btn" onclick="copyText('/download')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Downloads the actual video, GIF, or image from social/media links with a NotSoBot metadata footer.</p>
+        <p class="cmd-desc">Downloads social media clips, Reels, TikToks, Shorts, and GIF videos directly as an MP4 attachment with size &amp; latency stats[cite: 25]!</p>
       </div>
     </section>
 
     <!-- 24. OWO ROLEPLAY GIFS, COOLDOWN, RESTRICTED CHANNELS & SHUTDOWN (/prefix, /action, /shutdown) -->
     <section class="feature-section" id="sec-owo">
       <div class="section-header">
-        <h3>🎭 24. OwO Roleplay (45+ Commands), Anti-Spam Cooldown, Channel Restrictions &amp; Shutdown</h3>
+        <h3>🎭 24. OwO Roleplay (45+ Commands), Multi-Prefix Cooldown &amp; Shutdown</h3>
         <span class="pill pill-white">Table: guild_settings</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/prefix set new_prefix:[!b]   |   /prefix cooldown seconds:[10]   |   /prefix restricted channel:[#channel]</code>
-          <div>
-            <span class="pill pill-red">Mod / Admin</span>
-            <button class="copy-btn" onclick="copyText('/prefix cooldown')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Sets the custom prefix, configures `/prefix cooldown` so members cannot spam-mention someone with `!b slap @user` continuously, or restricts prefix commands in specific channels.</p>
       </div>
 
       <div class="cmd-card" data-role="member">
         <div class="cmd-top">
-          <code class="cmd-syntax">/action act:[Choice] target:[Optional @Member] lang:[Optional bn|en]   &amp;   /shutdown channel:[#channel]</code>
+          <code class="cmd-syntax">!slap @user | wkiss @user | &amp;hug @user | !dance | !cry | /action act:[Choice] target:[Optional @Member]</code>
           <div>
-            <span class="pill pill-green">Slash Roleplay &amp; Shutdown Log</span>
-            <button class="copy-btn" onclick="copyText('/action')">Copy</button>
+            <span class="pill pill-green">Roleplay Actions</span>
+            <button class="copy-btn" onclick="copyText('!slap')">Copy</button>
           </div>
         </div>
-        <p class="cmd-desc">Slash command version of the OwO actions, plus `/shutdown` to log bot restarts/shutdowns in your log channel.</p>
+        <p class="cmd-desc">Send animated anime GIFs with hilarious bot self-defense roasting if anyone tries to attack or romance the bot itself[cite: 25]!</p>
       </div>
     </section>
   </main>
@@ -1173,7 +1231,7 @@
     function setRoleFilter(role, btn) {
       activeRole = role;
       document.querySelectorAll('.filter-btn').forEach(b => {
-        if (b.innerText.includes('All') || b.innerText.includes('Admin') || b.innerText.includes('Dealer') || b.innerText.includes('Member')) {
+        if (b.innerText.includes('All') || b.innerText.includes('Progression') || b.innerText.includes('Admin') || b.innerText.includes('Dealer') || b.innerText.includes('Member')) {
           b.classList.remove('active');
         }
       });
