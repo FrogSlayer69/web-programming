@@ -3,1267 +3,1504 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>কবিরাজ • ভূত বট — Complete Command &amp; Feature Documentation</title>
+  <title>Developing in AI and Fintech Index of Commercial Banking (Bangladesh)</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js for Interactive Graphs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+
   <style>
-    :root {
-      --bg-primary: #161515;
-      --bg-secondary: #211f1f;
-      --bg-card: #282525;
-      --bg-card-hover: #302c2c;
-      --border: #3a3636;
-      --text-main: #ffffff;
-      --text-muted: #c7c2c2;
-      --accent: #f44336;
-      --accent-soft: rgba(244, 67, 54, 0.16);
-      --accent-border: rgba(244, 67, 54, 0.45);
-      --green: #2ecc71;
-      --gold: #ffb300;
-      --cyan: #29b6f6;
-      --purple: #ba55d3;
-      --zoom-scale: 1;
-    }
-
-    body.light-mode {
-      --bg-primary: #f3f4f6;
-      --bg-secondary: #ffffff;
-      --bg-card: #f9fafb;
-      --bg-card-hover: #eef2f6;
-      --border: #d1d5db;
-      --text-main: #111827;
-      --text-muted: #4b5563;
-      --accent: #dc2626;
-      --accent-soft: rgba(220, 38, 38, 0.12);
-      --accent-border: rgba(220, 38, 38, 0.4);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
-      background-color: var(--bg-primary);
-      color: var(--text-main);
-      font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      line-height: 1.6;
-      display: flex;
-      min-height: 100vh;
-      zoom: var(--zoom-scale);
-      transition: background 0.2s, color 0.2s;
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
     }
-
-    .sidebar {
-      width: 325px;
-      background: var(--bg-secondary);
-      border-right: 1px solid var(--border);
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      overflow-y: auto;
-      padding: 20px 14px;
-      z-index: 100;
-      transition: transform 0.25s ease;
+    .glass-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
     }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 8px 10px 20px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 14px;
+    .toggle-badge {
+      transition: all 0.16s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
     }
-
-    .brand-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--accent), #b71c1c);
-      box-shadow: 0 4px 14px rgba(244, 67, 54, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      flex-shrink: 0;
-      color: #fff;
+    .toggle-badge:active {
+      transform: scale(0.92);
     }
-
-    .brand-text h1 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-main);
+    /* Custom subtle scrollbar for wide tables on mobile */
+    .table-scroll::-webkit-scrollbar {
+      height: 7px;
+      width: 7px;
     }
-
-    .brand-text span {
-      font-size: 12px;
-      color: var(--accent);
-      font-weight: 600;
+    .table-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 9999px;
     }
-
-    .nav-label {
+    .table-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    .table-scroll::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    /* Excel Grid Styling */
+    .excel-grid th {
+      background-color: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: var(--text-muted);
-      margin: 12px 10px 6px;
-      font-weight: 700;
+      color: #334155;
+      padding: 6px 10px;
+      white-space: nowrap;
     }
-
-    .nav-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 7px 12px;
-      color: var(--text-muted);
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      transition: all 0.15s;
-      margin-bottom: 2px;
-    }
-
-    .nav-link:hover, .nav-link.active {
-      background: var(--accent-soft);
-      color: var(--text-main);
-      border-left: 3px solid var(--accent);
-    }
-
-    .main-content {
-      flex: 1;
-      margin-left: 325px;
-      padding: 32px 40px 80px;
-      max-width: 1280px;
-    }
-
-    .mobile-bar {
-      display: none;
-      position: sticky;
-      top: 0;
-      z-index: 90;
-      background: var(--bg-secondary);
-      border-bottom: 1px solid var(--border);
-      padding: 12px 16px;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .menu-btn {
-      background: var(--accent);
-      border: none;
-      color: #ffffff;
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 15px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .hero {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-left: 5px solid var(--accent);
-      border-radius: 12px;
-      padding: 28px;
-      margin-bottom: 28px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    }
-
-    .hero h2 {
-      font-size: 26px;
-      margin-bottom: 8px;
-      color: var(--text-main);
-    }
-
-    .hero p {
-      color: var(--text-muted);
-      font-size: 15px;
-      margin-bottom: 18px;
-    }
-
-    .badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .pill {
+    .excel-grid td {
+      border: 1px solid #e2e8f0;
+      padding: 6px 10px;
       font-size: 12px;
+      white-space: nowrap;
+    }
+    .excel-row-header {
+      background-color: #f8fafc;
+      color: #64748b;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-align: center;
       font-weight: 600;
-      padding: 4px 11px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .pill-red { background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-border); }
-    .pill-green { background: rgba(46, 204, 113, 0.16); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.4); }
-    .pill-gold { background: rgba(255, 179, 0, 0.16); color: #ffb300; border: 1px solid rgba(255, 179, 0, 0.4); }
-    .pill-cyan { background: rgba(41, 182, 246, 0.16); color: #29b6f6; border: 1px solid rgba(41, 182, 246, 0.4); }
-    .pill-purple { background: rgba(186, 85, 211, 0.16); color: #ba55d3; border: 1px solid rgba(186, 85, 211, 0.4); }
-    .pill-white { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border); }
-
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 28px;
-      position: sticky;
-      top: 12px;
-      z-index: 50;
-      background: var(--bg-secondary);
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-    }
-
-    .search-input {
-      flex: 1;
-      min-width: 240px;
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      color: var(--text-main);
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 14px;
-      outline: none;
-    }
-
-    .search-input:focus {
-      border-color: var(--accent);
-    }
-
-    .filter-btn {
-      background: var(--bg-primary);
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-      padding: 8px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      transition: 0.15s;
-    }
-
-    .filter-btn:hover, .filter-btn.active {
-      background: var(--accent);
-      color: #ffffff;
-      border-color: var(--accent);
-    }
-
-    .feature-section {
-      margin-bottom: 42px;
-      scroll-margin-top: 85px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--border);
-    }
-
-    .section-header h3 {
-      font-size: 20px;
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .cmd-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 16px;
-      transition: border-color 0.2s, transform 0.15s;
-    }
-
-    .cmd-card:hover {
-      border-color: var(--accent);
-    }
-
-    .cmd-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 12px;
-    }
-
-    .cmd-syntax {
-      font-family: 'Consolas', 'Courier New', monospace;
-      background: var(--bg-primary);
-      color: var(--text-main);
-      border-left: 3px solid var(--accent);
-      padding: 8px 14px;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 600;
-      border-top: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      word-break: break-all;
-    }
-
-    .copy-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      color: var(--text-main);
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 12px;
-      cursor: pointer;
-      font-weight: 600;
-      flex-shrink: 0;
-      transition: 0.15s;
-    }
-
-    .copy-btn:hover {
-      background: var(--accent);
-      color: #ffffff;
-      border-color: var(--accent);
-    }
-
-    .cmd-desc {
-      color: var(--text-main);
-      font-size: 14.5px;
-      margin-bottom: 12px;
-    }
-
-    .param-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      font-size: 13.5px;
-      background: var(--bg-primary);
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-    }
-
-    .param-table th, .param-table td {
-      text-align: left;
-      padding: 10px 12px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .param-table th {
-      background: var(--bg-card);
-      color: var(--text-muted);
-      font-size: 11.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .param-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .param-name {
-      font-family: monospace;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .logic-box {
-      margin-top: 14px;
-      background: var(--accent-soft);
-      border-left: 3px solid var(--accent);
-      padding: 12px 14px;
-      border-radius: 4px;
-      font-size: 13.5px;
-      color: var(--text-muted);
-    }
-
-    .logic-box strong {
-      color: var(--text-main);
-    }
-
-    #toast {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: var(--accent);
-      color: #ffffff;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 13.5px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-      z-index: 999;
-    }
-
-    #toast.show {
-      opacity: 1;
-    }
-
-    @media (max-width: 900px) {
-      body {
-        flex-direction: column;
-      }
-      .mobile-bar {
-        display: flex;
-      }
-      .sidebar {
-        transform: translateX(-100%);
-        width: 295px;
-      }
-      .sidebar.open {
-        transform: translateX(0);
-        box-shadow: 0 0 40px rgba(0, 0, 0, 0.85);
-      }
-      .main-content {
-        margin-left: 0;
-        padding: 20px 16px 60px;
-      }
-      .param-table, .param-table thead, .param-table tbody, .param-table th, .param-table td, .param-table tr {
-        display: block;
-      }
-      .param-table thead {
-        display: none;
-      }
-      .param-table tr {
-        border-bottom: 2px solid var(--border);
-        padding: 8px 0;
-      }
-      .param-table td {
-        border: none;
-        padding: 6px 12px;
-      }
+      border: 1px solid #cbd5e1 !important;
+      user-select: none;
     }
   </style>
 </head>
-<body>
+<body class="min-h-screen antialiased selection:bg-emerald-100 selection:text-emerald-900">
 
-  <!-- Mobile Top Header -->
-  <div class="mobile-bar">
-    <div style="display:flex; align-items:center; gap:10px;">
-      <span style="font-size:20px;">👻</span>
-      <strong>কবিরাজ • ভূত বট Docs</strong>
+  <!-- Toast Notification Banner (No alert() used) -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 hidden transform transition-all duration-300 translate-y-2 opacity-0">
+    <div class="flex items-center gap-3 rounded-xl bg-slate-900 px-4 py-3 text-sm font-medium text-white shadow-xl border border-slate-700">
+      <span id="toast-dot" class="h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+      <span id="toast-msg">Notification</span>
     </div>
-    <button class="menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰ Menu</button>
   </div>
 
-  <!-- Sidebar -->
-  <aside class="sidebar" id="sidebar">
-    <div class="brand">
-      <div class="brand-icon">👻</div>
-      <div class="brand-text">
-        <h1>কবিরাজ • ভূত বট</h1>
-        <span>● 100% Supabase Persistent</span>
+  <!-- Top Academic Header Banner -->
+  <header class="bg-gradient-to-r from-slate-950 via-slate-900 to-emerald-950 text-white border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 sm:py-9">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+        <div class="space-y-2.5 max-w-3xl">
+          <div class="inline-flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-300 bg-emerald-950/80 border border-emerald-700/60 px-3 py-1 rounded-full">
+            <span>Bangladesh Bank Scheduled Banks</span>
+            <span>•</span>
+            <span>50 Verified Annual Reports (2021–2025)</span>
+            <span>•</span>
+            <span>350 Indicator Audits</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
+            Developing in AI and Fintech Index of Commercial Banking (Bangladesh)
+          </h1>
+          <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+            Empirical longitudinal index measuring <strong class="text-white">4 Core AI Pillars</strong> and <strong class="text-white">3 Financial Technology Channels</strong> across Bangladesh's Top 10 Commercial Banks with verified PDF page citations.
+          </p>
+        </div>
+
+        <!-- Mathematical Formula Box -->
+        <div class="bg-slate-900/90 border border-slate-700/80 rounded-2xl p-4 sm:p-5 lg:min-w-[340px] shadow-inner">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Assignment Formula</span>
+            <span class="text-xs font-mono text-emerald-400 bg-emerald-950/90 px-2 py-0.5 rounded border border-emerald-800">Binary {0, 1}</span>
+          </div>
+          <div class="font-mono text-lg sm:text-xl font-bold text-white bg-slate-950/80 rounded-xl px-4 py-2.5 border border-slate-800 text-center">
+            Index = <span class="text-emerald-400">&Sigma;</span><sub>i=1</sub><sup>n</sup> [ i ]
+          </div>
+          <p class="mt-2.5 text-xs text-slate-300 leading-relaxed">
+            Each indicator <span class="font-mono text-emerald-300">[i]</span> equals <span class="font-mono font-bold text-white">1</span> if verified with a page citation in the bank's Annual Report PDF for that year, and <span class="font-mono font-bold text-slate-400">0</span> otherwise.
+          </p>
+        </div>
       </div>
     </div>
+  </header>
 
-    <div class="nav-label">Core Control &amp; Progression</div>
-    <a href="#sec-setup" class="nav-link" onclick="closeMobileMenu()">🎛️ 00. Master Web Setup (/setup)</a>
-    <a href="#sec-maps" class="nav-link" onclick="closeMobileMenu()">🗺️ 01. Blood Role Map (/maps)</a>
-    <a href="#sec-make" class="nav-link" onclick="closeMobileMenu()">🛡️ 0. Roles, Factions &amp; /help</a>
-    <a href="#sec-alias" class="nav-link" onclick="closeMobileMenu()">⚡ 0B. Multi-Prefix &amp; Aliases (/alias)</a>
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 sm:space-y-8">
 
-    <div class="nav-label">Server &amp; Auto-Mod</div>
-    <a href="#sec-language" class="nav-link" onclick="closeMobileMenu()">🌐 1. Language &amp; Command Toggle</a>
-    <a href="#sec-spam" class="nav-link" onclick="closeMobileMenu()">🚨 2. Spam Protection (/spam)</a>
-    <a href="#sec-level" class="nav-link" onclick="closeMobileMenu()">🏆 3. Levels, Rewards &amp; Gifts</a>
-    <a href="#sec-tord" class="nav-link" onclick="closeMobileMenu()">🎲 4. Truth or Dare (/tord)</a>
-    <a href="#sec-shop" class="nav-link" onclick="closeMobileMenu()">🛒 5. Shop &amp; Sellers (/shop)</a>
-    <a href="#sec-ticket" class="nav-link" onclick="closeMobileMenu()">🎫 6. Ticket System (/ticket)</a>
-    <a href="#sec-embed" class="nav-link" onclick="closeMobileMenu()">🛠️ 7. Multi-Embeds (/embed)</a>
-    <a href="#sec-reminder" class="nav-link" onclick="closeMobileMenu()">⏰ 8. Embed Reminders (/reminder)</a>
-    <a href="#sec-birthday" class="nav-link" onclick="closeMobileMenu()">🎂 9. Birthdays (/birthday &amp; /sync)</a>
-    <a href="#sec-nick" class="nav-link" onclick="closeMobileMenu()">🏷️ 10. Auto Nickname (/nick)</a>
-    <a href="#sec-answer" class="nav-link" onclick="closeMobileMenu()">🧩 11. Riddle Q&amp;A (/answer)</a>
-    <a href="#sec-link" class="nav-link" onclick="closeMobileMenu()">🔗 12. Link Box Wrapper (/link)</a>
-    <a href="#sec-close" class="nav-link" onclick="closeMobileMenu()">🧵 13. Auto-Close Threads (/close)</a>
-    <a href="#sec-donation" class="nav-link" onclick="closeMobileMenu()">💸 14. Donations (/donation)</a>
-
-    <div class="nav-label">Study, Blood &amp; Supernatural RPG</div>
-    <a href="#sec-routine" class="nav-link" onclick="closeMobileMenu()">📅 15. DM Routine Sync (/routine)</a>
-    <a href="#sec-study" class="nav-link" onclick="closeMobileMenu()">📚 16. Study VC &amp; Anti-Distraction</a>
-    <a href="#sec-afk" class="nav-link" onclick="closeMobileMenu()">👻 17. Minimal Boxed AFK &amp; Spy</a>
-    <a href="#sec-blood" class="nav-link" onclick="closeMobileMenu()">🩸 18. Blood Vials &amp; Passive Channels</a>
-    <a href="#sec-currency" class="nav-link" onclick="closeMobileMenu()">🔐 19. Permission Currency (/currency)</a>
-    <a href="#sec-supernatural" class="nav-link" onclick="closeMobileMenu()">🧛 20. Vampire King, Mummy &amp; #death</a>
-    <a href="#sec-shhh" class="nav-link" onclick="closeMobileMenu()">🤫 21. Channel Shhh Mute (/shhh)</a>
-    <a href="#sec-games" class="nav-link" onclick="closeMobileMenu()">🔫 22. Party Games (/roulette, /pass, /fish)</a>
-    <a href="#sec-download" class="nav-link" onclick="closeMobileMenu()">📥 23. Media Downloader (/download)</a>
-    <a href="#sec-owo" class="nav-link" onclick="closeMobileMenu()">🎭 24. OwO Roleplay &amp; Shutdown</a>
-  </aside>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <div class="hero">
-      <h2>📚 কবিরাজ • ভূত বট — Complete Command &amp; Feature Reference</h2>
-      <p>Every slash command, Multi-Prefix configuration (<code>!</code>, <code>w</code>, <code>&amp;</code>, <code>!b</code>), Command Alias Studio (e.g. <code>!rokto</code> ➔ <code>!blood</code>), Master Web Control Center (<code>/setup</code>), Blood &amp; Role Progression Map (<code>/maps</code> &amp; <code>!maps</code>), routine DM reminder, Blood Vial economy (10 mL initial pre-blood, default member visibility, passive earning channels, and strict Dealer/Owner permissions), Supernatural RPG faction (Vampire, Vampire King with 0 cooldown, Witch, Wizard, Mummy with <code>[CURSED]</code> power/gamble locks, Werewolf), and Study VC anti-distraction penalties are 100% backed by <strong>Supabase PostgreSQL</strong>[cite: 25, 27, 29].</p>
-      <div class="badge-row">
-        <span class="pill pill-red">⚡ Multi-Prefix &amp; Aliases</span>
-        <span class="pill pill-cyan">🎛️ /setup Master Web Control</span>
-        <span class="pill pill-purple">🗺️ /maps Role Progression Map</span>
-        <span class="pill pill-gold">👑🩸 Vampire King &amp; Mummy Lock</span>
-        <span class="pill pill-green">💾 100% Supabase Persistent</span>
-      </div>
-    </div>
-
-    <!-- Search, Role Filter & Theme/Text Size Controls -->
-    <div class="controls">
-      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search any command or feature (e.g. /setup, /maps, /alias, /blood, /mummy, /bite, /help)..." oninput="filterCommands()" />
-      <button class="filter-btn active" onclick="setRoleFilter('all', this)">All</button>
-      <button class="filter-btn" onclick="setRoleFilter('progression', this)">Progression &amp; Maps</button>
-      <button class="filter-btn" onclick="setRoleFilter('admin', this)">Admin / Mod / Staff</button>
-      <button class="filter-btn" onclick="setRoleFilter('seller', this)">Dealer, Seller &amp; Special</button>
-      <button class="filter-btn" onclick="setRoleFilter('member', this)">Member, RPG &amp; Games</button>
-      <button class="filter-btn" onclick="document.body.classList.toggle('light-mode')">🌓 Dark / White</button>
-      <button class="filter-btn" onclick="cycleTextSize()">🔠 Text Size</button>
-    </div>
-
-    <!-- 00. MASTER WEB SETUP & BOT PROFILE DASHBOARD (/setup) -->
-    <section class="feature-section" id="sec-setup">
-      <div class="section-header">
-        <h3>🎛️ 00. Master Web Control Center &amp; Bot Profile Dashboard (/setup)</h3>
-        <span class="pill pill-cyan">Route: /setup/{token}</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/setup perms:[Optional #userid | off]</code>
-          <div>
-            <span class="pill pill-red">Admin / Owner</span>
-            <button class="copy-btn" onclick="copyText('/setup')">Copy</button>
-          </div>
+    <!-- KPI Summary Cards -->
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="glass-card rounded-2xl p-5 flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">2025 Perfect Score Leaders</span>
+          <span class="p-2 rounded-xl bg-emerald-50 text-emerald-600">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+          </span>
         </div>
-        <p class="cmd-desc">Generates a private link button to open the <strong>Master Web Control Center &amp; Bot Profile</strong> with live Supabase synchronization (zero ID rounding, zero data resets), or locks Web Setup access strictly to a single Admin User ID!</p>
-        <table class="param-table">
-          <thead><tr><th>Parameter</th><th>Type / Choices</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td class="param-name">perms</td><td>Optional Discord User ID / <code>off</code></td><td>When run by the authorized Admin or Server Owner (or User ID <code>1210652404169707520</code>), locks <code>/setup</code> web dashboard access exclusively to that Admin User ID[cite: 25]! Pass <code>off</code> to unlock for all Admins[cite: 25].</td></tr>
-          </tbody>
-        </table>
-        <div class="logic-box">
-          <strong>🌐 Live Database Display &amp; Precision Architecture:</strong><br/>
-          • <strong>Zero Value Resets:</strong> All Discord Snowflake IDs are serialized as exact strings so browser JavaScript never rounds 18-digit numbers[cite: 22].<br/>
-          • <strong>Live DB Sync:</strong> Reopening or reloading `/setup` instantly fetches current database values and displays active channels[cite: 22].<br/>
-          • <strong>Theme &amp; Text Scaling:</strong> Switch between Dark Crimson, Clean White Mode, and Neon Cyber Blood, with 100%, 115%, or 130% text scaling[cite: 22]!
+        <div class="mt-3">
+          <div id="kpi-leader-name" class="text-lg font-bold text-slate-900 truncate">7 Commercial Banks</div>
+          <p id="kpi-leader-score" class="text-xs font-medium text-emerald-600 mt-1">Score: 4 / 4 in 2025 (EBL, Prime, MTB, Bank Asia = 5-Yr Perfect)</p>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl p-5 flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">2025 Industry Mean</span>
+          <span class="p-2 rounded-xl bg-blue-50 text-blue-600">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+          </span>
+        </div>
+        <div class="mt-3">
+          <div id="kpi-avg-2025" class="text-2xl font-extrabold text-slate-900 font-mono">3.50 <span class="text-sm font-normal text-slate-400">/ 4</span></div>
+          <p id="kpi-avg-growth" class="text-xs font-medium text-blue-600 mt-1">Up from 2.90 in 2021 (+21%)</p>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl p-5 flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Highest 5-Yr Jump</span>
+          <span class="p-2 rounded-xl bg-amber-50 text-amber-600">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+          </span>
+        </div>
+        <div class="mt-3">
+          <div id="kpi-fastest-bank" class="text-lg font-bold text-slate-900 truncate">DBBL &amp; UCB PLC</div>
+          <p id="kpi-fastest-delta" class="text-xs font-medium text-amber-600 mt-1">+3 pts Core AI gain (2021 → 2025)</p>
+        </div>
+      </div>
+
+      <div class="glass-card rounded-2xl p-5 flex flex-col justify-between">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Verified Audit Corpus</span>
+          <span class="p-2 rounded-xl bg-purple-50 text-purple-600">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+          </span>
+        </div>
+        <div class="mt-3">
+          <div id="kpi-mode-title" class="text-lg font-bold text-slate-900">22,226 PDF Pages</div>
+          <p id="kpi-mode-desc" class="text-xs text-slate-500 mt-1">50 Reports • 309 Positives (`1`) • 41 Zeros (`0`)</p>
         </div>
       </div>
     </section>
 
-    <!-- 01. BLOOD & ACHIEVEMENT ROLE PROGRESSION MAP (/maps & /milestone) -->
-    <section class="feature-section" id="sec-maps">
-      <div class="section-header">
-        <h3>🗺️ 01. Blood &amp; Achievement Role Progression Map (/maps &amp; /milestone)</h3>
-        <span class="pill pill-purple">Interactive Role Map + Auto Unlock &amp; Claim</span>
-      </div>
+    <!-- Control Bar & Interactive Chart Section -->
+    <section class="glass-card rounded-2xl p-5 sm:p-6 space-y-6">
+      <!-- Top Controls -->
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 border-b border-slate-100 pb-5">
+        <div>
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900">
+            5-Year Commercial Bank Index Trajectory (2021–2025)
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
+             Verified longitudinal condition of each bank across 2021–2025 (`Graph -> to show condition of each bank`).
+          </p>
+        </div>
 
-      <div class="cmd-card" data-role="progression">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/maps category:[all | supernatural | achievement | custom]   &amp;   !maps [category]</code>
-          <div>
-            <span class="pill pill-green">Available to All Members</span>
-            <button class="copy-btn" onclick="copyText('/maps')">Copy</button>
+        <div class="flex flex-wrap items-center gap-2.5">
+          <!-- Scope Toggle: 4 Core AI vs 7 Combined AI + Fintech -->
+          <div class="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200" role="group">
+            <button id="btn-mode-core" onclick="setIndexMode('core')" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-white text-slate-900 shadow-sm transition">
+              4 Core AI Indicators (0–4)
+            </button>
+            <button id="btn-mode-full" onclick="setIndexMode('full')" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition">
+              AI + Fintech Channels (0–7)
+            </button>
+          </div>
+
+          <!-- Chart Type Toggle -->
+          <div class="inline-flex rounded-xl bg-slate-100 p-1 border border-slate-200" role="group">
+            <button id="btn-chart-line" onclick="setChartType('line')" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-white text-slate-900 shadow-sm transition">
+              Line Trend
+            </button>
+            <button id="btn-chart-bar" onclick="setChartType('bar')" class="px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition">
+              Grouped Bar
+            </button>
           </div>
         </div>
-        <p class="cmd-desc">Opens the interactive <strong>Blood &amp; Role Progression Map</strong>. Members can view exact Blood (`mL`/`L`), Study VC Time, and Todo Task requirements to unlock Supernatural or Server Achievement roles, track personal progress, and click <strong>`🩸 Claim / Sync Unlocked Roles`</strong>!</p>
-        <div class="logic-box">
-          <strong>💡 Multi-Prefix Ready:</strong><br/>
-          Members can invoke this command via any active prefix: <code>!maps</code>, <code>wmaps</code>, <code>&amp;maps</code>, <code>!b maps</code>, or <code>/maps</code>!
+      </div>
+
+      <!-- Bank Filter Pills -->
+      <div class="space-y-2.5">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <span class="text-xs font-semibold uppercase tracking-wider text-slate-500">Filter Banks on Graph:</span>
+          <div class="flex items-center gap-2">
+            <button onclick="selectBanksPreset('all')" class="text-xs font-semibold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-lg transition">
+              Show All 10
+            </button>
+            <button onclick="selectBanksPreset('changers')" class="text-xs font-semibold text-amber-800 hover:text-amber-900 bg-amber-50 hover:bg-amber-100 px-2.5 py-1 rounded-lg transition">
+              Show Dynamic Movers (6)
+            </button>
+            <button onclick="selectBanksPreset('perfect')" class="text-xs font-semibold text-blue-700 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-2.5 py-1 rounded-lg transition">
+              5-Yr Perfect Leaders (4)
+            </button>
+            <button onclick="selectBanksPreset('clear')" class="text-xs font-semibold text-slate-500 hover:text-slate-700 px-2 py-1 rounded-lg transition">
+              Clear
+            </button>
+          </div>
+        </div>
+        <div id="bank-pills-container" class="flex flex-wrap gap-2">
+          <!-- Populated dynamically by JS -->
         </div>
       </div>
 
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/milestone add role:[@Role] milestone_name:[Text] required_blood:[float] required_vc_minutes:[int] required_todo_points:[int] category:[Choice] task_description:[Text] auto_assign:[True/False] consume_blood:[True/False]</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/milestone add')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Adds or updates a Role Milestone in Supabase. You can also configure all milestones via the web studio in <strong>`/setup` ➔ Tab 9 (Blood Role Map)</strong>!</p>
+      <!-- Responsive Canvas Container -->
+      <div class="relative w-full h-[350px] sm:h-[420px] bg-slate-50/70 rounded-2xl p-3 sm:p-4 border border-slate-100">
+        <canvas id="indexChart"></canvas>
       </div>
 
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/milestone remove role:[@Role]</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/milestone remove')">Copy</button>
+      <!-- Indicator Legend Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+        <div class="rounded-xl bg-emerald-50/60 border border-emerald-200/80 p-4">
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-800 mb-2">
+            <span class="h-2 w-2 rounded-full bg-emerald-600"></span>
+            Core AI Index Pillars (Left Side of Assignment Note: i = 1..4)
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700">
+            <div><strong class="text-slate-900">1. Fraud Detection:</strong> SOC/SIEM, AML/CFT &amp; card fraud monitoring</div>
+            <div><strong class="text-slate-900">2. Loan Disbursement:</strong> Digital nano-loan / LOS / automated credit</div>
+            <div><strong class="text-slate-900">3. AI Agent:</strong> Conversational chatbot (AVA, EBL DIA, Mita, etc.)</div>
+            <div><strong class="text-slate-900">4. AI Implementation:</strong> RPA, ML credit scoring, OCR &amp; analytics</div>
           </div>
         </div>
-        <p class="cmd-desc">Deletes a role milestone threshold from Supabase and updates the live map embed.</p>
+
+        <div class="rounded-xl bg-blue-50/60 border border-blue-200/80 p-4">
+          <div class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-800 mb-2">
+            <span class="h-2 w-2 rounded-full bg-blue-600"></span>
+            Financial Technology Channels (Right Side of Assignment Note: i = 5..7)
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs text-slate-700">
+            <div><strong class="text-slate-900">5. Mobile Apps:</strong> Astha, Citytouch, Skybanking, NexusPay, CellFin</div>
+            <div><strong class="text-slate-900">6. D. Banking:</strong> e-KYC digital onboarding, QR &amp; MFS wallet</div>
+            <div><strong class="text-slate-900">7. Internet Banking:</strong> Retail &amp; corporate web banking portals</div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- 0. ROLE, FACTION, VAMPIRE KING, GENDER & HELP SETUP (/make, /gender, /help) -->
-    <section class="feature-section" id="sec-make">
-      <div class="section-header">
-        <h3>🛡️ 0. Role, Vampire King, Supernatural Factions, Gender &amp; Dynamic Help (/make, /gender, /help)</h3>
-        <span class="pill pill-white">Table: guild_settings</span>
+    <!-- Multi-View Matrix, Handwritten Notebook Format & Excel CSV Viewer -->
+    <section class="glass-card rounded-2xl p-5 sm:p-6 space-y-5">
+      <!-- Top Bar with View Switcher & CSV Export Actions -->
+      <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4 border-b border-slate-100 pb-4">
+        <div class="space-y-1">
+          <div class="flex flex-wrap items-center gap-2">
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900">
+              Verified Annual Report Scoring Matrix &amp; Excel CSV Viewer
+            </h2>
+            <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full">100% Page-Audited</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-500">
+            Switch between the <strong class="text-slate-700">Interactive Year Matrix</strong>, your teacher's <strong class="text-slate-700">Handwritten Notebook Format</strong>, or the <strong class="text-slate-700">Excel / CSV Spreadsheet View</strong>.
+          </p>
+        </div>
+
+        <!-- 3-Way View Switcher -->
+        <div class="inline-flex flex-wrap rounded-xl bg-slate-100 p-1.5 border border-slate-200 gap-1">
+          <button id="tab-view-interactive" onclick="switchDataView('interactive')" class="px-3.5 py-2 text-xs font-bold rounded-lg bg-slate-900 text-white shadow-sm transition">
+            1. Interactive Year Matrix (with Page #)
+          </button>
+          <button id="tab-view-handwritten" onclick="switchDataView('handwritten')" class="px-3.5 py-2 text-xs font-bold rounded-lg text-slate-600 hover:text-slate-900 transition">
+            2. Teacher's Handwritten Format (2021–2025)
+          </button>
+          <button id="tab-view-excel" onclick="switchDataView('excel')" class="px-3.5 py-2 text-xs font-bold rounded-lg text-slate-600 hover:text-slate-900 transition">
+            3. Excel / CSV Viewer &amp; Downloads
+          </button>
+        </div>
       </div>
 
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/make role_type:[Admin | Mod | Staff | Seller | Dealer | Vampire | Vampire King | Witch | Wizard | Mummy | Werewolf | Shhh] role:[@Role] lang:[Optional bn|en]</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/make')">Copy</button>
+      <!-- =================================================================== -->
+      <!-- VIEW 1: INTERACTIVE YEAR-BY-YEAR MATRIX (WITH PAGE CITATIONS & PDF) -->
+      <!-- =================================================================== -->
+      <div id="view-interactive" class="space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex flex-wrap items-center gap-3">
+            <div id="year-tabs" class="inline-flex flex-wrap gap-1.5 bg-slate-100 p-1.5 rounded-xl border border-slate-200">
+              <!-- Populated by JS -->
+            </div>
+            <span class="text-xs text-slate-500">
+              Active Year: <strong id="active-year-label" class="text-slate-900 font-mono text-sm">2025</strong>
+              <span class="mx-1.5 text-slate-300">|</span>
+              Click any <span class="font-mono font-bold text-emerald-700">1</span> or <span class="font-mono font-bold text-slate-600">0</span> to test scenarios
+            </span>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="downloadCSVFile('main')" class="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 py-2 shadow-sm transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+              Download Main CSV
+            </button>
+            <button onclick="downloadCSVFile('handwritten')" class="inline-flex items-center gap-1.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-3.5 py-2 shadow-sm transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+              Download Handwritten Matrix CSV
+            </button>
+            <button onclick="resetDemoData()" class="inline-flex items-center gap-1.5 rounded-xl bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 text-xs font-semibold px-3 py-2 transition">
+              Restore Verified Data
+            </button>
           </div>
         </div>
-        <p class="cmd-desc">Assigns or removes a Discord role for server management or Supernatural RPG factions[cite: 25]. Unlocks commands immediately without creating duplicate slash command listings[cite: 25]!</p>
+
+        <div class="overflow-x-auto table-scroll rounded-xl border border-slate-200">
+          <table class="min-w-full divide-y divide-slate-200 text-sm">
+            <thead class="bg-slate-50">
+              <tr>
+                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-xs font-bold uppercase tracking-wider text-slate-600 sticky left-0 bg-slate-50 z-10">
+                  # &amp; Commercial Bank (PDF Link)
+                </th>
+                <th scope="col" class="px-3 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50/50">
+                  1. Fraud<br/><span class="font-normal text-[10px] text-emerald-600">Detection</span>
+                </th>
+                <th scope="col" class="px-3 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50/50">
+                  2. Loan<br/><span class="font-normal text-[10px] text-emerald-600">Disbursement</span>
+                </th>
+                <th scope="col" class="px-3 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50/50">
+                  3. AI Agent<br/><span class="font-normal text-[10px] text-emerald-600">Chatbot</span>
+                </th>
+                <th scope="col" class="px-3 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50/50">
+                  4. AI<br/><span class="font-normal text-[10px] text-emerald-600">Implementation</span>
+                </th>
+                <th scope="col" class="px-3 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-blue-800 bg-blue-50/40">
+                  5. Mobile<br/><span class="font-normal text-[10px] text-blue-600">Apps</span>
+                </th>
+                <th scope="col" class="px-3 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-blue-800 bg-blue-50/40">
+                  6. Digital<br/><span class="font-normal text-[10px] text-blue-600">Banking</span>
+                </th>
+                <th scope="col" class="px-3 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-blue-800 bg-blue-50/40">
+                  7. Internet<br/><span class="font-normal text-[10px] text-blue-600">Banking</span>
+                </th>
+                <th scope="col" class="px-4 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-slate-900 bg-slate-100">
+                  Year Index<br/><span class="font-mono font-normal text-[10px] text-slate-500">&Sigma;[i]</span>
+                </th>
+                <th scope="col" class="px-4 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-slate-700 bg-slate-100">
+                  5-Yr Mean<br/><span class="font-normal text-[10px] text-slate-500">(2021–25)</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="scoring-tbody" class="divide-y divide-slate-200 bg-white">
+              <!-- Populated dynamically by JS -->
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/gender gender_type:[Female | Male] role:[@Role]</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/gender')">Copy</button>
+      <!-- =================================================================== -->
+      <!-- VIEW 2: TEACHER'S HANDWRITTEN NOTEBOOK FORMAT (2021-2025 COLUMNS)   -->
+      <!-- =================================================================== -->
+      <div id="view-handwritten" class="hidden space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-amber-50/70 border border-amber-200 rounded-xl p-4">
+          <div class="space-y-1">
+            <div class="text-xs font-bold uppercase tracking-wider text-amber-900">
+              Matches Handwritten Assignment Sheet Format (`BRAC | 2021 | 2022 | 2023 | 2024 | 2025`)
+            </div>
+            <p class="text-xs text-amber-800">
+              Each bank block below lists the binary `{0, 1}` scores across `2021–2025` and calculates `Index = Σ[i]` at the bottom of the block.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="copyCSVToClipboard('handwritten')" class="inline-flex items-center gap-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3.5 py-2 transition">
+              Copy All for Excel
+            </button>
+            <button onclick="downloadCSVFile('handwritten')" class="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3.5 py-2 transition">
+              Download .CSV
+            </button>
           </div>
         </div>
-        <p class="cmd-desc">Registers which server roles represent <strong>Female</strong> (for Witches) and <strong>Male</strong> (for Wizards)[cite: 25]. Gender enforcement can be toggled on or off in `/setup`!</p>
+
+        <div id="handwritten-blocks-container" class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <!-- Populated dynamically by JS -->
+        </div>
       </div>
 
-      <div class="cmd-card" data-role="member">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/help lang:[Optional bn|en]   &amp;   !help</code>
-          <div>
-            <span class="pill pill-green">Role-Aware Command Guide</span>
-            <button class="copy-btn" onclick="copyText('/help')">Copy</button>
+      <!-- =================================================================== -->
+      <!-- VIEW 3: EXCEL / CSV SPREADSHEET VIEWER & DOWNLOAD CENTER            -->
+      <!-- =================================================================== -->
+      <div id="view-excel" class="hidden space-y-4">
+        <!-- Excel Toolbar -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 bg-slate-100 p-3 rounded-xl border border-slate-200">
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-500 mr-1">Select CSV Sheet:</span>
+            <button id="csv-sheet-btn-handwritten" onclick="renderExcelSheet('handwritten')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-700 text-white shadow-xs transition">
+              Sheet 1: Assignment_Matrix_Handwritten.csv
+            </button>
+            <button id="csv-sheet-btn-summary" onclick="renderExcelSheet('summary')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 transition">
+              Sheet 2: Bank_Progress_Summary.csv
+            </button>
+            <button id="csv-sheet-btn-main" onclick="renderExcelSheet('main')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 transition">
+              Sheet 3: AI_Fintech_Index_Main (50 Rows).csv
+            </button>
+            <button id="csv-sheet-btn-audit" onclick="renderExcelSheet('audit')" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 transition">
+              Sheet 4: Scan_and_Why_Not_Found_Log.csv
+            </button>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="copyActiveExcelSheet()" class="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold px-3 py-1.5 transition">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              Copy Tab-Separated for Excel (Ctrl+V)
+            </button>
+            <button onclick="downloadActiveExcelSheet()" class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-3 py-1.5 transition">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+              Download Active .CSV File
+            </button>
           </div>
         </div>
-        <p class="cmd-desc">Displays an organized embed tailored to the caller's exact roles: <strong>Member commands</strong> (available to everyone by default), <strong>Supernatural powers</strong> (Vampire, Vampire King, Witch, Wizard, Mummy, Werewolf, Shhh), <strong>Seller commands</strong>, <strong>Dealer commands</strong>, and <strong>Admin commands</strong>[cite: 25]!</p>
-      </div>
-    </section>
 
-    <!-- 0B. MULTI-PREFIX & ALIAS STUDIO (/alias & /prefix) -->
-    <section class="feature-section" id="sec-alias">
-      <div class="section-header">
-        <h3>⚡ 0B. Multi-Prefix Studio &amp; Command Aliases (/alias &amp; /prefix)</h3>
-        <span class="pill pill-cyan">Full Customization in /setup Tab 8</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/prefix set new_prefix:[e.g. !b or w or &amp;]   |   /prefix cooldown seconds:[8]   |   /prefix restricted channel:[#ch]</code>
-          <div>
-            <span class="pill pill-red">Admin / Mod</span>
-            <button class="copy-btn" onclick="copyText('/prefix set')">Copy</button>
-          </div>
+        <!-- Excel Formula Bar Lookalike -->
+        <div class="flex items-center gap-2 bg-white border border-slate-300 rounded-lg px-3 py-1.5 text-xs font-mono text-slate-600">
+          <span class="font-bold text-slate-400 select-none">fx</span>
+          <span class="text-slate-300">|</span>
+          <span id="excel-formula-bar" class="truncate">=SUM(C2:C5) // Verified Empirical Binary Index (2021-2025)</span>
         </div>
-        <p class="cmd-desc">Sets or adds custom prefixes (e.g. <code>!</code>, <code>w</code>, <code>&amp;</code>, <code>!b</code>), adjusts anti-spam cooldown between chat commands, or restricts prefix commands in selected channels[cite: 25].</p>
-      </div>
 
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/alias set command_name:[blood] alias:[rokto]   |   /alias remove alias:[rokto]   |   /alias list</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/alias set')">Copy</button>
-          </div>
+        <!-- Spreadsheet Scroll Container -->
+        <div class="overflow-auto max-h-[540px] table-scroll rounded-xl border border-slate-300 bg-white shadow-inner">
+          <table id="excel-preview-table" class="min-w-full border-collapse excel-grid">
+            <!-- Populated dynamically by JS -->
+          </table>
         </div>
-        <p class="cmd-desc">Maps any custom word as an alias for any command across the bot (e.g., setting <code>rokto</code> ➔ <code>blood</code> allows members to run <code>!rokto</code>, <code>wrokto</code>, or <code>&amp;rokto</code> to check their Blood Vial!).</p>
-      </div>
-    </section>
 
-    <!-- 1. LANGUAGE & COMMAND RESTRICTIONS (/language, /command) -->
-    <section class="feature-section" id="sec-language">
-      <div class="section-header">
-        <h3>🌐 1. Global Language, Per-Command Language Swap &amp; Granular Permissions</h3>
-        <span class="pill pill-white">Tables: guild_settings, command_restrictions</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/language lang:[বাংলা (Bangla) | English]</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/language')">Copy</button>
+        <!-- Raw CSV Text Box for Instant Copy -->
+        <details class="group rounded-xl border border-slate-200 bg-slate-50 p-3">
+          <summary class="cursor-pointer text-xs font-bold text-slate-700 flex items-center justify-between">
+            <span>View Raw Comma-Separated (.CSV) Text for This Sheet</span>
+            <span class="text-emerald-700 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="mt-3 space-y-2">
+            <textarea id="raw-csv-textarea" readonly class="w-full h-44 font-mono text-xs p-3 rounded-lg bg-slate-900 text-emerald-300 border border-slate-700 focus:outline-none"></textarea>
           </div>
-        </div>
-        <p class="cmd-desc">Changes the entire bot's default response language across the server between <strong>Bangla (`bn`)</strong> and <strong>English (`en`)</strong>[cite: 25].</p>
+        </details>
       </div>
 
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/command state:[on | off] command_name:[Command Name or 'all'] channel:[Optional #channel] role:[Optional @Role] user:[Optional @User]</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/command')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Turns any command (or <strong>`all`</strong>) ON or OFF for a specific channel, role, or user ID[cite: 25]. You can also configure full allowed/restricted lists inside <strong>`/setup` ➔ Tab 8 (Command Alias &amp; Perms)</strong>!</p>
-      </div>
-    </section>
-
-    <!-- 2. SPAM MENTION PROTECTION -->
-    <section class="feature-section" id="sec-spam">
-      <div class="section-header">
-        <h3>🚨 2. Spam Mention Protection &amp; 1-Hour Cooldown</h3>
-        <span class="pill pill-white">Tables: guild_settings, spam_cooldowns</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/spam mention state:[on | off]   |   /spam channel channel:[#ch]   |   /spam log channel:[#log]</code>
-          <div>
-            <span class="pill pill-red">Mod / Admin</span>
-            <button class="copy-btn" onclick="copyText('/spam mention state:on')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Deletes messages with 3+ rapid mentions of the same user, locks the spammer on a 1-hour target-specific mention cooldown in Supabase, and logs a report in `/spam log`[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 3. LEVEL, REWARD & GIFTS SYSTEM -->
-    <section class="feature-section" id="sec-level">
-      <div class="section-header">
-        <h3>🏆 3. Channel-Specific Leveling, Blood Bonuses, Role Rewards &amp; Gifts (/level, /reward, /gifts)</h3>
-        <span class="pill pill-white">Tables: level_rules, user_channel_levels, level_rewards</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/level level_gain:[int] channel:[#channel] posts_required:[int] post_type:[Choice] cooldown_seconds:[int] blood_reward:[Optional float]</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/level')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Creates a custom leveling rule for a Text or Forum channel with anti-cheat cooldown protection and an optional automatic <strong>Blood bonus (`blood_reward`)</strong> per level-up[cite: 25]!</p>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/reward channel:[#channel] level:[int] role:[@Role] blood_bonus:[Optional float]   &amp;   /gifts channel:[Optional #channel]</code>
-          <div>
-            <span class="pill pill-green">Admin &amp; Member</span>
-            <button class="copy-btn" onclick="copyText('/gifts')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Awards a Role and optional Blood bonus on reaching a milestone level, and lets members view all available level gifts via `/gifts`[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 4. TRUTH OR DARE -->
-    <section class="feature-section" id="sec-tord">
-      <div class="section-header">
-        <h3>🎲 4. Bangla Truth or Dare System (সত্য নাকি সাহস) + Guaranteed GIF Attachment &amp; 3-Day Expiry</h3>
-        <span class="pill pill-white">Tables: tord_channels, tord_sessions</span>
-      </div>
-
-      <div class="cmd-card" data-role="member">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/tord channel:[#channel] action:[start | stop] lang:[Optional bn|en]</code>
-          <div>
-            <span class="pill pill-green">Interactive Game</span>
-            <button class="copy-btn" onclick="copyText('/tord')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Starts or stops the interactive Truth or Dare panel with Anonymous toggle, guaranteed GIF/image attachment, real notification pings, and 3-day auto-expiry[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 5. SHOP SYSTEM -->
-    <section class="feature-section" id="sec-shop">
-      <div class="section-header">
-        <h3>🛒 5. Shop System, Seller Roles, Emoji Triggers &amp; Boxed Posts</h3>
-        <span class="pill pill-white">Tables: guild_settings, shop_triggers</span>
-      </div>
-
-      <div class="cmd-card" data-role="seller">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/shop status | /shop seller | /shop react | /shop box | /shop seller_mention | /shop seller_cooldown</code>
-          <div>
-            <span class="pill pill-gold">Seller / Admin</span>
-            <button class="copy-btn" onclick="copyText('/shop box')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Manages shop channels, seller roles, emoji reaction ticket triggers, and boxed product embeds with custom ticket buttons[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 6. TICKET CONFIGURATION -->
-    <section class="feature-section" id="sec-ticket">
-      <div class="section-header">
-        <h3>🎫 6. Rich Ticket Channel Configuration &amp; Anti-Spam Lock</h3>
-        <span class="pill pill-white">Tables: active_tickets, ticket_cooldowns</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/ticket name_format position_mode category under_channel cooldown_seconds duration_minutes allow_user_close welcome_message_bangla</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/ticket')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Customizes Shop Ticket naming, placement, cooldowns, auto-expiration, and welcome message[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 7. MULTI-EMBED & FORM-BUTTON BUILDER (IN-APP & WEB) -->
-    <section class="feature-section" id="sec-embed">
-      <div class="section-header">
-        <h3>🛠️ 7. Multi-Embed &amp; Form-Button Builder (Dedicated /editor/{token} Route)</h3>
-        <span class="pill pill-white">Tables: web_editor_sessions, custom_embed_buttons</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/embed builder channel:[Optional #channel]   &amp;   /embed web channel:[Optional #channel]</code>
-          <div>
-            <span class="pill pill-cyan">In-App &amp; Web Multi-Embed Builder</span>
-            <button class="copy-btn" onclick="copyText('/embed web')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Build up to 10 embeds with custom left-sidebar colors and interactive/link buttons either inside Discord (`/embed builder`) or in the dedicated Web Editor (`/embed web`) with Dark/White theme and Text Size toggles[cite: 25]!</p>
-      </div>
-    </section>
-
-    <!-- 8. SCHEDULED & RECURRING EMBED REMINDERS (/reminder) -->
-    <section class="feature-section" id="sec-reminder">
-      <div class="section-header">
-        <h3>⏰ 8. Scheduled &amp; Recurring Multi-Embed Reminders (/reminder)</h3>
-        <span class="pill pill-white">Table: scheduled_reminders</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/reminder embed | /reminder channel | /reminder web | /reminder list | /reminder stop reminder_id:[ID]</code>
-          <div>
-            <span class="pill pill-red">Staff / Mod / Admin</span>
-            <button class="copy-btn" onclick="copyText('/reminder embed')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Schedules one-time or recurring multi-embed reminders in any channel[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 9. BIRTHDAY & SYNC -->
-    <section class="feature-section" id="sec-birthday">
-      <div class="section-header">
-        <h3>🎂 9. Birthday Wishing &amp; Smart Channel History Sync</h3>
-        <span class="pill pill-white">Tables: guild_settings, user_birthdays</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/birthday channel:[#channel] title:[Text] desc:[Text] url:[Media/GIF URL]   &amp;   /sync birthday_channel:[#channel]</code>
-          <div>
-            <span class="pill pill-red">Admin</span>
-            <button class="copy-btn" onclick="copyText('/birthday')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Enables daily midnight Bangladesh Time birthday wishes and syncs channel history (keeping only each user's latest birthday entry)[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 10. AUTO NICKNAME -->
-    <section class="feature-section" id="sec-nick">
-      <div class="section-header">
-        <h3>🏷️ 10. Persistent Auto Nickname Channel (On / Off)</h3>
-        <span class="pill pill-white">Table: guild_settings (nick_channels)</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/nick state:[on | off] channel:[#channel] lang:[Optional bn|en]</code>
-          <div>
-            <span class="pill pill-red">Mod / Admin</span>
-            <button class="copy-btn" onclick="copyText('/nick state:on')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Persistently saves auto-nickname channels in Supabase (`nick_channels` &amp; `nick_channel_id`), ignores all bots, and blocks nicknames starting with numbers[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 11. SMART RIDDLE / Q&A -->
-    <section class="feature-section" id="sec-answer">
-      <div class="section-header">
-        <h3>🧩 11. Auto-Detecting Q&amp;A / Riddle Answer System (Set &amp; Unset)</h3>
-        <span class="pill pill-white">Table: channel_answers</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/answer set channel:[#channel] answer:[Correct Answer] thread:[Optional Thread]   &amp;   /answer unset ...</code>
-          <div>
-            <span class="pill pill-red">Staff / Mod / Admin</span>
-            <button class="copy-btn" onclick="copyText('/answer set')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Sets or removes the target riddle answer for a channel or thread, matching phonetic typos, Bangla script, and misspelled full sentences[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 12. LINK BOX WRAPPER (/link) -->
-    <section class="feature-section" id="sec-link">
-      <div class="section-header">
-        <h3>🔗 12. Automatic Link Box Wrapper (/link)</h3>
-        <span class="pill pill-white">Table: guild_settings</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/link on | /link off | /link whitelist | /link blacklist</code>
-          <div>
-            <span class="pill pill-red">Mod / Admin</span>
-            <button class="copy-btn" onclick="copyText('/link on')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Wraps non-whitelisted links inside an Embed Box with the author's name, avatar, clickable caption, and a `Go to Link` button[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 13. AUTO-CLOSE THREADS -->
-    <section class="feature-section" id="sec-close">
-      <div class="section-header">
-        <h3>🧵 13. Silent Nested Thread Auto-Closer (Up to 15 Channels) &amp; Timer</h3>
-        <span class="pill pill-white">Tables: auto_close_channels, scheduled_thread_closes</span>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/close channels channel1:[#ch1] ... channel15:[#ch15]   &amp;   /close timer channel:[#ch] minutes:[int]</code>
-          <div>
-            <span class="pill pill-red">Mod / Admin</span>
-            <button class="copy-btn" onclick="copyText('/close channels')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Silently archives threads across up to 15 channels without posting any system clutter[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 14. DONATION SYSTEM -->
-    <section class="feature-section" id="sec-donation">
-      <div class="section-header">
-        <h3>💸 14. Rich Multi-Option Donation System (0% Default &amp; Live Ranks)</h3>
-        <span class="pill pill-white">Tables: donation_goals, donation_records, active_tickets</span>
-      </div>
-
-      <div class="cmd-card" data-role="seller">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/donation default | /donation add | /donation option_add | /donation option_remove | /donation reset | /donation permission | /donation embed | /donation ticket</code>
-          <div>
-            <span class="pill pill-gold">Permitted Role / Admin</span>
-            <button class="copy-btn" onclick="copyText('/donation add')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Manages community donation goals, live emoji progress bars, top donator leaderboards, and dropdown donation tickets[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 15. ROUTINE REMINDER & ACTIVITY SYNC (/routine) -->
-    <section class="feature-section" id="sec-routine">
-      <div class="section-header">
-        <h3>📅 15. Smart Todo Routine Parser, DM Inbox Reminder &amp; Activity Checker (/routine)</h3>
-        <span class="pill pill-white">Tables: routine_schedules, study_users, guild_settings</span>
-      </div>
-
-      <div class="cmd-card" data-role="member">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/routine reminder state:[on | off] mode:[member | admin] channel:[Optional #channel (Admin)]</code>
-          <div>
-            <span class="pill pill-green">Member &amp; Admin</span>
-            <button class="copy-btn" onclick="copyText('/routine reminder')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Parses schedules from the Todo channel in Bangladesh Time (`Asia/Dhaka`), sends DM inbox reminders with confirmation buttons, and logs missed tasks to `/study log`[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 16. STUDY & TOP-8 PODIUM LEADERBOARD -->
-    <section class="feature-section" id="sec-study">
-      <div class="section-header">
-        <h3>📚 16. Study VC Tracker, Anti-Distraction Penalty &amp; Top-8 Leaderboard (/leaderboard, /ranks, /study)</h3>
-        <span class="pill pill-white">Tables: study_users, study_vc_sessions, study_daily_logs</span>
-      </div>
-
-      <div class="cmd-card" data-role="member">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/leaderboard lang:[Optional bn|en]   &amp;   /ranks scope:[top3 | all]</code>
-          <div>
-            <span class="pill pill-gold">Zero-Box Mixed-Font Podium Card</span>
-            <button class="copy-btn" onclick="copyText('/leaderboard')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Generates the <strong>Top-8 Podium &amp; Ranked Leaderboard Card</strong> with centered headers, mixed Bangla + English font rendering (zero `[]` boxes!), each player's <strong>Supernatural Faction or `[CURSED]` status</strong>, and exact rank distance[cite: 25]!</p>
-      </div>
-
-      <div class="cmd-card" data-role="admin">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/study vc vc_channel:[#vc]   |   /study log channel:[#ch]   |   /study todo channel:[#ch]   |   /study progress</code>
-          <div>
-            <span class="pill pill-red">Study VC Protection</span>
-            <button class="copy-btn" onclick="copyText('/study vc')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Tracks Study Voice Channels and automatically deducts Blood (`-2 mL` per penalty) if a studying member plays a <strong>Video Game</strong>, listens to <strong>Spotify</strong>, or posts <strong>memes/GIFs</strong> in other channels while inside the Study VC[cite: 25]!</p>
-      </div>
-    </section>
-
-    <!-- 17. MINIMAL SPOOKY BOXED AFK & AUTO-DELETING NOTICE (/afk) -->
-    <section class="feature-section" id="sec-afk">
-      <div class="section-header">
-        <h3>👻 17. Minimal Boxed AFK, Auto-Deleting Reply Notice &amp; Spy Detector (/afk &amp; .afk)</h3>
-        <span class="pill pill-white">Table: afk_users</span>
-      </div>
-
-      <div class="cmd-card" data-role="member">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/afk reason:[Optional AFK Message] lang:[Optional bn|en]   &amp;   .afk [reason]</code>
-          <div>
-            <span class="pill pill-green">Bilingual Reply Notice</span>
-            <button class="copy-btn" onclick="copyText('/afk')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Sets AFK status inside a clean dark box with Thakurmar Jhuli flavor[cite: 25]. When anyone mentions or <strong>replies</strong> to an AFK member, the bot automatically informs them in chat and <strong>auto-deletes the notice after 8 seconds</strong> (configurable in `/setup`) to prevent chat clutter[cite: 25]!</p>
-      </div>
-    </section>
-
-    <!-- 18. BLOOD VIAL CURRENCY, PASSIVE CHANNELS, PERMS & ANIMATED DICE BET (/blood, /coin, /bet) -->
-    <section class="feature-section" id="sec-blood">
-      <div class="section-header">
-        <h3>🩸 18. Spooky Blood Vial, Passive VC/Text/Forum Channels, Master Perms &amp; Dice Bet (/blood, /coin, /bet)</h3>
-        <span class="pill pill-white">Tables: study_users, guild_settings</span>
-      </div>
-
-      <div class="cmd-card" data-role="member">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/blood member:[Optional @Member] give_amount:[Optional float] vc:[Optional #vc] text:[Optional #text] forum:[Optional #forum] perms_user:[Optional @User] perms_role:[Optional @Role]</code>
-          <div>
-            <span class="pill pill-gold">Available to All Members by Default</span>
-            <button class="copy-btn" onclick="copyText('/blood')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">All-in-one Blood &amp; Coin status command (also available via `/coin`, `!blood`, `wblood`, `&amp;rokto`):</p>
-        <table class="param-table">
-          <thead><tr><th>Mode / Parameter</th><th>Who Can Use</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td class="param-name">/blood [member]</td><td><strong>All Members by Default</strong></td><td>Displays the visual Spooky Blood Vial Card with initial 10 mL blood, capacity %, and `[CURSED]` badge if cursed by a Mummy[cite: 25].</td></tr>
-            <tr><td class="param-name">vc / text / forum</td><td>Server Admins</td><td>Toggles passive Blood channels[cite: 25]! <strong>Blood VC</strong> pays `50%` of Study VC rate; <strong>Blood Text</strong> (`0.15 mL`) and <strong>Blood Forum</strong> (`0.30 mL`) pay a low trickle rate for active texting[cite: 25].</td></tr>
-            <tr><td class="param-name">give_amount</td><td>Owner (`1210652404169707520` / Server Owner), <strong>Dealers</strong>, or `/blood perms`</td><td>Grants or deducts Blood[cite: 25]. <strong>Regular Admins and Mods are strictly blocked</strong> from giving themselves or others Blood unless granted permission[cite: 25]!</td></tr>
-            <tr><td class="param-name">perms_user / perms_role</td><td><strong>ONLY</strong> `1210652404169707520` or Server Owner</td><td>Grants or revokes Master Blood &amp; Supernatural permissions for a specific user or role[cite: 25].</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="cmd-card" data-role="member">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/bet opponent:[@Member] amount:[float] sticky_in_place:[Optional True|False]   &amp;   /gamble channel:[#ch]</code>
-          <div>
-            <span class="pill pill-gold">Animated Dice Duel</span>
-            <button class="copy-btn" onclick="copyText('/bet')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Challenges a member to a Blood Dice Duel with multi-frame rolling dice animation (blocked if either player is cursed by a Mummy!)[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 19. TRIPLE-SECURITY PERMISSION CURRENCY ENGINE (/currency) -->
-    <section class="feature-section" id="sec-currency">
-      <div class="section-header">
-        <h3>🔐 19. Triple-Security Permission Currency Engine (/currency)</h3>
-        <span class="pill pill-white">Tables: currency_catalog, currency_perm_requests</span>
-      </div>
-
-      <div class="cmd-card" data-role="seller">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/currency permissions | /currency set_reward | /currency log | /currency config</code>
-          <div>
-            <span class="pill pill-gold">Dealer &amp; Admin</span>
-            <button class="copy-btn" onclick="copyText('/currency permissions')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Requests moderation/role/channel powers in exchange for Blood with <strong>3-Step Dealer Verification (`1/3` → `2/3` → `3/3`)</strong> and audit-log self-revocation[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 20. SUPERNATURAL RPG FACTIONS (/bite, /brew, /cast, /mummy, /howl, /death, /supernatural) -->
-    <section class="feature-section" id="sec-supernatural">
-      <div class="section-header">
-        <h3>🧛 20. Supernatural RPG: Vampire King (0 CD!), Witches, Wizards, Mummy [CURSED] Lock &amp; #death</h3>
-        <span class="pill pill-white">Table: supernatural_states</span>
-      </div>
-
-      <div class="cmd-card" data-role="seller">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/bite target:[@Member]   &amp;   !bite @target</code>
-          <div>
-            <span class="pill pill-red">🧛 Vampire &amp; 👑 Vampire King Only</span>
-            <button class="copy-btn" onclick="copyText('/bite')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc"><strong>Normal Vampires</strong> steal `5–25 mL` Blood with a cooldown[cite: 25]. <strong>👑 Vampire Kings</strong> (`/make role_type:Vampire King`) steal massive random Blood (`60–160 mL`) with <strong>ZERO cooldown</strong>[cite: 25]! *(Admins without role or master perm are blocked from biting[cite: 25]!)*</p>
-      </div>
-
-      <div class="cmd-card" data-role="seller">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/mummy target:[@Member]   &amp;   !mummy @target</code>
-          <div>
-            <span class="pill pill-gold">🤕 Mummy Curse — Full Power &amp; Gamble Lock</span>
-            <button class="copy-btn" onclick="copyText('/mummy')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Curses any target for `60 minutes` (configurable in `/supernatural`)[cite: 25]. While cursed:
-          <br/>• If the target is a <strong>Vampire / Vampire King</strong>, they <strong>cannot suck blood (`/bite`)</strong>[cite: 25]!
-          <br/>• If the target is a <strong>Witch / Wizard</strong>, they <strong>cannot brew or cast spells (`/brew`, `/cast`)</strong>[cite: 25]!
-          <br/>• The target <strong>cannot earn positive Blood</strong> and <strong>cannot play `/bet`, `/roulette`, `/pass`, or `/fish`</strong>[cite: 25]!
-          <br/>• They are labeled <strong>`[CURSED]`</strong> on `/leaderboard`, `/ranks`, `/maps`, and `/blood`[cite: 25]!</p>
-      </div>
-
-      <div class="cmd-card" data-role="seller">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/brew spell:[drain | damage | mummy | kill]   |   /cast target:[@Member]   |   /howl target:[@Member]</code>
-          <div>
-            <span class="pill pill-green">🧙 Witch / Wizard &amp; 🐺 Werewolf</span>
-            <button class="copy-btn" onclick="copyText('/brew')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Witches/Wizards brew and cast Drain, Damage, Mummy Curse, or `#death` Banishment potions; Werewolves hunt at Night in Bangladesh Time (`6 PM – 6 AM BD`)[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 21. CHANNEL-SPECIFIC /SHHH MUTE -->
-    <section class="feature-section" id="sec-shhh">
-      <div class="section-header">
-        <h3>🤫 21. Channel-Specific Silence (/shhh &amp; /shhh_config)</h3>
-        <span class="pill pill-white">Table: active_shhh_mutes</span>
-      </div>
-
-      <div class="cmd-card" data-role="seller">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/shhh member:[@Member] channel:[Optional #channel] minutes:[Optional int]   &amp;   /shhh_config default_minutes:[int] role:[Optional @Role]</code>
-          <div>
-            <span class="pill pill-gold">🤫 Shhh Role / Admin</span>
-            <button class="copy-btn" onclick="copyText('/shhh')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Silences a user from texting in a specific channel for a set duration without applying a server-wide timeout[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 22. MULTIPLAYER PARTY GAMES (/roulette, /pass, /fish, /lobby close) -->
-    <section class="feature-section" id="sec-games">
-      <div class="section-header">
-        <h3>🔫 22. Multiplayer Party Games: Shotgun Roulette, Time-Bomb Pass, Mystery Fish &amp; /lobby close</h3>
-        <span class="pill pill-white">Auto-Move to Bottom + Mummy Curse Check</span>
-      </div>
-
-      <div class="cmd-card" data-role="member">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/roulette lobby   |   /pass   |   /fish   |   /lobby close   &amp;   !roulette | !pass | !fish</code>
-          <div>
-            <span class="pill pill-green">Party Games</span>
-            <button class="copy-btn" onclick="copyText('/roulette lobby')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Play Shotgun Roulette, Time-Bomb Pass, or Mystery Fish (automatically moves to the bottom of chat on each turn unless `sticky_in_place:True` is set)[cite: 25].</p>
-      </div>
-    </section>
-
-    <!-- 23. UNIVERSAL MEDIA DOWNLOADER (/download) -->
-    <section class="feature-section" id="sec-download">
-      <div class="section-header">
-        <h3>📥 23. Universal Social Media Downloader (/download)</h3>
-        <span class="pill pill-white">yt-dlp + Deno JS Solver</span>
-      </div>
-
-      <div class="cmd-card" data-role="member">
-        <div class="cmd-top">
-          <code class="cmd-syntax">/download link:[YouTube / Instagram / Facebook / TikTok / Twitter / X / Reddit / Tenor / Giphy / Video URL]</code>
-          <div>
-            <span class="pill pill-green">Member Command</span>
-            <button class="copy-btn" onclick="copyText('/download')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Downloads social media clips, Reels, TikToks, Shorts, and GIF videos directly as an MP4 attachment with size &amp; latency stats[cite: 25]!</p>
-      </div>
-    </section>
-
-    <!-- 24. OWO ROLEPLAY GIFS, COOLDOWN, RESTRICTED CHANNELS & SHUTDOWN (/prefix, /action, /shutdown) -->
-    <section class="feature-section" id="sec-owo">
-      <div class="section-header">
-        <h3>🎭 24. OwO Roleplay (45+ Commands), Multi-Prefix Cooldown &amp; Shutdown</h3>
-        <span class="pill pill-white">Table: guild_settings</span>
-      </div>
-
-      <div class="cmd-card" data-role="member">
-        <div class="cmd-top">
-          <code class="cmd-syntax">!slap @user | wkiss @user | &amp;hug @user | !dance | !cry | /action act:[Choice] target:[Optional @Member]</code>
-          <div>
-            <span class="pill pill-green">Roleplay Actions</span>
-            <button class="copy-btn" onclick="copyText('!slap')">Copy</button>
-          </div>
-        </div>
-        <p class="cmd-desc">Send animated anime GIFs with hilarious bot self-defense roasting if anyone tries to attack or romance the bot itself[cite: 25]!</p>
+      <!-- Methodological Audit Footnotes -->
+      <div class="rounded-xl bg-slate-50 border border-slate-200 p-4 text-xs text-slate-600 space-y-1.5">
+        <div class="font-bold text-slate-800 uppercase tracking-wider">Methodological &amp; Audit Notes (from Scan_and_Why_Not_Found_Error_Log.csv):</div>
+        <p>
+          <strong>1. Dutch-Bangla Bank PLC (2021–2023 vs. 2024–2025):</strong> For 2021–2023, DBBL's Investor Relations portal hosts 27–28 page <em>Basel III Pillar 3 Risk-Based Capital Disclosures</em> (`0` on narrative AI indicators, `2/7` on Fintech channels), whereas 2024 (294 pages) and 2025 (280 pages) are full Annual Reports scoring `3/4` on Core AI (`p.143`/`p.165` Fraud, `p.139`/`p.105` Digital Loan, `p.151`/`p.17` AI Implementation) and `6/7` Combined.
+        </p>
+        <p>
+          <strong>2. Mercantile Bank PLC (Bank #10 Selection):</strong> Pubali Bank PLC (`pubalibangla.com`) returns an HTTP 403 Cloudflare Turnstile challenge blocking automated PDF retrieval; therefore, <strong>Mercantile Bank PLC</strong> (`mblbd.com`, also a top Bangladesh Bank scheduled commercial bank) was audited across all 5 full Annual Reports (2021–2025, 399–536 pages each).
+        </p>
       </div>
     </section>
   </main>
 
-  <div id="toast">✅ Copied to clipboard!</div>
-
   <script>
-    let activeRole = 'all';
-    const zoomScales = [1, 1.12, 1.24];
-    let zoomIdx = 0;
+    // =========================================================================
+    // 1. VERIFIED EMPIRICAL DATASET FROM THE 5 UPLOADED CSV FILES (2021 - 2025)
+    // Indicators per year: [1_Fraud, 2_Loan, 3_AIAgent, 4_AIImpl, 5_Apps, 6_DBanking, 7_IBanking]
+    // =========================================================================
+    const YEARS = [2021, 2022, 2023, 2024, 2025];
 
-    function cycleTextSize() {
-      zoomIdx = (zoomIdx + 1) % zoomScales.length;
-      document.documentElement.style.setProperty('--zoom-scale', zoomScales[zoomIdx]);
+    const BANK_META = [
+      { id: 'brac', rank: 1, name: 'BRAC Bank PLC', short: 'BRAC Bank', color: '#059669', website: 'https://www.bracbank.com', appNote: 'Astha App, CorpNet & AVA Chatbot' },
+      { id: 'city', rank: 2, name: 'City Bank PLC', short: 'City Bank', color: '#2563eb', website: 'https://www.thecitybank.com', appNote: 'Citytouch & Digital Nano Loan' },
+      { id: 'ebl', rank: 3, name: 'Eastern Bank PLC', short: 'EBL', color: '#d97706', website: 'https://www.ebl.com.bd', appNote: 'Skybanking & EBL DIA Chatbot' },
+      { id: 'dbbl', rank: 4, name: 'Dutch-Bangla Bank PLC', short: 'DBBL', color: '#dc2626', website: 'https://www.dutchbanglabank.com', appNote: 'NexusPay & Rocket MFS' },
+      { id: 'prime', rank: 5, name: 'Prime Bank PLC', short: 'Prime Bank', color: '#7c3aed', website: 'https://www.primebank.com.bd', appNote: 'MyPrime & PrimeAgrim Nano Loan' },
+      { id: 'ibbl', rank: 6, name: 'Islami Bank Bangladesh PLC', short: 'Islami Bank', color: '#0d9488', website: 'https://www.islamibankbd.com', appNote: 'CellFin, mCash & Khidmah' },
+      { id: 'mtb', rank: 7, name: 'Mutual Trust Bank PLC', short: 'MTB', color: '#db2777', website: 'https://www.mutualtrustbank.com', appNote: 'MTB Neo, Smart Banking & Mita Bot' },
+      { id: 'asia', rank: 8, name: 'Bank Asia PLC', short: 'Bank Asia', color: '#4f46e5', website: 'https://www.bankasia-bd.com', appNote: 'SMART App, Nano Loan & AI Bot' },
+      { id: 'ucb', rank: 9, name: 'United Commercial Bank PLC', short: 'UCB', color: '#ea580c', website: 'https://www.ucb.com.bd', appNote: 'UNet, Upay & AI Banking' },
+      { id: 'mbl', rank: 10, name: 'Mercantile Bank PLC', short: 'Mercantile Bank', color: '#475569', website: 'https://www.mblbd.com', appNote: 'MBL Rainbow, MyCash & Digital Loan' },
+    ];
+
+    // Exact binary scores [Fraud, Loan, AI_Agent, AI_Impl, Apps, D_Banking, I_Banking]
+    const INITIAL_DATA = {
+      brac: {
+        2021: [1, 1, 0, 1, 1, 1, 1],
+        2022: [1, 1, 0, 1, 1, 1, 1],
+        2023: [1, 1, 1, 1, 1, 1, 1],
+        2024: [1, 1, 0, 1, 1, 1, 1],
+        2025: [1, 1, 1, 1, 1, 1, 1],
+      },
+      city: {
+        2021: [1, 1, 0, 1, 1, 1, 1],
+        2022: [1, 1, 0, 1, 1, 1, 1],
+        2023: [1, 1, 0, 1, 1, 1, 1],
+        2024: [1, 1, 1, 1, 1, 1, 1],
+        2025: [1, 1, 1, 1, 1, 1, 1],
+      },
+      ebl: {
+        2021: [1, 1, 1, 1, 1, 1, 1],
+        2022: [1, 1, 1, 1, 1, 1, 1],
+        2023: [1, 1, 1, 1, 1, 1, 1],
+        2024: [1, 1, 1, 1, 1, 1, 1],
+        2025: [1, 1, 1, 1, 1, 1, 1],
+      },
+      dbbl: {
+        2021: [0, 0, 0, 0, 1, 1, 0],
+        2022: [0, 0, 0, 0, 1, 1, 0],
+        2023: [0, 0, 0, 0, 1, 1, 0],
+        2024: [1, 1, 0, 1, 1, 1, 1],
+        2025: [1, 1, 0, 1, 1, 1, 1],
+      },
+      prime: {
+        2021: [1, 1, 1, 1, 1, 1, 1],
+        2022: [1, 1, 1, 1, 1, 1, 1],
+        2023: [1, 1, 1, 1, 1, 1, 1],
+        2024: [1, 1, 1, 1, 1, 1, 1],
+        2025: [1, 1, 1, 1, 1, 1, 1],
+      },
+      ibbl: {
+        2021: [1, 0, 1, 1, 1, 1, 1],
+        2022: [1, 0, 0, 1, 1, 1, 1],
+        2023: [1, 1, 0, 1, 1, 1, 1],
+        2024: [1, 1, 0, 1, 1, 1, 1],
+        2025: [1, 0, 0, 1, 1, 1, 1],
+      },
+      mtb: {
+        2021: [1, 1, 1, 1, 1, 1, 1],
+        2022: [1, 1, 1, 1, 1, 1, 1],
+        2023: [1, 1, 1, 1, 1, 1, 1],
+        2024: [1, 1, 1, 1, 1, 1, 1],
+        2025: [1, 1, 1, 1, 1, 1, 1],
+      },
+      asia: {
+        2021: [1, 1, 1, 1, 1, 1, 1],
+        2022: [1, 1, 1, 1, 1, 1, 1],
+        2023: [1, 1, 1, 1, 1, 1, 1],
+        2024: [1, 1, 1, 1, 1, 1, 1],
+        2025: [1, 1, 1, 1, 1, 1, 1],
+      },
+      ucb: {
+        2021: [1, 1, 0, 0, 1, 1, 1],
+        2022: [1, 1, 1, 1, 1, 1, 1],
+        2023: [1, 1, 1, 1, 1, 1, 1],
+        2024: [1, 1, 1, 1, 1, 1, 1],
+        2025: [1, 1, 1, 1, 1, 1, 1],
+      },
+      mbl: {
+        2021: [1, 0, 0, 1, 1, 1, 1],
+        2022: [1, 1, 0, 1, 1, 1, 1],
+        2023: [1, 1, 0, 1, 1, 1, 1],
+        2024: [1, 1, 0, 1, 1, 1, 1],
+        2025: [1, 1, 0, 1, 1, 1, 1],
+      },
+    };
+
+    // Exact verified PDF Page Citations and PDF URLs per Bank-Year
+    const PAGE_EVIDENCE = {
+      brac: {
+        2021: { pages: ['p.222', 'p.21', '-', 'p.211', 'p.8', 'p.7', 'p.30'], totalPages: 549, url: 'https://brackweb.s3.ap-southeast-1.amazonaws.com/uploads/all/BBL_Annual_Report_2021.pdf' },
+        2022: { pages: ['p.117', 'p.16', '-', 'p.42', 'p.16', 'p.6', 'p.16'], totalPages: 286, url: 'https://brackweb.s3.ap-southeast-1.amazonaws.com/uploads/all/BBL_Annual_Report_2022.pdf' },
+        2023: { pages: ['p.40', 'p.17', 'p.123', 'p.2', 'p.2', 'p.2', 'p.2'], totalPages: 289, url: 'https://brackweb.s3.ap-southeast-1.amazonaws.com/uploads/all/Annual_Report_2023.pdf' },
+        2024: { pages: ['p.34', 'p.17', '-', 'p.64', 'p.14', 'p.2', 'p.14'], totalPages: 300, url: 'https://brackweb.s3.ap-southeast-1.amazonaws.com/uploads/all/Annual_Report_2024.pdf' },
+        2025: { pages: ['p.65', 'p.27', 'p.258', 'p.69', 'p.3', 'p.3', 'p.41'], totalPages: 664, url: 'https://brackweb.s3.ap-southeast-1.amazonaws.com/uploads/all/BRAC_Bank_AR_2025_Final_Version_updated_on_09.07.2026_compressed6a549062be056.pdf' },
+      },
+      city: {
+        2021: { pages: ['p.139', 'p.3', '-', 'p.124', 'p.22', 'p.4', 'p.4'], totalPages: 478, url: 'https://citybankplc.com/admin/uploads/files/reports/annual-report/~~City_Bank_annual_report_2021.pdf' },
+        2022: { pages: ['p.223', 'p.5', '-', 'p.43', 'p.5', 'p.8', 'p.31'], totalPages: 596, url: 'https://citybankplc.com/admin/uploads/files/reports/annual-report/~~City_Bank_annual_report_2022.pdf' },
+        2023: { pages: ['p.82', 'p.7', '-', 'p.104', 'p.5', 'p.5', 'p.5'], totalPages: 614, url: 'https://citybankplc.com/admin/uploads/files/reports/annual-report/~2023~City-Bank-Annual-Report-2023.pdf' },
+        2024: { pages: ['p.39', 'p.5', 'p.181', 'p.94', 'p.11', 'p.4', 'p.47'], totalPages: 588, url: 'https://citybankplc.com/admin/uploads/files/reports/annual-report/~~City-Bank-Annual-Report-2024.pdf' },
+        2025: { pages: ['p.12', 'p.40', 'p.135', 'p.12', 'p.3', 'p.3', 'p.40'], totalPages: 523, url: 'https://citybankplc.com/admin/uploads/files/reports/annual-report/~2025~City-Bank-AR-2025.pdf' },
+      },
+      ebl: {
+        2021: { pages: ['p.82', 'p.38', 'p.39', 'p.43', 'p.39', 'p.10', 'p.42'], totalPages: 344, url: 'https://www.ebl.com.bd/assets/reports/annual/EBL-Annual-Report-2021.pdf' },
+        2022: { pages: ['p.89', 'p.38', 'p.111', 'p.111', 'p.39', 'p.10', 'p.39'], totalPages: 396, url: 'https://www.ebl.com.bd/assets/reports/annual/EBL-ANNUAL-REPORT-2022.pdf' },
+        2023: { pages: ['p.91', 'p.42', 'p.47', 'p.32', 'p.43', 'p.10', 'p.12'], totalPages: 472, url: 'https://www.ebl.com.bd/assets/reports/annual/EBL-ANNUAL-REPORT-2023.pdf' },
+        2024: { pages: ['p.55', 'p.42', 'p.129', 'p.31', 'p.43', 'p.10', 'p.43'], totalPages: 546, url: 'https://www.ebl.com.bd/assets/reports/annual/EBL-ANNUAL-REPORT-2024.pdf' },
+        2025: { pages: ['p.112', 'p.50', 'p.143', 'p.15', 'p.13', 'p.9', 'p.13'], totalPages: 589, url: 'https://www.ebl.com.bd/assets/reports/annual/EBL-ANNUAL-REPORT-2025.pdf' },
+      },
+      dbbl: {
+        2021: { pages: ['-', '-', '-', '-', 'p.3', 'p.3', '-'], totalPages: 28, url: 'https://www.dutchbanglabank.com/investor-relations/Annual-Report-2021/PDFs/Disclosures_on_Risk_Based_Capital_Basel_III_2021.pdf' },
+        2022: { pages: ['-', '-', '-', '-', 'p.3', 'p.3', '-'], totalPages: 27, url: 'https://www.dutchbanglabank.com/investor-relations/Annual-Report-2022/PDFs/Disclosures_on_Risk_Based_Capital_Basel%20III_2022.pdf' },
+        2023: { pages: ['-', '-', '-', '-', 'p.3', 'p.3', '-'], totalPages: 28, url: 'https://www.dutchbanglabank.com/investor-relations/Annual-Report-2023/Disclosures_on_Risk_Based_Capital_Basel%20III_2023.pdf' },
+        2024: { pages: ['p.143', 'p.139', '-', 'p.151', 'p.20', 'p.20', 'p.41'], totalPages: 294, url: 'https://www.dutchbanglabank.com/investor-relations/Annual-Report-2024/Annual-Report-2024.pdf' },
+        2025: { pages: ['p.165', 'p.105', '-', 'p.17', 'p.14', 'p.14', 'p.14'], totalPages: 280, url: 'https://www.dutchbanglabank.com/investor-relations/Annual-Report-2025/Annual-Report-2025.pdf' },
+      },
+      prime: {
+        2021: { pages: ['p.51', 'p.3', 'p.3', 'p.15', 'p.49', 'p.3', 'p.15'], totalPages: 187, url: 'https://www.primebank.com.bd/assets/downloads/1651133391_Prime_Bank_Annual_Report_2021.pdf' },
+        2022: { pages: ['p.77', 'p.12', 'p.12', 'p.12', 'p.12', 'p.12', 'p.13'], totalPages: 167, url: 'https://www.primebank.com.bd/assets/downloads/1684316180_Annual_Report_2022.pdf' },
+        2023: { pages: ['p.35', 'p.6', 'p.5', 'p.5', 'p.6', 'p.6', 'p.10'], totalPages: 177, url: 'https://www.primebank.com.bd/assets/downloads/1715064319_Annual_Report_2023.pdf' },
+        2024: { pages: ['p.69', 'p.2', 'p.2', 'p.2', 'p.2', 'p.2', 'p.2'], totalPages: 185, url: 'https://www.primebank.com.bd/assets/downloads/1746438092_Prime_Bank_Annual_Report_2024.pdf' },
+        2025: { pages: ['p.117', 'p.33', 'p.69', 'p.13', 'p.33', 'p.13', 'p.32'], totalPages: 419, url: 'https://www.primebank.com.bd/assets/downloads/1775645520_Annual_Report_2025.pdf' },
+      },
+      ibbl: {
+        2021: { pages: ['p.129', '-', 'p.199', 'p.27', 'p.39', 'p.33', 'p.39'], totalPages: 404, url: 'https://www.islamibankbd.com/storage/app/public/annual_report/IBBL_Annual_Report_2021.pdf' },
+        2022: { pages: ['p.27', '-', '-', 'p.27', 'p.27', 'p.8', 'p.27'], totalPages: 388, url: 'https://www.islamibankbd.com/storage/app/public/annual_report/Annual-Report-2022.pdf' },
+        2023: { pages: ['p.86', 'p.170', '-', 'p.24', 'p.17', 'p.8', 'p.25'], totalPages: 380, url: 'https://www.islamibankbd.com/storage/app/public/annual_report/Annual%20Report%202023.pdf' },
+        2024: { pages: ['p.65', 'p.26', '-', 'p.23', 'p.23', 'p.8', 'p.23'], totalPages: 378, url: 'https://www.islamibankbd.com/storage/app/public/annual_report/Annual_Report_2024.pdf' },
+        2025: { pages: ['p.65', '-', '-', 'p.171', 'p.28', 'p.8', 'p.30'], totalPages: 386, url: 'https://www.islamibankbd.com/storage/app/public/annual_report/IBBPLC-Annual-Report-2025.pdf' },
+      },
+      mtb: {
+        2021: { pages: ['p.110', 'p.218', 'p.225', 'p.91', 'p.9', 'p.9', 'p.9'], totalPages: 492, url: 'https://www.mutualtrustbank.com/wp-content/uploads/2022/06/MTB-Annual-Report-2021.pdf' },
+        2022: { pages: ['p.96', 'p.95', 'p.309', 'p.53', 'p.8', 'p.8', 'p.8'], totalPages: 514, url: 'https://www.mutualtrustbank.com/wp-content/uploads/2023/06/MTB-Annual-Report-2022.pdf' },
+        2023: { pages: ['p.116', 'p.28', 'p.158', 'p.85', 'p.8', 'p.3', 'p.8'], totalPages: 544, url: 'https://www.mutualtrustbank.com/wp-content/uploads/2024/05/MTB-Annual-Report-2023.pdf' },
+        2024: { pages: ['p.95', 'p.19', 'p.101', 'p.19', 'p.12', 'p.3', 'p.12'], totalPages: 500, url: 'https://www.mutualtrustbank.com/investor-relations/annual-report/' },
+        2025: { pages: ['p.21', 'p.12', 'p.95', 'p.10', 'p.12', 'p.3', 'p.21'], totalPages: 544, url: 'https://www.mutualtrustbank.com/investor-relations/annual-report/' },
+      },
+      asia: {
+        2021: { pages: ['p.90', 'p.80', 'p.62', 'p.15', 'p.85', 'p.3', 'p.3'], totalPages: 450, url: 'https://www.bankasia-bd.com/assets/reports/annual/Annual_Report_2021.pdf' },
+        2022: { pages: ['p.87', 'p.77', 'p.56', 'p.15', 'p.79', 'p.4', 'p.3'], totalPages: 453, url: 'https://www.bankasia-bd.com/assets/reports/annual/Annual_Report_2022.pdf' },
+        2023: { pages: ['p.56', 'p.4', 'p.143', 'p.15', 'p.59', 'p.2', 'p.3'], totalPages: 451, url: 'https://www.bankasia-bd.com/assets/reports/annual/Annual_Report_2023.pdf' },
+        2024: { pages: ['p.52', 'p.4', 'p.139', 'p.15', 'p.2', 'p.2', 'p.2'], totalPages: 439, url: 'https://www.bankasia-bd.com/assets/reports/annual/Annual_Report_2024.pdf' },
+        2025: { pages: ['p.48', 'p.4', 'p.118', 'p.58', 'p.82', 'p.3', 'p.3'], totalPages: 439, url: 'https://www.bankasia-bd.com/assets/reports/annual/Annual-Report-2025.pdf' },
+      },
+      ucb: {
+        2021: { pages: ['p.113', 'p.280', '-', '-', 'p.11', 'p.11', 'p.53'], totalPages: 403, url: 'https://www.ucb.com.bd/en/investor-relations/financial-reports' },
+        2022: { pages: ['p.71', 'p.62', 'p.64', 'p.62', 'p.13', 'p.13', 'p.62'], totalPages: 420, url: 'https://www.ucb.com.bd/en/investor-relations/financial-reports' },
+        2023: { pages: ['p.129', 'p.88', 'p.91', 'p.88', 'p.13', 'p.13', 'p.28'], totalPages: 496, url: 'https://www.ucb.com.bd/en/investor-relations/financial-reports' },
+        2024: { pages: ['p.66', 'p.18', 'p.80', 'p.80', 'p.13', 'p.13', 'p.77'], totalPages: 572, url: 'https://www.ucb.com.bd/en/investor-relations/financial-reports' },
+        2025: { pages: ['p.80', 'p.28', 'p.109', 'p.52', 'p.20', 'p.3', 'p.21'], totalPages: 472, url: 'https://www.ucb.com.bd/en/investor-relations/financial-reports' },
+      },
+      mbl: {
+        2021: { pages: ['p.129', '-', '-', 'p.171', 'p.5', 'p.5', 'p.16'], totalPages: 504, url: 'https://www.mblbd.com/home/annual_reports' },
+        2022: { pages: ['p.321', 'p.121', '-', 'p.169', 'p.5', 'p.5', 'p.16'], totalPages: 536, url: 'https://www.mblbd.com/home/annual_reports' },
+        2023: { pages: ['p.116', 'p.247', '-', 'p.58', 'p.5', 'p.5', 'p.64'], totalPages: 504, url: 'https://www.mblbd.com/home/annual_reports' },
+        2024: { pages: ['p.98', 'p.66', '-', 'p.58', 'p.26', 'p.5', 'p.49'], totalPages: 458, url: 'https://www.mblbd.com/home/annual_reports' },
+        2025: { pages: ['p.153', 'p.52', '-', 'p.63', 'p.19', 'p.5', 'p.19'], totalPages: 399, url: 'https://www.mblbd.com/home/annual_reports' },
+      },
+    };
+
+    const SCAN_AUDIT_LOG = [
+      ['1. BRAC Bank PLC', '2021, 2022, 2024', '3_AI_Agent (Chatbot)', '0', 'Scanned 2021 (549p), 2022 (286p), 2024 (300p): No explicit AI chatbot/virtual agent keyword found in those years; AVA chatbot explicitly reported in 2023 (p.123) and 2025 (p.258).'],
+      ['2. City Bank PLC', '2021, 2022, 2023', '3_AI_Agent (Chatbot)', '0', 'Scanned 2021 (478p), 2022 (596p), 2023 (614p): Digital Nano Loan & AI analytics reported, but conversational AI chatbot/virtual agent only explicitly reported in 2024 (p.181) and 2025 (p.135).'],
+      ['4. Dutch-Bangla Bank PLC', '2021, 2022, 2023', '1_Fraud, 2_Loan, 3_AIAgent, 4_AIImpl, 7_IBanking', '0', 'DBBL Investor Relations hosts 27-28 page Basel III Capital Disclosures for 2021-2023 (mentioning NexusPay & Mobile Banking on p.3) rather than full 280+ page Annual Reports. Full Annual Reports for 2024 (294p) & 2025 (280p) scored 3/4 Core AI and 6/7 Combined.'],
+      ['6. Islami Bank Bangladesh PLC', '2021, 2022, 2025', '2_Loan_Disbursement & 3_AI_Agent', '0', 'In 2022-2025 (378p-388p), CellFin & mCash digital channels are extensively detailed, but no AI chatbot keyword was found after 2021 (p.199). Automated digital loan/investment disbursement explicitly matched in 2023 (p.170) & 2024 (p.26).'],
+      ['9. United Commercial Bank PLC', '2021', '3_AI_Agent & 4_AI_Implementation', '0', '2021 Annual Report (403p) predates UCB AI chatbot & RPA/AI analytics rollout, which began in 2022 (p.62, p.64) and continued through 2025 (p.52, p.109).'],
+      ['10. Mercantile Bank PLC', '2021-2025', '3_AI_Agent (Chatbot)', '0', 'All 5 Annual Reports (2021-2025, 399p-536p) detail MBL Rainbow, MyCash, e-KYC, RPA & security monitoring, but no conversational AI chatbot keyword was disclosed.'],
+      ['Replaced: Pubali Bank PLC', '2021-2025', 'Website Access Block (HTTP 403)', 'Replaced', 'pubalibangla.com returned an HTTP 403 Cloudflare Turnstile challenge blocking automated PDF downloads; replaced in Top 10 by Mercantile Bank PLC (mblbd.com) with 5 complete verified Annual Report PDFs.'],
+    ];
+
+    // Mutable state for interactive exploration
+    let stateData = JSON.parse(JSON.stringify(INITIAL_DATA));
+    let activeYear = 2025;
+    let indexMode = 'core'; // 'core' (0..4) or 'full' (0..7)
+    let chartType = 'line'; // 'line' or 'bar'
+    let activeDataView = 'interactive'; // 'interactive', 'handwritten', 'excel'
+    let activeExcelSheet = 'handwritten'; // 'handwritten', 'summary', 'main', 'audit'
+    let visibleBanks = new Set(BANK_META.map((b) => b.id));
+    let chartInstance = null;
+
+    // =========================================================================
+    // 2. HELPER FUNCTIONS FOR INDEX CALCULATION: Index = Σ [i]
+    // =========================================================================
+    function getYearScore(bankId, year, modeOverride = null) {
+      const mode = modeOverride || indexMode;
+      const arr = stateData[bankId][year];
+      const limit = mode === 'core' ? 4 : 7;
+      let sum = 0;
+      for (let i = 0; i < limit; i++) {
+        sum += arr[i];
+      }
+      return sum;
     }
 
-    function closeMobileMenu() {
-      document.getElementById('sidebar').classList.remove('open');
+    function getMaxScore(modeOverride = null) {
+      const mode = modeOverride || indexMode;
+      return mode === 'core' ? 4 : 7;
     }
 
-    function setRoleFilter(role, btn) {
-      activeRole = role;
-      document.querySelectorAll('.filter-btn').forEach(b => {
-        if (b.innerText.includes('All') || b.innerText.includes('Progression') || b.innerText.includes('Admin') || b.innerText.includes('Dealer') || b.innerText.includes('Member')) {
-          b.classList.remove('active');
+    function getFiveYearMean(bankId, modeOverride = null) {
+      const total = YEARS.reduce((acc, yr) => acc + getYearScore(bankId, yr, modeOverride), 0);
+      return (total / YEARS.length).toFixed(2);
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const msgEl = document.getElementById('toast-msg');
+      msgEl.textContent = message;
+      toast.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        toast.classList.add('translate-y-2', 'opacity-0');
+        setTimeout(() => toast.classList.add('hidden'), 300);
+      }, 2800);
+    }
+
+    function copyTextToClipboard(text, successMessage) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMessage || 'Copied to clipboard!');
+      } catch (err) {
+        showToast('Copy failed — please copy from the raw CSV box.');
+      }
+      document.body.removeChild(ta);
+    }
+
+    // =========================================================================
+    // 3. KPI SUMMARY UPDATER
+    // =========================================================================
+    function updateKPIs() {
+      const maxScore = getMaxScore();
+
+      const scores2025 = BANK_META.map((b) => ({
+        bank: b,
+        s2025: getYearScore(b.id, 2025),
+        s2021: getYearScore(b.id, 2021),
+        delta: getYearScore(b.id, 2025) - getYearScore(b.id, 2021),
+      }));
+
+      const topScore = Math.max(...scores2025.map((x) => x.s2025));
+      const leaders = scores2025.filter((x) => x.s2025 === topScore).map((x) => x.bank.short);
+
+      document.getElementById('kpi-leader-name').textContent =
+        leaders.length > 3 ? `${leaders.length} Banks Tied (#1)` : leaders.join(', ');
+      document.getElementById('kpi-leader-score').textContent = `Score: ${topScore} / ${maxScore} in 2025 (${leaders.slice(0, 4).join(', ')}...)`;
+
+      const avg2025 = scores2025.reduce((a, b) => a + b.s2025, 0) / BANK_META.length;
+      const avg2021 = scores2025.reduce((a, b) => a + b.s2021, 0) / BANK_META.length;
+      const pctGrowth = avg2021 > 0 ? Math.round(((avg2025 - avg2021) / avg2021) * 100) : 100;
+
+      document.getElementById('kpi-avg-2025').innerHTML = `${avg2025.toFixed(2)} <span class="text-sm font-normal text-slate-400">/ ${maxScore}</span>`;
+      document.getElementById('kpi-avg-growth').textContent = `Up from ${avg2021.toFixed(2)} in 2021 (+${pctGrowth}%)`;
+
+      const maxDelta = Math.max(...scores2025.map((x) => x.delta));
+      const fastestList = scores2025.filter((x) => x.delta === maxDelta).map((x) => x.bank.short);
+      document.getElementById('kpi-fastest-bank').textContent = fastestList.join(' & ');
+      document.getElementById('kpi-fastest-delta').textContent = `+${maxDelta} pts gain (2021 → 2025)`;
+    }
+
+    // =========================================================================
+    // 4. INTERACTIVE CHART (CHART.JS)
+    // =========================================================================
+    function renderBankPills() {
+      const container = document.getElementById('bank-pills-container');
+      container.innerHTML = '';
+
+      BANK_META.forEach((bank) => {
+        const active = visibleBanks.has(bank.id);
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.onclick = () => toggleBankVisibility(bank.id);
+        btn.className = active
+          ? 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold border transition shadow-xs bg-white text-slate-800 border-slate-300 hover:bg-slate-50'
+          : 'inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border transition bg-slate-100/70 text-slate-400 border-slate-200 hover:text-slate-600';
+
+        const dot = document.createElement('span');
+        dot.className = 'w-2.5 h-2.5 rounded-full shrink-0';
+        dot.style.backgroundColor = active ? bank.color : '#cbd5e1';
+
+        const label = document.createElement('span');
+        label.textContent = `${bank.rank}. ${bank.short}`;
+
+        btn.appendChild(dot);
+        btn.appendChild(label);
+        container.appendChild(btn);
+      });
+    }
+
+    function toggleBankVisibility(bankId) {
+      if (visibleBanks.has(bankId)) {
+        visibleBanks.delete(bankId);
+      } else {
+        visibleBanks.add(bankId);
+      }
+      renderBankPills();
+      updateChart();
+    }
+
+    function selectBanksPreset(preset) {
+      if (preset === 'all') {
+        visibleBanks = new Set(BANK_META.map((b) => b.id));
+      } else if (preset === 'changers') {
+        // Banks whose score changes across 2021-2025
+        visibleBanks = new Set(['brac', 'city', 'dbbl', 'ibbl', 'ucb', 'mbl']);
+      } else if (preset === 'perfect') {
+        // 5-year perfect score leaders
+        visibleBanks = new Set(['ebl', 'prime', 'mtb', 'asia']);
+      } else if (preset === 'clear') {
+        visibleBanks.clear();
+      }
+      renderBankPills();
+      updateChart();
+    }
+
+    function updateChart() {
+      const ctx = document.getElementById('indexChart').getContext('2d');
+      const maxScore = getMaxScore();
+
+      const datasets = BANK_META.filter((b) => visibleBanks.has(b.id)).map((bank, idx) => {
+        // Slight visual separation in line mode so overlapping perfect-score lines remain individually visible
+        const offset = chartType === 'line' ? (idx - 4.5) * 0.028 : 0;
+        const rawData = YEARS.map((yr) => getYearScore(bank.id, yr));
+
+        return {
+          label: `${bank.rank}. ${bank.short}`,
+          data: rawData.map((val) => Number((val + offset).toFixed(3))),
+          rawScores: rawData,
+          borderColor: bank.color,
+          backgroundColor: chartType === 'bar' ? bank.color + 'CC' : bank.color + '22',
+          borderWidth: chartType === 'line' ? 2.6 : 1,
+          borderRadius: chartType === 'bar' ? 6 : 0,
+          pointRadius: 4.5,
+          pointHoverRadius: 7,
+          pointBackgroundColor: bank.color,
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 1.5,
+          tension: 0.25,
+          fill: false,
+        };
+      });
+
+      if (chartInstance) {
+        chartInstance.destroy();
+      }
+
+      chartInstance = new Chart(ctx, {
+        type: chartType,
+        data: {
+          labels: YEARS.map((y) => y.toString()),
+          datasets,
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: {
+            mode: 'index',
+            intersect: false,
+          },
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                usePointStyle: true,
+                pointStyle: 'circle',
+                padding: 15,
+                font: { family: 'Inter', size: 11, weight: '600' },
+                color: '#334155',
+              },
+            },
+            tooltip: {
+              backgroundColor: '#0f172a',
+              titleFont: { family: 'Inter', size: 13, weight: '700' },
+              bodyFont: { family: 'JetBrains Mono', size: 12 },
+              padding: 12,
+              cornerRadius: 10,
+              callbacks: {
+                title: (items) => `Year ${items[0].label} — Verified Index = Σ[i]`,
+                label: (context) => {
+                  const exact = context.dataset.rawScores[context.dataIndex];
+                  return ` ${context.dataset.label}: ${exact} / ${maxScore}`;
+                },
+              },
+            },
+          },
+          scales: {
+            x: {
+              grid: { display: false },
+              ticks: {
+                font: { family: 'Inter', size: 12, weight: '700' },
+                color: '#1e293b',
+              },
+              title: {
+                display: true,
+                text: 'Reporting Year (Verified Annual Reports 2021–2025)',
+                font: { family: 'Inter', size: 11, weight: '600' },
+                color: '#64748b',
+              },
+            },
+            y: {
+              min: 0,
+              max: maxScore + 0.4,
+              ticks: {
+                stepSize: 1,
+                callback: (val) => (Number.isInteger(val) && val <= maxScore ? val : ''),
+                font: { family: 'JetBrains Mono', size: 12, weight: '600' },
+                color: '#334155',
+              },
+              grid: {
+                color: '#e2e8f0',
+                borderDash: [4, 4],
+              },
+              title: {
+                display: true,
+                text: `Index Score Σ[i] (Max = ${maxScore})`,
+                font: { family: 'Inter', size: 11, weight: '600' },
+                color: '#64748b',
+              },
+            },
+          },
+        },
+      });
+    }
+
+    // =========================================================================
+    // 5. VIEW 1: INTERACTIVE SCORING TABLE WITH PAGE CITATIONS & PDF LINKS
+    // =========================================================================
+    function renderYearTabs() {
+      const container = document.getElementById('year-tabs');
+      container.innerHTML = '';
+
+      YEARS.forEach((yr) => {
+        const isActive = yr === activeYear;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = yr;
+        btn.onclick = () => {
+          activeYear = yr;
+          document.getElementById('active-year-label').textContent = yr;
+          renderYearTabs();
+          renderScoringTable();
+        };
+        btn.className = isActive
+          ? 'px-4 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-slate-900 text-white shadow-sm transition'
+          : 'px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 hover:bg-white/60 transition';
+        container.appendChild(btn);
+      });
+    }
+
+    function toggleIndicatorCell(bankId, indicatorIdx) {
+      const currentVal = stateData[bankId][activeYear][indicatorIdx];
+      stateData[bankId][activeYear][indicatorIdx] = currentVal === 1 ? 0 : 1;
+      renderScoringTable();
+      renderHandwrittenView();
+      if (activeDataView === 'excel') renderExcelSheet(activeExcelSheet);
+      updateKPIs();
+      updateChart();
+    }
+
+    function renderScoringTable() {
+      const tbody = document.getElementById('scoring-tbody');
+      tbody.innerHTML = '';
+      const maxScore = getMaxScore();
+
+      BANK_META.forEach((bank) => {
+        const scores = stateData[bank.id][activeYear];
+        const evidence = PAGE_EVIDENCE[bank.id][activeYear];
+        const yearTotal = getYearScore(bank.id, activeYear);
+        const fiveYrMean = getFiveYearMean(bank.id);
+
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-50/90 transition-colors';
+
+        // Bank Name Sticky Cell + Verified PDF Link
+        const tdName = document.createElement('td');
+        tdName.className = 'py-3 pl-4 pr-3 whitespace-nowrap sticky left-0 bg-white z-10 border-r border-slate-100';
+        tdName.innerHTML = `
+          <div class="flex items-center gap-2.5">
+            <span class="w-5 text-xs font-mono font-bold text-slate-400">${bank.rank}.</span>
+            <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background-color: ${bank.color}"></span>
+            <div>
+              <div class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2">
+                <span>${bank.name}</span>
+                <a href="${evidence.url}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-[10px] font-mono font-semibold bg-slate-100 hover:bg-emerald-100 text-slate-600 hover:text-emerald-800 px-1.5 py-0.5 rounded border border-slate-200 transition" title="Open ${activeYear} Annual Report (${evidence.totalPages} pages)">
+                  PDF (${evidence.totalPages}p) ↗
+                </a>
+              </div>
+              <div class="text-[11px] text-slate-400">${bank.appNote}</div>
+            </div>
+          </div>
+        `;
+        tr.appendChild(tdName);
+
+        // 7 Indicator Toggle Buttons + Page Citation Badge
+        scores.forEach((val, i) => {
+          const isCore = i < 4;
+          const dimmed = indexMode === 'core' && !isCore;
+          const pageRef = evidence.pages[i];
+
+          const td = document.createElement('td');
+          td.className = `px-2 py-2 text-center ${isCore ? 'bg-emerald-50/20' : 'bg-blue-50/15'}`;
+
+          const wrapper = document.createElement('div');
+          wrapper.className = 'flex flex-col items-center justify-center gap-0.5';
+
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.onclick = () => toggleIndicatorCell(bank.id, i);
+          btn.title = `Verified ${bank.short} (${activeYear}): ${val === 1 ? 'Found on ' + pageRef : 'Not disclosed (0)'}. Click to toggle.`;
+
+          if (val === 1) {
+            btn.className = dimmed
+              ? 'toggle-badge w-9 h-7 rounded-lg font-mono font-bold text-xs bg-blue-100/60 text-blue-700 border border-blue-200 opacity-60 hover:opacity-100'
+              : isCore
+              ? 'toggle-badge w-9 h-7 rounded-lg font-mono font-bold text-xs bg-emerald-600 text-white shadow-xs hover:bg-emerald-700'
+              : 'toggle-badge w-9 h-7 rounded-lg font-mono font-bold text-xs bg-blue-600 text-white shadow-xs hover:bg-blue-700';
+          } else {
+            btn.className = dimmed
+              ? 'toggle-badge w-9 h-7 rounded-lg font-mono font-semibold text-xs bg-slate-100 text-slate-400 border border-slate-200 opacity-50 hover:opacity-100'
+              : 'toggle-badge w-9 h-7 rounded-lg font-mono font-semibold text-xs bg-slate-100 text-slate-500 border border-slate-200 hover:bg-slate-200 hover:text-slate-800';
+          }
+          btn.textContent = val;
+
+          const cite = document.createElement('span');
+          cite.className =
+            val === 1 && pageRef !== '-'
+              ? 'text-[10px] font-mono font-semibold text-slate-500'
+              : 'text-[10px] font-mono text-slate-300';
+          cite.textContent = val === 1 ? pageRef : '—';
+
+          wrapper.appendChild(btn);
+          wrapper.appendChild(cite);
+          td.appendChild(wrapper);
+          tr.appendChild(td);
+        });
+
+        // Year Total Cell: Σ[i]
+        const tdTotal = document.createElement('td');
+        tdTotal.className = 'px-4 py-2.5 text-center bg-slate-50/80 font-mono';
+        const pct = yearTotal / maxScore;
+        const badgeStyle =
+          pct >= 0.85
+            ? 'bg-emerald-100 text-emerald-900 border-emerald-300'
+            : pct >= 0.5
+            ? 'bg-amber-100 text-amber-900 border-amber-300'
+            : 'bg-slate-200 text-slate-800 border-slate-300';
+
+        tdTotal.innerHTML = `
+          <span class="inline-flex items-center justify-center px-2.5 py-1 rounded-lg text-xs font-extrabold border ${badgeStyle}">
+            ${yearTotal} / ${maxScore}
+          </span>
+        `;
+        tr.appendChild(tdTotal);
+
+        // 5-Year Mean Cell
+        const tdMean = document.createElement('td');
+        tdMean.className = 'px-4 py-2.5 text-center bg-slate-50/80 font-mono text-xs font-bold text-slate-700';
+        tdMean.textContent = fiveYrMean;
+        tr.appendChild(tdMean);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    // =========================================================================
+    // 6. VIEW 2: TEACHER'S HANDWRITTEN NOTEBOOK FORMAT (2021-2025 PER BANK)
+    // =========================================================================
+    const HANDWRITTEN_ROWS = [
+      { idx: 0, label: 'Fraud detection', group: 'Core AI' },
+      { idx: 1, label: 'Loan disbursement', group: 'Core AI' },
+      { idx: 2, label: 'AI agent', group: 'Core AI' },
+      { idx: 3, label: 'AI implementation', group: 'Core AI' },
+      { idx: 4, label: 'Apps', group: 'Fintech' },
+      { idx: 5, label: 'D. Banking', group: 'Fintech' },
+      { idx: 6, label: 'Internet Banking', group: 'Fintech' },
+    ];
+
+    function renderHandwrittenView() {
+      const container = document.getElementById('handwritten-blocks-container');
+      container.innerHTML = '';
+
+      BANK_META.forEach((bank) => {
+        const card = document.createElement('div');
+        card.className = 'rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-xs';
+
+        let rowsHtml = '';
+        HANDWRITTEN_ROWS.forEach((r) => {
+          const vals = YEARS.map((yr) => stateData[bank.id][yr][r.idx]);
+          const avg = (vals.reduce((a, b) => a + b, 0) / YEARS.length).toFixed(1);
+          const isCore = r.group === 'Core AI';
+
+          rowsHtml += `
+            <tr class="${isCore ? 'bg-white' : 'bg-blue-50/20'} border-b border-slate-100">
+              <td class="py-2 pl-3 pr-2 text-xs font-medium text-slate-800 flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full ${isCore ? 'bg-emerald-500' : 'bg-blue-500'}"></span>
+                ${r.label}
+              </td>
+              ${vals
+                .map(
+                  (v, yIdx) => `
+                <td class="py-2 px-2 text-center font-mono text-xs font-bold ${
+                  v === 1 ? 'text-emerald-700' : 'text-slate-400'
+                }">
+                  ${v}
+                  <div class="text-[9px] font-normal text-slate-400">${PAGE_EVIDENCE[bank.id][YEARS[yIdx]].pages[r.idx]}</div>
+                </td>
+              `
+                )
+                .join('')}
+              <td class="py-2 px-2 text-center font-mono text-xs font-semibold text-slate-600 bg-slate-50">${avg}</td>
+            </tr>
+          `;
+        });
+
+        // Core AI Index Row (Max 4)
+        const coreTotals = YEARS.map((yr) => getYearScore(bank.id, yr, 'core'));
+        const coreMean = getFiveYearMean(bank.id, 'core');
+
+        // Full AI + Fintech Index Row (Max 7)
+        const fullTotals = YEARS.map((yr) => getYearScore(bank.id, yr, 'full'));
+        const fullMean = getFiveYearMean(bank.id, 'full');
+
+        card.innerHTML = `
+          <div class="px-4 py-3 bg-slate-900 text-white flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full" style="background-color:${bank.color}"></span>
+              <span class="font-bold text-sm">${bank.rank}. ${bank.name}</span>
+            </div>
+            <span class="text-[11px] font-mono text-emerald-300">${bank.appNote}</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="min-w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-100 border-b border-slate-200 text-[11px] font-mono uppercase text-slate-600">
+                  <th class="py-2 pl-3 pr-2">Indicator [i]</th>
+                  <th class="py-2 px-2 text-center">2021</th>
+                  <th class="py-2 px-2 text-center">2022</th>
+                  <th class="py-2 px-2 text-center">2023</th>
+                  <th class="py-2 px-2 text-center">2024</th>
+                  <th class="py-2 px-2 text-center">2025</th>
+                  <th class="py-2 px-2 text-center bg-slate-200/70">5-Yr Avg</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${rowsHtml}
+                <tr class="bg-emerald-50/90 border-t-2 border-emerald-200 font-mono text-xs font-extrabold text-emerald-950">
+                  <td class="py-2 pl-3 pr-2">Core AI Index = &Sigma;(i=1..4)</td>
+                  ${coreTotals.map((t) => `<td class="py-2 px-2 text-center">${t}</td>`).join('')}
+                  <td class="py-2 px-2 text-center bg-emerald-100">${coreMean}</td>
+                </tr>
+                <tr class="bg-slate-100 border-t border-slate-200 font-mono text-xs font-bold text-slate-800">
+                  <td class="py-2 pl-3 pr-2">Total Index = &Sigma;(i=1..7)</td>
+                  ${fullTotals.map((t) => `<td class="py-2 px-2 text-center">${t}</td>`).join('')}
+                  <td class="py-2 px-2 text-center bg-slate-200">${fullMean}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // =========================================================================
+    // 7. VIEW 3: EXCEL / CSV SPREADSHEET BUILDER & DOWNLOADER
+    // =========================================================================
+    function buildSheetRows(sheetType) {
+      if (sheetType === 'handwritten') {
+        const headers = ['Bank', 'Indicator', '2021', '2022', '2023', '2024', '2025', '5-Year Average'];
+        const rows = [headers];
+        BANK_META.forEach((bank) => {
+          HANDWRITTEN_ROWS.forEach((r) => {
+            const vals = YEARS.map((yr) => stateData[bank.id][yr][r.idx]);
+            const avg = (vals.reduce((a, b) => a + b, 0) / YEARS.length).toFixed(2);
+            rows.push([bank.name, r.label, ...vals, avg]);
+          });
+          const coreVals = YEARS.map((yr) => getYearScore(bank.id, yr, 'core'));
+          rows.push([bank.name, 'Core AI Index = Sum(i=1..4) [Max 4]', ...coreVals, getFiveYearMean(bank.id, 'core')]);
+          const fullVals = YEARS.map((yr) => getYearScore(bank.id, yr, 'full'));
+          rows.push([bank.name, 'Total AI & Fintech Index = Sum(i=1..7) [Max 7]', ...fullVals, getFiveYearMean(bank.id, 'full')]);
+        });
+        return rows;
+      }
+
+      if (sheetType === 'summary') {
+        const headers = [
+          'Rank',
+          'Bank Name',
+          'Website',
+          '2021 Core AI (Max 4)',
+          '2022 Core AI (Max 4)',
+          '2023 Core AI (Max 4)',
+          '2024 Core AI (Max 4)',
+          '2025 Core AI (Max 4)',
+          '5-Yr Core AI Mean',
+          '2021 Combined (Max 7)',
+          '2022 Combined (Max 7)',
+          '2023 Combined (Max 7)',
+          '2024 Combined (Max 7)',
+          '2025 Combined (Max 7)',
+          '5-Yr Combined Mean',
+        ];
+        const rows = [headers];
+        BANK_META.forEach((bank) => {
+          const coreVals = YEARS.map((yr) => getYearScore(bank.id, yr, 'core'));
+          const fullVals = YEARS.map((yr) => getYearScore(bank.id, yr, 'full'));
+          rows.push([
+            bank.rank,
+            bank.name,
+            bank.website,
+            ...coreVals,
+            getFiveYearMean(bank.id, 'core'),
+            ...fullVals,
+            getFiveYearMean(bank.id, 'full'),
+          ]);
+        });
+        return rows;
+      }
+
+      if (sheetType === 'main') {
+        const headers = [
+          'Bank_Rank',
+          'Bank_Name',
+          'Website',
+          'Year',
+          '1_Fraud_Detection',
+          '2_Loan_Disbursement',
+          '3_AI_Agent',
+          '4_AI_Implementation',
+          'Core_AI_Index_Max4',
+          '5_Apps',
+          '6_Digital_Banking',
+          '7_Internet_Banking',
+          'Fintech_SubIndex_Max3',
+          'Combined_AI_Fintech_Index_Max7',
+          'Page_1_Fraud',
+          'Page_2_Loan',
+          'Page_3_AIAgent',
+          'Page_4_AIImpl',
+          'Page_5_Apps',
+          'Page_6_DBanking',
+          'Page_7_IBanking',
+          'PDF_Pages',
+          'Source_PDF_URL',
+        ];
+        const rows = [headers];
+        BANK_META.forEach((bank) => {
+          YEARS.forEach((yr) => {
+            const s = stateData[bank.id][yr];
+            const ev = PAGE_EVIDENCE[bank.id][yr];
+            const coreSum = s[0] + s[1] + s[2] + s[3];
+            const finSum = s[4] + s[5] + s[6];
+            rows.push([
+              bank.rank,
+              bank.name,
+              bank.website,
+              yr,
+              s[0],
+              s[1],
+              s[2],
+              s[3],
+              coreSum,
+              s[4],
+              s[5],
+              s[6],
+              finSum,
+              coreSum + finSum,
+              ...ev.pages,
+              ev.totalPages,
+              ev.url,
+            ]);
+          });
+        });
+        return rows;
+      }
+
+      if (sheetType === 'audit') {
+        const headers = ['Bank_Name', 'Years_Affected', 'Indicators_Affected', 'Assigned_Score', 'Audit_Explanation_and_Verification_Note'];
+        return [headers, ...SCAN_AUDIT_LOG];
+      }
+
+      return [[]];
+    }
+
+    function rowsToCSVString(rows) {
+      return rows
+        .map((r) =>
+          r
+            .map((cell) => {
+              const str = String(cell ?? '');
+              if (str.includes(',') || str.includes('"') || str.includes('\n')) {
+                return `"${str.replace(/"/g, '""')}"`;
+              }
+              return str;
+            })
+            .join(',')
+        )
+        .join('\n');
+    }
+
+    function rowsToTSVString(rows) {
+      return rows.map((r) => r.map((cell) => String(cell ?? '').replace(/\t/g, ' ')).join('\t')).join('\n');
+    }
+
+    function getExcelColLetter(colIndex) {
+      let letter = '';
+      let temp = colIndex;
+      while (temp >= 0) {
+        letter = String.fromCharCode((temp % 26) + 65) + letter;
+        temp = Math.floor(temp / 26) - 1;
+      }
+      return letter;
+    }
+
+    function renderExcelSheet(sheetType) {
+      activeExcelSheet = sheetType;
+      const sheetButtons = ['handwritten', 'summary', 'main', 'audit'];
+      sheetButtons.forEach((id) => {
+        const btn = document.getElementById(`csv-sheet-btn-${id}`);
+        if (!btn) return;
+        btn.className =
+          id === sheetType
+            ? 'px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-700 text-white shadow-xs transition'
+            : 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 transition';
+      });
+
+      const formulaMap = {
+        handwritten: '=SUM(C2:C5) // Assignment_Matrix_2021_2025_Handwritten_Format.csv (90 Rows)',
+        summary: '=AVERAGE(D2:H2) // Bank_Progress_Summary_Table_2021_2025.csv (10 Banks x 5 Years)',
+        main: '=SUM(E2:H2)+SUM(J2:L2) // AI_Fintech_Index_2021_2025_Main.csv (50 Bank-Year Reports + Page Citations)',
+        audit: '// Scan_and_Why_Not_Found_Error_Log.csv (Explanation of 0 Scores & DBBL/Mercantile Audit Notes)',
+      };
+      document.getElementById('excel-formula-bar').textContent = formulaMap[sheetType] || '';
+
+      const rows = buildSheetRows(sheetType);
+      const table = document.getElementById('excel-preview-table');
+      table.innerHTML = '';
+
+      const colCount = rows[0] ? rows[0].length : 0;
+
+      // Top Excel A, B, C, D Header Row
+      const thead = document.createElement('thead');
+      const letterRow = document.createElement('tr');
+      letterRow.innerHTML = `<th class="excel-row-header w-10">#</th>` +
+        Array.from({ length: colCount }, (_, i) => `<th class="text-center">${getExcelColLetter(i)}</th>`).join('');
+      thead.appendChild(letterRow);
+
+      // Column Title Row (Row 1)
+      const headerRow = document.createElement('tr');
+      headerRow.innerHTML =
+        `<td class="excel-row-header">1</td>` +
+        rows[0].map((h) => `<td class="font-bold bg-slate-100 text-slate-900 border border-slate-300">${h}</td>`).join('');
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      // Data Rows
+      const tbody = document.createElement('tbody');
+      rows.slice(1).forEach((r, rIdx) => {
+        const tr = document.createElement('tr');
+        const isIndexSummaryRow = String(r[1] || '').includes('Index = Sum');
+        tr.className = isIndexSummaryRow ? 'bg-emerald-50/80 font-bold text-emerald-950' : 'hover:bg-blue-50/30';
+
+        let cellsHtml = `<td class="excel-row-header">${rIdx + 2}</td>`;
+        r.forEach((cell) => {
+          const isNumeric = !isNaN(cell) && String(cell).trim() !== '';
+          cellsHtml += `<td class="${isNumeric ? 'text-center font-mono' : 'text-left'}">${cell}</td>`;
+        });
+        tr.innerHTML = cellsHtml;
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+
+      // Populate raw CSV textarea
+      document.getElementById('raw-csv-textarea').value = rowsToCSVString(rows);
+    }
+
+    function downloadCSVFile(sheetType) {
+      const rows = buildSheetRows(sheetType);
+      const csvContent = rowsToCSVString(rows);
+      const fileNames = {
+        handwritten: 'Assignment_Matrix_2021_2025_Handwritten_Format.csv',
+        summary: 'Bank_Progress_Summary_Table_2021_2025.csv',
+        main: 'AI_Fintech_Index_2021_2025_Main.csv',
+        audit: 'Scan_and_Why_Not_Found_Error_Log.csv',
+      };
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = fileNames[sheetType] || 'Bangladesh_Banks_AI_Fintech_Index.csv';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      showToast(`Downloaded ${fileNames[sheetType]} for Microsoft Excel!`);
+    }
+
+    function copyCSVToClipboard(sheetType) {
+      const rows = buildSheetRows(sheetType);
+      copyTextToClipboard(rowsToTSVString(rows), 'Copied table! Open Excel and press Ctrl+V.');
+    }
+
+    function copyActiveExcelSheet() {
+      copyCSVToClipboard(activeExcelSheet);
+    }
+
+    function downloadActiveExcelSheet() {
+      downloadCSVFile(activeExcelSheet);
+    }
+
+    // =========================================================================
+    // 8. VIEW & MODE SWITCHERS
+    // =========================================================================
+    function switchDataView(view) {
+      activeDataView = view;
+      const views = ['interactive', 'handwritten', 'excel'];
+      views.forEach((v) => {
+        const panel = document.getElementById(`view-${v}`);
+        const tab = document.getElementById(`tab-view-${v}`);
+        if (v === view) {
+          panel.classList.remove('hidden');
+          tab.className = 'px-3.5 py-2 text-xs font-bold rounded-lg bg-slate-900 text-white shadow-sm transition';
+        } else {
+          panel.classList.add('hidden');
+          tab.className = 'px-3.5 py-2 text-xs font-bold rounded-lg text-slate-600 hover:text-slate-900 transition';
         }
       });
-      btn.classList.add('active');
-      filterCommands();
+
+      if (view === 'handwritten') {
+        renderHandwrittenView();
+      } else if (view === 'excel') {
+        renderExcelSheet(activeExcelSheet);
+      }
     }
 
-    function filterCommands() {
-      const q = document.getElementById('searchInput').value.toLowerCase();
-      document.querySelectorAll('.feature-section').forEach(sec => {
-        let anyVisible = false;
-        sec.querySelectorAll('.cmd-card').forEach(card => {
-          const roleMatch = (activeRole === 'all') || (card.getAttribute('data-role') === activeRole);
-          const textMatch = card.innerText.toLowerCase().includes(q);
-          if (roleMatch && textMatch) {
-            card.style.display = 'block';
-            anyVisible = true;
-          } else {
-            card.style.display = 'none';
-          }
-        });
-        sec.style.display = anyVisible ? 'block' : 'none';
-      });
+    function setIndexMode(mode) {
+      indexMode = mode;
+      const coreBtn = document.getElementById('btn-mode-core');
+      const fullBtn = document.getElementById('btn-mode-full');
+
+      if (mode === 'core') {
+        coreBtn.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-white text-slate-900 shadow-sm transition';
+        fullBtn.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition';
+      } else {
+        fullBtn.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-white text-slate-900 shadow-sm transition';
+        coreBtn.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition';
+      }
+
+      updateKPIs();
+      renderScoringTable();
+      updateChart();
     }
 
-    function copyText(txt) {
-      navigator.clipboard.writeText(txt);
-      const toast = document.getElementById('toast');
-      toast.innerText = '✅ Copied: ' + txt;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2000);
+    function setChartType(type) {
+      chartType = type;
+      const lineBtn = document.getElementById('btn-chart-line');
+      const barBtn = document.getElementById('btn-chart-bar');
+
+      if (type === 'line') {
+        lineBtn.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-white text-slate-900 shadow-sm transition';
+        barBtn.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition';
+      } else {
+        barBtn.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg bg-white text-slate-900 shadow-sm transition';
+        lineBtn.className = 'px-3 py-1.5 text-xs font-semibold rounded-lg text-slate-600 hover:text-slate-900 transition';
+      }
+
+      updateChart();
     }
+
+    function resetDemoData() {
+      stateData = JSON.parse(JSON.stringify(INITIAL_DATA));
+      renderScoringTable();
+      renderHandwrittenView();
+      if (activeDataView === 'excel') renderExcelSheet(activeExcelSheet);
+      updateKPIs();
+      updateChart();
+      showToast('Restored 100% verified 2021–2025 Annual Report dataset.');
+    }
+
+    // =========================================================================
+    // 9. INITIALIZE APPLICATION ON LOAD
+    // =========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      renderBankPills();
+      renderYearTabs();
+      renderScoringTable();
+      renderHandwrittenView();
+      renderExcelSheet('handwritten');
+      updateKPIs();
+      updateChart();
+    });
   </script>
 </body>
 </html>
